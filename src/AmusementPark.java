@@ -60,8 +60,39 @@ public class AmusementPark {
             return black + "-" + blue + "-" + green + "-" + red + "-" + white + "-" + gold;
         }
     }
+    private class Player {
+        public int score;
+        int reserveCards;
+        int blackCoin;
+        int blueCoin;
+        int greenCoin;
+        int redCoin;
+        int whiteCoin;
+        int goldCoin;
+        public int getTotalCoin() {
+            return blackCoin + blueCoin + greenCoin + redCoin + whiteCoin + goldCoin;
+        }
+    }
+
     AmusementPark() {
         startGame();
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    frame.dispose(); // Close the frame
+                }
+            }
+        });
+        frame.setVisible(true);
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setBackground(new Color(51, 77, 104));
+        frame.add(gamePanel);
     }
     public void startGame() {
         buildSlotMachineBlack();
@@ -265,5 +296,8 @@ public class AmusementPark {
         PrizeClaw card3 = new PrizeClaw(4, 3, 3, 2, 2, 2);
         prizeClaw.add(card3);
     }
+    //window
+    JFrame frame = new JFrame("Amusement Park");
+    JPanel gamePanel = new JPanel();
 
 }

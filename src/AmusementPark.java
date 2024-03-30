@@ -25,6 +25,22 @@ public class AmusementPark {
             return point + "-" + specialCoin + "-" + blackCoin + "-" + blueCoin + "-" + greenCoin + "-" + redCoin + "-" + whiteCoin;
         }
     }
+    private class PrizeClaw {
+        int point;
+        int blackCoin;
+        int blueCoin;
+        int greenCoin;
+        int redCoin;
+        int whiteCoin;
+        PrizeClaw (int point, int blackCoin, int blueCoin, int greenCoin, int redCoin, int whiteCoin) {
+            this.point = point;
+            this.blackCoin = blackCoin;
+            this.blueCoin = blueCoin;
+            this.greenCoin = greenCoin;
+            this.redCoin = redCoin;
+            this.whiteCoin = whiteCoin;
+        }
+    }
     private class Coin {
         int black;
         int blue;
@@ -59,10 +75,16 @@ public class AmusementPark {
         shuffleLevel1();
         shuffleLevel2();
         shuffleLevel3();
+        buildPrizeClaw();
     }
+    //Card class arraylists:
     ArrayList<Card> level1; //storing level1 cards
     ArrayList<Card> level2; //storing level2 cards
     ArrayList<Card> level3; //storing level3 cards
+    ArrayList<Card> playerOneHand; //storing cards in player one's hand
+    ArrayList<Card> playerTwoHand; //storing cards in player two's hand
+    ArrayList<Card> playerOneReserves; //storing reserve cards of player one
+    ArrayList<Card> playerTwoReserves; //storing reserve cards of player two
     public void buildLevel1() { //building an arraylist to store level1 cards
         level1 = new ArrayList<Card>();
         Card card1 = new Card(0, "black", 2, 0, 0, 0, 2);
@@ -230,4 +252,18 @@ public class AmusementPark {
             slotMachineWhite.add(coin);
         }
     }
+    // prize claw class arraylists:
+    ArrayList<PrizeClaw> prizeClaw; //arraylist to store prize claw cards
+    ArrayList<PrizeClaw> playerOnePC; //arraylist to store player one prize claw cards //PC stands for prize claw
+    ArrayList<PrizeClaw> getPlayerTwoPC; //arraylist to store player two prize claw cards //PC stands for prize claw
+    public void buildPrizeClaw() {
+        prizeClaw = new ArrayList<PrizeClaw>();
+        PrizeClaw card1 = new PrizeClaw(3, 2, 0, 2, 2, 2);
+        prizeClaw.add(card1);
+        PrizeClaw card2 = new PrizeClaw(4, 2, 2, 2, 2, 2);
+        prizeClaw.add(card2);
+        PrizeClaw card3 = new PrizeClaw(4, 3, 3, 2, 2, 2);
+        prizeClaw.add(card3);
+    }
+
 }

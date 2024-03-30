@@ -21,11 +21,48 @@ public class AmusementPark {
             this.redCoin = redCoin;
             this.whiteCoin = whiteCoin;
         }
+        public String toString() { // A method in order to print arraylist to check
+            return point + "-" + specialCoin + "-" + blackCoin + "-" + blueCoin + "-" + greenCoin + "-" + redCoin + "-" + whiteCoin;
+        }
+    }
+    private class Coin {
+        int black;
+        int blue;
+        int green;
+        int red;
+        int white;
+        int gold;
+        Coin (int black, int blue, int green, int red, int white, int gold) {
+            this.black = black;
+            this.blue = blue;
+            this.green = green;
+            this.red = red;
+            this.white = white;
+            this.gold = gold;
+        }
+        public String toString() {
+            return black + "-" + blue + "-" + green + "-" + red + "-" + white + "-" + gold;
+        }
+    }
+    AmusementPark() {
+        startGame();
+    }
+    public void startGame() {
+        buildSlotMachineBlack();
+        buildSlotMachineBlue();
+        buildSlotMachineGreen();
+        buildSlotMachineRed();
+        buildSlotMachineWhite();
+        buildLevel1();
+        buildLevel2();
+        buildLevel3();
+        shuffleLevel1();
+        shuffleLevel2();
+        shuffleLevel3();
     }
     ArrayList<Card> level1; //storing level1 cards
     ArrayList<Card> level2; //storing level2 cards
     ArrayList<Card> level3; //storing level3 cards
-    Random random = new Random(); //for shuffling
     public void buildLevel1() {
         level1 = new ArrayList<Card>();
         Card card1 = new Card(0, "black", 2, 0, 0, 0, 2);
@@ -125,4 +162,83 @@ public class AmusementPark {
         Card card15 = new Card(5, "black", 2, 3, 2, 0, 3);
         level3.add(card15);
     }
+    Random random = new Random(); //for shuffling
+    public void shuffleLevel1() { //shuffling level1
+        for (int i = 0; i < level1.size(); i++) {
+            int j = random.nextInt(level1.size());
+            Card currCard = level1.get(i);
+            Card randomCard = level1.get(j);
+            level1.set(i, randomCard);
+            level1.set(j, currCard);
+        }
+    }
+    public void shuffleLevel2() { //shuffling level2
+        for (int i = 0; i < level2.size(); i++) {
+            int j = random.nextInt(level2.size());
+            Card currCard = level2.get(i);
+            Card randomCard = level2.get(j);
+            level2.set(i, randomCard);
+            level2.set(j, currCard);
+        }
+    }
+    public void shuffleLevel3() { //shuffling level3
+        for (int i = 0; i < level3.size(); i++) {
+            int j = random.nextInt(level3.size());
+            Card currCard = level3.get(i);
+            Card randomCard = level3.get(j);
+            level3.set(i, randomCard);
+            level3.set(j, currCard);
+        }
+    }
+    ArrayList<Coin> slotMachineBlack;
+    ArrayList<Coin> slotMachineBlue;
+    ArrayList<Coin> slotMachineGreen;
+    ArrayList<Coin> slotMachineRed;
+    ArrayList<Coin> slotMachineWhite;
+    public void buildSlotMachineBlack() {
+        slotMachineBlack = new ArrayList<Coin>();
+        for (int i = 0; i < 4; i++) {
+            Coin coin = new Coin(4, 0, 0, 0, 0, 0);
+            slotMachineBlack.add(coin);
+        }
+        System.out.println("Build slot machine black:");
+        System.out.println(slotMachineBlack);
+    }
+    public void buildSlotMachineBlue() {
+        slotMachineBlue = new ArrayList<Coin>();
+        for (int i = 0; i < 4; i++) {
+            Coin coin = new Coin(0, 4, 0, 0, 0, 0);
+            slotMachineBlue.add(coin);
+        }
+        System.out.println("Build slot machine blue:");
+        System.out.println(slotMachineBlue);
+    }
+    public void buildSlotMachineGreen() {
+        slotMachineGreen = new ArrayList<Coin>();
+        for (int i = 0; i < 4; i++) {
+            Coin coin = new Coin(0, 0, 4, 0, 0, 0);
+            slotMachineGreen.add(coin);
+        }
+        System.out.println("Build slot machine green:");
+        System.out.println(slotMachineGreen);
+    }
+    public void buildSlotMachineRed() {
+        slotMachineRed = new ArrayList<Coin>();
+        for (int i = 0; i < 4; i++) {
+            Coin coin = new Coin(0, 0, 0, 4, 0, 0);
+            slotMachineRed.add(coin);
+        }
+        System.out.println("Build slot machine red:");
+        System.out.println(slotMachineRed);
+    }
+    public void buildSlotMachineWhite() {
+        slotMachineWhite = new ArrayList<Coin>();
+        for (int i = 0; i < 4; i++) {
+            Coin coin = new Coin(0, 0, 0, 0, 4, 0);
+            slotMachineWhite.add(coin);
+        }
+        System.out.println("Build slot machine white:");
+        System.out.println(slotMachineWhite);
+    }
+
 }

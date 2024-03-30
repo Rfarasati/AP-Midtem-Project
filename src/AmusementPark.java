@@ -3,7 +3,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
-public class AmusementPark {
+public class AmusementPark extends JFrame {
     private class Card {
         int point;
         String specialCoin;
@@ -12,7 +12,8 @@ public class AmusementPark {
         int greenCoin;
         int redCoin;
         int whiteCoin;
-        Card (int point, String specialCoin, int blackCoin, int blueCoin, int greenCoin, int redCoin, int whiteCoin) {
+
+        Card(int point, String specialCoin, int blackCoin, int blueCoin, int greenCoin, int redCoin, int whiteCoin) {
             this.point = point;
             this.specialCoin = specialCoin;
             this.blackCoin = blackCoin;
@@ -21,10 +22,12 @@ public class AmusementPark {
             this.redCoin = redCoin;
             this.whiteCoin = whiteCoin;
         }
+
         public String toString() { // A method in order to print arraylist to check
             return point + "-" + specialCoin + "-" + blackCoin + "-" + blueCoin + "-" + greenCoin + "-" + redCoin + "-" + whiteCoin;
         }
     }
+
     private class PrizeClaw {
         int point;
         int blackCoin;
@@ -32,7 +35,8 @@ public class AmusementPark {
         int greenCoin;
         int redCoin;
         int whiteCoin;
-        PrizeClaw (int point, int blackCoin, int blueCoin, int greenCoin, int redCoin, int whiteCoin) {
+
+        PrizeClaw(int point, int blackCoin, int blueCoin, int greenCoin, int redCoin, int whiteCoin) {
             this.point = point;
             this.blackCoin = blackCoin;
             this.blueCoin = blueCoin;
@@ -41,6 +45,7 @@ public class AmusementPark {
             this.whiteCoin = whiteCoin;
         }
     }
+
     private class Coin {
         int black;
         int blue;
@@ -48,7 +53,8 @@ public class AmusementPark {
         int red;
         int white;
         int gold;
-        Coin (int black, int blue, int green, int red, int white, int gold) {
+
+        Coin(int black, int blue, int green, int red, int white, int gold) {
             this.black = black;
             this.blue = blue;
             this.green = green;
@@ -56,10 +62,12 @@ public class AmusementPark {
             this.white = white;
             this.gold = gold;
         }
+
         public String toString() {
             return black + "-" + blue + "-" + green + "-" + red + "-" + white + "-" + gold;
         }
     }
+
     private class Player {
         public int score;
         int reserveCards;
@@ -69,6 +77,7 @@ public class AmusementPark {
         int redCoin;
         int whiteCoin;
         int goldCoin;
+
         public int getTotalCoin() {
             return blackCoin + blueCoin + greenCoin + redCoin + whiteCoin + goldCoin;
         }
@@ -76,6 +85,7 @@ public class AmusementPark {
 
     AmusementPark() {
         startGame();
+
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
         frame.setLocationRelativeTo(null);
@@ -89,11 +99,58 @@ public class AmusementPark {
                 }
             }
         });
+        JButton pick2Button = new JButton("I want 2 coins with the same color");
+        JButton pick3Button = new JButton("I want 3 coins with different colors");
+
+        pick2Button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                buttonPanel.removeAll();
+
+                JPanel radioPanel = new JPanel();
+                radioPanel.add(new JRadioButton("Black"));
+                radioPanel.add(new JRadioButton("Blue"));
+                radioPanel.add(new JRadioButton("Green"));
+                radioPanel.add(new JRadioButton("Red"));
+                radioPanel.add(new JRadioButton("White"));
+
+                buttonPanel.add(radioPanel);
+
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+        pick3Button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                buttonPanel.removeAll();
+
+                JPanel checkboxPanel = new JPanel();
+                checkboxPanel.add(new JCheckBox("Black"));
+                checkboxPanel.add(new JCheckBox("Blue"));
+                checkboxPanel.add(new JCheckBox("Green"));
+                checkboxPanel.add(new JCheckBox("Red"));
+                checkboxPanel.add(new JCheckBox("White"));
+
+                buttonPanel.add(checkboxPanel);
+
+                frame.revalidate();
+                frame.repaint();            }
+        });
+
         frame.setVisible(true);
+
         gamePanel.setLayout(new BorderLayout());
         gamePanel.setBackground(new Color(51, 77, 104));
         frame.add(gamePanel);
+
+        pick2Button.setFocusable(false);
+        buttonPanel.add(pick2Button);
+        pick3Button.setFocusable(false);
+        buttonPanel.add(pick3Button);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+
+
     }
+
     public void startGame() {
         buildSlotMachineBlack();
         buildSlotMachineBlue();
@@ -108,6 +165,7 @@ public class AmusementPark {
         shuffleLevel3();
         buildPrizeClaw();
     }
+
     //Card class arraylists:
     ArrayList<Card> level1; //storing level1 cards
     ArrayList<Card> level2; //storing level2 cards
@@ -116,6 +174,7 @@ public class AmusementPark {
     ArrayList<Card> playerTwoHand; //storing cards in player two's hand
     ArrayList<Card> playerOneReserves; //storing reserve cards of player one
     ArrayList<Card> playerTwoReserves; //storing reserve cards of player two
+
     public void buildLevel1() { //building an arraylist to store level1 cards
         level1 = new ArrayList<Card>();
         Card card1 = new Card(0, "black", 2, 0, 0, 0, 2);
@@ -149,6 +208,7 @@ public class AmusementPark {
         Card card15 = new Card(1, "white", 2, 0, 2, 2, 0);
         level1.add(card15);
     }
+
     public void buildLevel2() { //building an arraylist to store level2 cards
         level2 = new ArrayList<Card>();
         Card card1 = new Card(2, "black", 0, 2, 0, 2, 2);
@@ -163,7 +223,7 @@ public class AmusementPark {
         level2.add(card5);
         Card card6 = new Card(3, "black", 2, 0, 2, 2, 1);
         level2.add(card6);
-        Card card7 = new Card(3, "blue",  2, 2, 0, 1, 2);
+        Card card7 = new Card(3, "blue", 2, 2, 0, 1, 2);
         level2.add(card7);
         Card card8 = new Card(3, "green", 2, 1, 2, 0, 2);
         level2.add(card8);
@@ -182,6 +242,7 @@ public class AmusementPark {
         Card card15 = new Card(4, "black", 0, 2, 2, 2, 2);
         level2.add(card15);
     }
+
     public void buildLevel3() { //building an arraylist to store level3 cards
         level3 = new ArrayList<Card>();
         Card card1 = new Card(3, "black", 2, 2, 1, 2, 0);
@@ -196,7 +257,7 @@ public class AmusementPark {
         level3.add(card5);
         Card card6 = new Card(4, "black", 2, 2, 2, 2, 0);
         level3.add(card6);
-        Card card7 = new Card(4, "blue",  2, 0, 2, 2, 2);
+        Card card7 = new Card(4, "blue", 2, 0, 2, 2, 2);
         level3.add(card7);
         Card card8 = new Card(4, "green", 0, 2, 2, 2, 2);
         level3.add(card8);
@@ -215,7 +276,9 @@ public class AmusementPark {
         Card card15 = new Card(5, "black", 2, 3, 2, 0, 3);
         level3.add(card15);
     }
+
     Random random = new Random(); //for shuffling
+
     public void shuffleLevel1() { //shuffling level1
         for (int i = 0; i < level1.size(); i++) {
             int j = random.nextInt(level1.size());
@@ -225,6 +288,7 @@ public class AmusementPark {
             level1.set(j, currCard);
         }
     }
+
     public void shuffleLevel2() { //shuffling level2
         for (int i = 0; i < level2.size(); i++) {
             int j = random.nextInt(level2.size());
@@ -234,6 +298,7 @@ public class AmusementPark {
             level2.set(j, currCard);
         }
     }
+
     public void shuffleLevel3() { //shuffling level3
         for (int i = 0; i < level3.size(); i++) {
             int j = random.nextInt(level3.size());
@@ -243,11 +308,13 @@ public class AmusementPark {
             level3.set(j, currCard);
         }
     }
+
     ArrayList<Coin> slotMachineBlack;
     ArrayList<Coin> slotMachineBlue;
     ArrayList<Coin> slotMachineGreen;
     ArrayList<Coin> slotMachineRed;
     ArrayList<Coin> slotMachineWhite;
+
     public void buildSlotMachineBlack() { //building black slot machine
         slotMachineBlack = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
@@ -255,6 +322,7 @@ public class AmusementPark {
             slotMachineBlack.add(coin);
         }
     }
+
     public void buildSlotMachineBlue() { //building blue slot machine
         slotMachineBlue = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
@@ -262,6 +330,7 @@ public class AmusementPark {
             slotMachineBlue.add(coin);
         }
     }
+
     public void buildSlotMachineGreen() { //building green slot machine
         slotMachineGreen = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
@@ -269,6 +338,7 @@ public class AmusementPark {
             slotMachineGreen.add(coin);
         }
     }
+
     public void buildSlotMachineRed() { //building red slot machine
         slotMachineRed = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
@@ -276,6 +346,7 @@ public class AmusementPark {
             slotMachineRed.add(coin);
         }
     }
+
     public void buildSlotMachineWhite() { //building white slot machine
         slotMachineWhite = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
@@ -283,10 +354,12 @@ public class AmusementPark {
             slotMachineWhite.add(coin);
         }
     }
+
     // prize claw class arraylists:
     ArrayList<PrizeClaw> prizeClaw; //arraylist to store prize claw cards
     ArrayList<PrizeClaw> playerOnePC; //arraylist to store player one prize claw cards //PC stands for prize claw
     ArrayList<PrizeClaw> getPlayerTwoPC; //arraylist to store player two prize claw cards //PC stands for prize claw
+
     public void buildPrizeClaw() {
         prizeClaw = new ArrayList<PrizeClaw>();
         PrizeClaw card1 = new PrizeClaw(3, 2, 0, 2, 2, 2);
@@ -296,8 +369,35 @@ public class AmusementPark {
         PrizeClaw card3 = new PrizeClaw(4, 3, 3, 2, 2, 2);
         prizeClaw.add(card3);
     }
+
     //window
     JFrame frame = new JFrame("Amusement Park");
     JPanel gamePanel = new JPanel();
+    JPanel buttonPanel = new JPanel();
+    private void replaceButtons(Component newComponent) {
+        buttonPanel.removeAll();
+        buttonPanel.add(newComponent);
+        revalidate();
+        repaint();
+    }
 
+    private Component createRadioButtons() {
+        JPanel radioPanel = new JPanel();
+        radioPanel.add(new JRadioButton("Black"));
+        radioPanel.add(new JRadioButton("Blue"));
+        radioPanel.add(new JRadioButton("Green"));
+        radioPanel.add(new JRadioButton("Red"));
+        radioPanel.add(new JRadioButton("White"));
+        return radioPanel;
+    }
+
+    private Component createCheckboxes() {
+        JPanel checkboxPanel = new JPanel();
+        checkboxPanel.add(new JCheckBox("Black"));
+        checkboxPanel.add(new JCheckBox("Blue"));
+        checkboxPanel.add(new JCheckBox("Green"));
+        checkboxPanel.add(new JCheckBox("Red"));
+        checkboxPanel.add(new JCheckBox("White"));
+        return checkboxPanel;
+    }
 }

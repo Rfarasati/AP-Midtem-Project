@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Random;
 import javax.swing.*;
 public class AmusementPark extends JFrame {
@@ -82,12 +83,25 @@ public class AmusementPark extends JFrame {
             return blackCoin + blueCoin + greenCoin + redCoin + whiteCoin + goldCoin;
         }
     }
-
+    JButton pick3Button;
+    JButton pick2Button;
+    JRadioButton blackBtn;
+    JRadioButton blueBtn;
+    JRadioButton greenBtn;
+    JRadioButton redBtn;
+    JRadioButton whiteBtn;
+    JCheckBox blackBox;
+    JCheckBox blueBox;
+    JCheckBox greenBox;
+    JCheckBox redBox;
+    JCheckBox whiteBox;
+    ButtonGroup group2;
     AmusementPark() {
         startGame();
 
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setUndecorated(true);
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frame.setUndecorated(true);
+        frame.setSize(500,300);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,19 +113,36 @@ public class AmusementPark extends JFrame {
                 }
             }
         });
-        JButton pick2Button = new JButton("I want 2 coins with the same color");
-        JButton pick3Button = new JButton("I want 3 coins with different colors");
+         pick2Button = new JButton("I want 2 coins with the same color");
+         pick3Button = new JButton("I want 3 coins with different colors");
 
-        pick2Button.addActionListener(new ActionListener() {
+        pick2Button.addActionListener(new ActionListener() { //when the pick2Button is pressed:
             public void actionPerformed(ActionEvent e) {
                 buttonPanel.removeAll();
 
                 JPanel radioPanel = new JPanel();
-                radioPanel.add(new JRadioButton("Black"));
-                radioPanel.add(new JRadioButton("Blue"));
-                radioPanel.add(new JRadioButton("Green"));
-                radioPanel.add(new JRadioButton("Red"));
-                radioPanel.add(new JRadioButton("White"));
+                blackBtn = new JRadioButton("Black");
+                blackBtn.setFocusable(false);
+                radioPanel.add(blackBtn);
+                blueBtn = new JRadioButton("Blue");
+                blueBtn.setFocusable(false);
+                radioPanel.add(blueBtn);
+                greenBtn = new JRadioButton("Green");
+                greenBtn.setFocusable(false);
+                radioPanel.add(greenBtn);
+                redBtn = new JRadioButton("Red");
+                redBtn.setFocusable(false);
+                radioPanel.add(redBtn);
+                whiteBtn = new JRadioButton("White");
+                whiteBtn.setFocusable(false);
+                radioPanel.add(whiteBtn);
+
+                group2 = new ButtonGroup();
+                group2.add(blackBtn);
+                group2.add(blueBtn);
+                group2.add(greenBtn);
+                group2.add(redBtn);
+                group2.add(whiteBtn);
 
                 buttonPanel.add(radioPanel);
 
@@ -119,21 +150,61 @@ public class AmusementPark extends JFrame {
                 frame.repaint();
             }
         });
-        pick3Button.addActionListener(new ActionListener() {
+        pick3Button.addActionListener(new ActionListener() { //when the pick3Buttons is pressed:
             public void actionPerformed(ActionEvent e) {
                 buttonPanel.removeAll();
 
-                JPanel checkboxPanel = new JPanel();
-                checkboxPanel.add(new JCheckBox("Black"));
-                checkboxPanel.add(new JCheckBox("Blue"));
-                checkboxPanel.add(new JCheckBox("Green"));
-                checkboxPanel.add(new JCheckBox("Red"));
-                checkboxPanel.add(new JCheckBox("White"));
+                JPanel checkBoxPanel = new JPanel();
+                blackBox = new JCheckBox("Black");
+                blackBox.setFocusable(false);
+                checkBoxPanel.add(blackBox);
+                blueBox = new JCheckBox("Blue");
+                blueBox.setFocusable(false);
+                checkBoxPanel.add(blueBox);
+                greenBox = new JCheckBox("Green");
+                greenBox.setFocusable(false);
+                checkBoxPanel.add(greenBox);
+                redBox = new JCheckBox("Red");
+                redBox.setFocusable(false);
+                checkBoxPanel.add(redBox);
+                whiteBox = new JCheckBox("White");
+                whiteBox.setFocusable(false);
+                checkBoxPanel.add(whiteBox);
 
-                buttonPanel.add(checkboxPanel);
+                int maxSelections = 3;
+                ItemListener itemListener = new ItemListener() {
+                    private int selectedCount = 0;
+
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        JCheckBox source = (JCheckBox) e.getSource();
+                        if (source.isSelected()) {
+                            selectedCount++;
+                        } else {
+                            selectedCount--;
+                        }
+
+                        // Disable other checkboxes when 3 are selected
+                        for (Component component : checkBoxPanel.getComponents()) {
+                            if (component instanceof JCheckBox) {
+                                JCheckBox checkBox = (JCheckBox) component;
+                                checkBox.setEnabled(selectedCount < maxSelections || checkBox.isSelected());
+                            }
+                        }
+                    }
+                };
+
+                blackBox.addItemListener(itemListener);
+                blueBox.addItemListener(itemListener);
+                greenBox.addItemListener(itemListener);
+                redBox.addItemListener(itemListener);
+                whiteBox.addItemListener(itemListener);
+
+                buttonPanel.add(checkBoxPanel);
 
                 frame.revalidate();
-                frame.repaint();            }
+                frame.repaint();
+            }
         });
 
         frame.setVisible(true);
@@ -374,30 +445,5 @@ public class AmusementPark extends JFrame {
     JFrame frame = new JFrame("Amusement Park");
     JPanel gamePanel = new JPanel();
     JPanel buttonPanel = new JPanel();
-    private void replaceButtons(Component newComponent) {
-        buttonPanel.removeAll();
-        buttonPanel.add(newComponent);
-        revalidate();
-        repaint();
-    }
 
-    private Component createRadioButtons() {
-        JPanel radioPanel = new JPanel();
-        radioPanel.add(new JRadioButton("Black"));
-        radioPanel.add(new JRadioButton("Blue"));
-        radioPanel.add(new JRadioButton("Green"));
-        radioPanel.add(new JRadioButton("Red"));
-        radioPanel.add(new JRadioButton("White"));
-        return radioPanel;
-    }
-
-    private Component createCheckboxes() {
-        JPanel checkboxPanel = new JPanel();
-        checkboxPanel.add(new JCheckBox("Black"));
-        checkboxPanel.add(new JCheckBox("Blue"));
-        checkboxPanel.add(new JCheckBox("Green"));
-        checkboxPanel.add(new JCheckBox("Red"));
-        checkboxPanel.add(new JCheckBox("White"));
-        return checkboxPanel;
-    }
 }

@@ -96,6 +96,8 @@ public class AmusementPark extends JFrame {
     JCheckBox redBox;
     JCheckBox whiteBox;
     ButtonGroup group2;
+    Player p1;
+    Player p2;
     AmusementPark() {
         startGame();
 
@@ -191,6 +193,40 @@ public class AmusementPark extends JFrame {
                                 checkBox.setEnabled(selectedCount < maxSelections || checkBox.isSelected());
                             }
                         }
+                        if (selectedCount == maxSelections) {
+                            if(blackBox.isSelected() && blueBox.isSelected() && greenBox.isSelected()) {
+                                System.out.println("1");
+                            }
+                            else if(blackBox.isSelected() && blueBox.isSelected() && redBox.isSelected()) {
+
+                            }
+                            else if(blackBox.isSelected() && blueBox.isSelected() && whiteBox.isSelected()) {
+
+                            }
+                            else if(blackBox.isSelected() && greenBox.isSelected() && redBox.isSelected()) {
+
+                            }
+                            else if(blackBox.isSelected() && greenBox.isSelected() && whiteBox.isSelected()) {
+
+
+                            }
+                            else if(blackBox.isSelected() && redBox.isSelected() && whiteBox.isSelected()) {
+
+                            }
+                            else if(blueBox.isSelected() && greenBox.isSelected() && redBox.isSelected()) {
+
+
+                            }
+                            else if(blueBox.isSelected() && greenBox.isSelected() && whiteBox.isSelected()) {
+
+                            }
+                            else if(blueBox.isSelected() && redBox.isSelected() && whiteBox.isSelected()) {
+
+                            }
+                            else if(greenBox.isSelected() && redBox.isSelected() && whiteBox.isSelected()) {
+
+                            }
+                        }
                     }
                 };
 
@@ -223,6 +259,8 @@ public class AmusementPark extends JFrame {
     }
 
     public void startGame() {
+        p1 = new Player();
+        p2 = new Player();
         buildSlotMachineBlack();
         buildSlotMachineBlue();
         buildSlotMachineGreen();

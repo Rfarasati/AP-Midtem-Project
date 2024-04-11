@@ -9,7 +9,7 @@ public class AmusementPark extends JFrame {
 
     //initialing graphics components
     JFrame frame = new JFrame("Amusement Park");
-    JPanel gamePanel = new JPanel();
+    JPanel gamePanel;
     JPanel buttonPanel = new JPanel();
     JButton pick3Button;
     JButton pick2Button;
@@ -26,14 +26,21 @@ public class AmusementPark extends JFrame {
     ButtonGroup group2;
     Player p1;
     Player p2;
+    boolean isP1Turn = true;
+    Card level1Card;
+    Card level2Card;
+    Card level3Card;
+    int cardWidth = 110; //ratio should 1/1.4
+    int cardHeight = 154;
+
 
 
     AmusementPark() {
         startGame();
 
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //frame.setUndecorated(true);
-        frame.setSize(500,300);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
+        //frame.setSize(500,300);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,9 +54,35 @@ public class AmusementPark extends JFrame {
         });
 
 
-        pick2Button = new JButton("I want 2 coins with the same color");
-        pick3Button = new JButton("I want 3 coins with different colors");
+        //pick2Button = new JButton("I want 2 coins with the same color");
+        //pick3Button = new JButton("I want 3 coins with different colors");
 
+        //twoBtn();
+        //threeBtn();
+
+        frame.setVisible(true);
+
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setBackground(new Color(51, 77, 104));
+        frame.add(gamePanel);
+
+
+
+        //pick2Button.setFocusable(false);
+        //buttonPanel.add(pick2Button);
+        //pick3Button.setFocusable(false);
+        //buttonPanel.add(pick3Button);
+        //frame.add(buttonPanel, BorderLayout.SOUTH);
+
+    }
+
+    public void startGame() {
+        p1 = new Player();
+        p2 = new Player();
+        init = new Initialization();
+        drawLevel1();
+    }
+    public void twoBtn () {
         pick2Button.addActionListener(new ActionListener() { //when the pick2Button is pressed:
             public void actionPerformed(ActionEvent e) {
                 buttonPanel.removeAll();
@@ -84,8 +117,8 @@ public class AmusementPark extends JFrame {
                 frame.repaint();
             }
         });
-
-
+    }
+    public void threeBtn () {
         pick3Button.addActionListener(new ActionListener() { //when the pick3Buttons is pressed:
             public void actionPerformed(ActionEvent e) {
                 buttonPanel.removeAll();
@@ -128,41 +161,274 @@ public class AmusementPark extends JFrame {
                             }
                         }
                         if (selectedCount == maxSelections) {
-                            if(blackBox.isSelected() && blueBox.isSelected() && greenBox.isSelected()) {
-                                System.out.println("1");
+                            if (isP1Turn) {
+                                if (blackBox.isSelected()) {
+                                    if (blueBox.isSelected()) {
+                                        if (greenBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player1Black.add(blackC);
+                                            p1.blackCoin++;
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player1Blue.add(blueC);
+                                            p1.blueCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player1Green.add(greenC);
+                                            p1.greenCoin++;
+                                            System.out.println(init.slotMachineBlack);
+                                            System.out.println(init.slotMachineBlue);
+                                            System.out.println(init.slotMachineGreen);
+                                        }
+                                        if (redBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player1Black.add(blackC);
+                                            p1.blackCoin++;
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player1Blue.add(blueC);
+                                            p1.blueCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player1Red.add(redC);
+                                            p1.redCoin++;
+                                        }
+                                        if (whiteBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player1Black.add(blackC);
+                                            p1.blackCoin++;
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player1Blue.add(blueC);
+                                            p1.blueCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player1White.add(whiteC);
+                                            p1.whiteCoin++;
+                                        }
+                                    }
+                                    if (greenBox.isSelected()) {
+                                        if (redBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player1Black.add(blackC);
+                                            p1.blackCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player1Green.add(greenC);
+                                            p1.greenCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player1Red.add(redC);
+                                            p1.redCoin++;
+                                        }
+                                        if (whiteBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player1Black.add(blackC);
+                                            p1.blackCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player1Green.add(greenC);
+                                            p1.greenCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player1White.add(whiteC);
+                                            p1.whiteCoin++;
+                                        }
+                                    }
+                                    if (redBox.isSelected()) {
+                                        if (whiteBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player1Black.add(blackC);
+                                            p1.blackCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player1Red.add(redC);
+                                            p1.redCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player1White.add(whiteC);
+                                            p1.whiteCoin++;
+                                        }
+                                    }
+                                }
+                                if (blueBox.isSelected()) {
+                                    if (greenBox.isSelected()) {
+                                        if (redBox.isSelected()) {
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player1Blue.add(blueC);
+                                            p1.blueCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player1Green.add(greenC);
+                                            p1.greenCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player1Red.add(redC);
+                                            p1.redCoin++;
+                                        }
+                                        if (whiteBox.isSelected()) {
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player1Blue.add(blueC);
+                                            p1.blueCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player1Green.add(greenC);
+                                            p1.greenCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player1White.add(whiteC);
+                                            p1.whiteCoin++;
+                                        }
+                                    }
+                                    if (redBox.isSelected()) {
+                                        if (whiteBox.isSelected()) {
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player1Blue.add(blueC);
+                                            p1.blueCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player1Red.add(redC);
+                                            p1.redCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player1White.add(whiteC);
+                                            p1.whiteCoin++;
+                                        }
+                                    }
+                                }
+                                if (greenBox.isSelected()) {
+                                    if (redBox.isSelected()) {
+                                        if (whiteBox.isSelected()) {
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player1Green.add(greenC);
+                                            p1.greenCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player1Red.add(redC);
+                                            p1.redCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player1White.add(whiteC);
+                                            p1.whiteCoin++;
+                                        }
+                                    }
+                                }
                             }
-                            else if(blackBox.isSelected() && blueBox.isSelected() && redBox.isSelected()) {
-
+                            else {
+                                if (blackBox.isSelected()) {
+                                    if (blueBox.isSelected()) {
+                                        if (greenBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player2Black.add(blackC);
+                                            p2.blackCoin++;
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player2Blue.add(blueC);
+                                            p2.blueCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player2Green.add(greenC);
+                                            p2.greenCoin++;
+                                        }
+                                        if (redBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player2Black.add(blackC);
+                                            p2.blackCoin++;
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player2Blue.add(blueC);
+                                            p2.blueCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player2Red.add(redC);
+                                            p2.redCoin++;
+                                        }
+                                        if (whiteBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player2Black.add(blackC);
+                                            p2.blackCoin++;
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player2Blue.add(blueC);
+                                            p2.blueCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player2White.add(whiteC);
+                                            p2.whiteCoin++;
+                                        }
+                                    }
+                                    if (greenBox.isSelected()) {
+                                        if (redBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player2Black.add(blackC);
+                                            p2.blackCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player2Green.add(greenC);
+                                            p2.greenCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player2Red.add(redC);
+                                            p2.redCoin++;
+                                        }
+                                        if (whiteBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player2Black.add(blackC);
+                                            p2.blackCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player2Green.add(greenC);
+                                            p2.greenCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player2White.add(whiteC);
+                                            p2.whiteCoin++;
+                                        }
+                                    }
+                                    if (redBox.isSelected()) {
+                                        if (whiteBox.isSelected()) {
+                                            Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                            init.player2Black.add(blackC);
+                                            p2.blackCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player2Red.add(redC);
+                                            p2.redCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player2White.add(whiteC);
+                                            p2.whiteCoin++;
+                                        }
+                                    }
+                                }
+                                if (blueBox.isSelected()) {
+                                    if (greenBox.isSelected()) {
+                                        if (redBox.isSelected()) {
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player2Blue.add(blueC);
+                                            p2.blueCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player2Green.add(greenC);
+                                            p2.greenCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player2Red.add(redC);
+                                            p2.redCoin++;
+                                        }
+                                        if (whiteBox.isSelected()) {
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player2Blue.add(blueC);
+                                            p2.blueCoin++;
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player2Green.add(greenC);
+                                            p2.greenCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player2White.add(whiteC);
+                                            p2.whiteCoin++;
+                                        }
+                                    }
+                                    if (redBox.isSelected()) {
+                                        if (whiteBox.isSelected()) {
+                                            Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                            init.player2Blue.add(blueC);
+                                            p2.blueCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player2Red.add(redC);
+                                            p2.redCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player2White.add(whiteC);
+                                            p2.whiteCoin++;
+                                        }
+                                    }
+                                }
+                                if (greenBox.isSelected()) {
+                                    if (redBox.isSelected()) {
+                                        if (whiteBox.isSelected()) {
+                                            Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                            init.player2Green.add(greenC);
+                                            p2.greenCoin++;
+                                            Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                            init.player2Red.add(redC);
+                                            p2.redCoin++;
+                                            Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                            init.player2White.add(whiteC);
+                                            p2.whiteCoin++;
+                                        }
+                                    }
+                                }
                             }
-                            else if(blackBox.isSelected() && blueBox.isSelected() && whiteBox.isSelected()) {
-
-                            }
-                            else if(blackBox.isSelected() && greenBox.isSelected() && redBox.isSelected()) {
-
-                            }
-                            else if(blackBox.isSelected() && greenBox.isSelected() && whiteBox.isSelected()) {
-
-
-                            }
-                            else if(blackBox.isSelected() && redBox.isSelected() && whiteBox.isSelected()) {
-
-                            }
-                            else if(blueBox.isSelected() && greenBox.isSelected() && redBox.isSelected()) {
-
-
-                            }
-                            else if(blueBox.isSelected() && greenBox.isSelected() && whiteBox.isSelected()) {
-
-                            }
-                            else if(blueBox.isSelected() && redBox.isSelected() && whiteBox.isSelected()) {
-
-                            }
-                            else if(greenBox.isSelected() && redBox.isSelected() && whiteBox.isSelected()) {
-
-                            }
+                            isP1Turn = !isP1Turn;
                         }
                     }
                 };
+
 
                 blackBox.addItemListener(itemListener);
                 blueBox.addItemListener(itemListener);
@@ -176,24 +442,23 @@ public class AmusementPark extends JFrame {
                 frame.repaint();
             }
         });
-
-        frame.setVisible(true);
-
-        gamePanel.setLayout(new BorderLayout());
-        gamePanel.setBackground(new Color(51, 77, 104));
-        frame.add(gamePanel);
-
-        pick2Button.setFocusable(false);
-        buttonPanel.add(pick2Button);
-        pick3Button.setFocusable(false);
-        buttonPanel.add(pick3Button);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-
     }
+    public void drawLevel1() {
+        gamePanel = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                try {
+                    for (int i = init.level1.size() - 1, j=0; i > init.level1.size() - 5; i--, j++) {
+                        level1Card = init.level1.get(i);
+                        Image level1Img = new ImageIcon(getClass().getResource(level1Card.getImage1Path())).getImage();
+                        g.drawImage(level1Img, 20 + (cardWidth + 5)*j, 320, cardWidth, cardHeight, null);
 
-    public void startGame() {
-        p1 = new Player();
-        p2 = new Player();
-        init = new Initialization();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 }

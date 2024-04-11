@@ -19,6 +19,17 @@ public class Initialization {
     ArrayList<Coin> slotMachineGreen;
     ArrayList<Coin> slotMachineRed;
     ArrayList<Coin> slotMachineWhite;
+    ArrayList<Coin> player1Black = new ArrayList<Coin>();
+    ArrayList<Coin> player1Blue = new ArrayList<Coin>();
+    ArrayList<Coin> player1Green = new ArrayList<Coin>();
+    ArrayList<Coin> player1Red = new ArrayList<Coin>();
+    ArrayList<Coin> player1White = new ArrayList<Coin>();
+    ArrayList<Coin> player2Black = new ArrayList<Coin>();
+    ArrayList<Coin> player2Blue = new ArrayList<Coin>();
+    ArrayList<Coin> player2Green = new ArrayList<Coin>();
+    ArrayList<Coin> player2Red = new ArrayList<Coin>();
+    ArrayList<Coin> player2White = new ArrayList<Coin>();
+    ArrayList<Coin> goldCoins;
 
 
     // PrizeClaw class arraylists:
@@ -41,6 +52,7 @@ public class Initialization {
         buildSlotMachineGreen();
         buildSlotMachineRed();
         buildSlotMachineWhite();
+        buildGoldCoins();
 
         buildPrizeClaw();
 
@@ -81,7 +93,6 @@ public class Initialization {
         level1.add(card14);
         Card card15 = new Card(1, "white", 2, 0, 2, 2, 0);
         level1.add(card15);
-        System.err.println(level1);
     }
 
     public void buildLevel2() { //building an arraylist to store level2 cards
@@ -187,7 +198,7 @@ public class Initialization {
     public void buildSlotMachineBlack() { //building black slot machine
         slotMachineBlack = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin(4, 0, 0, 0, 0, 0);
+            Coin coin = new Coin("Black");
             slotMachineBlack.add(coin);
         }
     }
@@ -195,7 +206,7 @@ public class Initialization {
     public void buildSlotMachineBlue() { //building blue slot machine
         slotMachineBlue = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin(0, 4, 0, 0, 0, 0);
+            Coin coin = new Coin("Blue");
             slotMachineBlue.add(coin);
         }
     }
@@ -203,7 +214,7 @@ public class Initialization {
     public void buildSlotMachineGreen() { //building green slot machine
         slotMachineGreen = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin(0, 0, 4, 0, 0, 0);
+            Coin coin = new Coin("Green");
             slotMachineGreen.add(coin);
         }
     }
@@ -211,7 +222,7 @@ public class Initialization {
     public void buildSlotMachineRed() { //building red slot machine
         slotMachineRed = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin(0, 0, 0, 4, 0, 0);
+            Coin coin = new Coin("Red");
             slotMachineRed.add(coin);
         }
     }
@@ -219,8 +230,16 @@ public class Initialization {
     public void buildSlotMachineWhite() { //building white slot machine
         slotMachineWhite = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin(0, 0, 0, 0, 4, 0);
+            Coin coin = new Coin("White");
             slotMachineWhite.add(coin);
+        }
+    }
+
+    public void buildGoldCoins() {
+        goldCoins = new ArrayList<Coin>();
+        for (int i = 0; i < 5; i++) {
+            Coin coin = new Coin("Gold");
+            goldCoins.add(coin);
         }
     }
 

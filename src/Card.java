@@ -20,4 +20,13 @@ public class Card {
     public String toString() { // A method in order to print arraylist to check
         return point + "-" + specialCoin + "-" + blackCoin + "-" + blueCoin + "-" + greenCoin + "-" + redCoin + "-" + whiteCoin;
     }
+    public String getImage1Path() {
+        return "./level 1/" + toString() + ".png";
+    }
+    public String getImage2Path() {
+        return "./level 2/" + toString() + ".png";
+    }
+    public String getImage3Path() {
+        return "./level 3/" + toString() + ".png";
+    }
 }

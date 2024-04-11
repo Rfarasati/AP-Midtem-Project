@@ -1,5 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class AmusementPark extends JFrame {
@@ -9,7 +13,8 @@ public class AmusementPark extends JFrame {
 
     //initialing graphics components
     JFrame frame = new JFrame("Amusement Park");
-    JPanel gamePanel;
+    JPanel gamePanel = new JPanel();
+    JLabel cardLabel;
     JPanel buttonPanel = new JPanel();
     JButton pick3Button;
     JButton pick2Button;
@@ -30,10 +35,9 @@ public class AmusementPark extends JFrame {
     Card level1Card;
     Card level2Card;
     Card level3Card;
-    int cardWidth = 110; //ratio should 1/1.4
-    int cardHeight = 154;
-
-
+    int cardWidth = 108; //ratio should 1/1.4
+    int cardHeight = 144;
+    BufferedImage[] images = new BufferedImage[4];
 
     AmusementPark() {
         startGame();
@@ -53,20 +57,19 @@ public class AmusementPark extends JFrame {
             }
         });
 
-
         //pick2Button = new JButton("I want 2 coins with the same color");
         //pick3Button = new JButton("I want 3 coins with different colors");
 
         //twoBtn();
         //threeBtn();
+        drawLevel1();
+        drawlevel2();
+        drawlevel3();
 
         frame.setVisible(true);
-
-        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setLayout(null);
         gamePanel.setBackground(new Color(51, 77, 104));
         frame.add(gamePanel);
-
-
 
         //pick2Button.setFocusable(false);
         //buttonPanel.add(pick2Button);
@@ -80,7 +83,6 @@ public class AmusementPark extends JFrame {
         p1 = new Player();
         p2 = new Player();
         init = new Initialization();
-        drawLevel1();
     }
     public void twoBtn () {
         pick2Button.addActionListener(new ActionListener() { //when the pick2Button is pressed:
@@ -444,21 +446,60 @@ public class AmusementPark extends JFrame {
         });
     }
     public void drawLevel1() {
-        gamePanel = new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                try {
-                    for (int i = init.level1.size() - 1, j=0; i > init.level1.size() - 5; i--, j++) {
-                        level1Card = init.level1.get(i);
-                        Image level1Img = new ImageIcon(getClass().getResource(level1Card.getImage1Path())).getImage();
-                        g.drawImage(level1Img, 20 + (cardWidth + 5)*j, 320, cardWidth, cardHeight, null);
-
+        for (int i = init.level1.size() - 1, j = 0; i > init.level1.size() - 5; i--, j++) {
+            try {
+                level1Card = init.level1.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(level1Card.getImage1Path()));
+                cardLabel = new JLabel(new ImageIcon(image));
+                cardLabel.setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
+                cardLabel.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("YESSSS");
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                });
+                gamePanel.add(cardLabel);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        };
+        }
+    }
+    public void drawlevel2() {
+        for (int i = init.level2.size() - 1, j = 0; i > init.level2.size() - 5; i--, j++) {
+            try {
+                level2Card = init.level2.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(level2Card.getImage2Path()));
+                cardLabel = new JLabel(new ImageIcon(image));
+                cardLabel.setBounds(510 + (cardWidth + 10)*j, 65 + 10 + cardHeight, cardWidth, cardHeight);
+                cardLabel.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("YESSSS");
+                    }
+                });
+                gamePanel.add(cardLabel);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void drawlevel3() {
+        for (int i = init.level3.size() - 1, j = 0; i > init.level3.size() - 5; i--, j++) {
+            try {
+                level3Card = init.level3.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(level3Card.getImage3Path()));
+                cardLabel = new JLabel(new ImageIcon(image));
+                cardLabel.setBounds(510 + (cardWidth + 10)*j, 65 + 2 * (10 + cardHeight), cardWidth, cardHeight);
+                cardLabel.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("YESSSS");
+                    }
+                });
+                gamePanel.add(cardLabel);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

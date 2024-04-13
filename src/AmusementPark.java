@@ -14,10 +14,15 @@ public class AmusementPark extends JFrame {
     //initialing graphics components
     JFrame frame = new JFrame("Amusement Park");
     JPanel gamePanel = new JPanel();
-    JLabel cardLabel;
+    JLabel[] cardLabel1 = new JLabel[4];
+    JLabel[] cardLabel2 = new JLabel[4];
+    JLabel[] cardLabel3 = new JLabel[4];
     JPanel buttonPanel = new JPanel();
     JButton pick3Button;
     JButton pick2Button;
+    JButton buyButton;
+    JButton reserveButton;
+    JButton cancelButton;
     JRadioButton blackBtn;
     JRadioButton blueBtn;
     JRadioButton greenBtn;
@@ -37,7 +42,6 @@ public class AmusementPark extends JFrame {
     Card level3Card;
     int cardWidth = 108; //ratio should 1/1.4
     int cardHeight = 144;
-    BufferedImage[] images = new BufferedImage[4];
 
     AmusementPark() {
         startGame();
@@ -57,11 +61,11 @@ public class AmusementPark extends JFrame {
             }
         });
 
-        //pick2Button = new JButton("I want 2 coins with the same color");
-        //pick3Button = new JButton("I want 3 coins with different colors");
+        pick2Button = new JButton("I want 2 coins with the same color");
+        pick3Button = new JButton("I want 3 coins with different colors");
 
-        //twoBtn();
-        //threeBtn();
+        twoBtn();
+        threeBtn();
         drawLevel1();
         drawlevel2();
         drawlevel3();
@@ -71,11 +75,11 @@ public class AmusementPark extends JFrame {
         gamePanel.setBackground(new Color(51, 77, 104));
         frame.add(gamePanel);
 
-        //pick2Button.setFocusable(false);
-        //buttonPanel.add(pick2Button);
-        //pick3Button.setFocusable(false);
-        //buttonPanel.add(pick3Button);
-        //frame.add(buttonPanel, BorderLayout.SOUTH);
+        pick2Button.setFocusable(false);
+        buttonPanel.add(pick2Button);
+        pick3Button.setFocusable(false);
+        buttonPanel.add(pick3Button);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
 
     }
 
@@ -446,57 +450,99 @@ public class AmusementPark extends JFrame {
         });
     }
     public void drawLevel1() {
-        for (int i = init.level1.size() - 1, j = 0; i > init.level1.size() - 5; i--, j++) {
+        for (int i = init.level1.size() - 1, j = 0, k = 0; i > init.level1.size() - 5; i--, j++, k++) {
             try {
                 level1Card = init.level1.get(i);
                 BufferedImage image = ImageIO.read(getClass().getResource(level1Card.getImage1Path()));
-                cardLabel = new JLabel(new ImageIcon(image));
-                cardLabel.setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
-                cardLabel.addMouseListener(new MouseAdapter() {
+                cardLabel1[k] = new JLabel(new ImageIcon(image));
+                cardLabel1[k].setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
+                int tmp = k;
+                cardLabel1[tmp].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        System.out.println("YESSSS");
+                        cardLabel1[tmp].removeMouseListener(this);
+                        cardLabel1[tmp].setIcon(null);
+                        buyButton = new JButton("Buy");
+                        reserveButton = new JButton("Reserve");
+                        cancelButton = new JButton("Cancel");
+                        buyButton.setFocusable(false);
+                        reserveButton.setFocusable(false);
+                        cancelButton.setFocusable(false);
+                        cardLabel1[tmp].add(buyButton);
+                        cardLabel1[tmp].add(reserveButton);
+                        cardLabel1[tmp].add(cancelButton);
+                        cardLabel1[tmp].setLayout(new FlowLayout());
+                        gamePanel.revalidate();
+                        gamePanel.repaint();
                     }
                 });
-                gamePanel.add(cardLabel);
+                gamePanel.add(cardLabel1[k]);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
     public void drawlevel2() {
-        for (int i = init.level2.size() - 1, j = 0; i > init.level2.size() - 5; i--, j++) {
+        for (int i = init.level2.size() - 1, j = 0, k = 0; i > init.level2.size() - 5; i--, j++, k++) {
             try {
                 level2Card = init.level2.get(i);
                 BufferedImage image = ImageIO.read(getClass().getResource(level2Card.getImage2Path()));
-                cardLabel = new JLabel(new ImageIcon(image));
-                cardLabel.setBounds(510 + (cardWidth + 10)*j, 65 + 10 + cardHeight, cardWidth, cardHeight);
-                cardLabel.addMouseListener(new MouseAdapter() {
+                cardLabel2[k] = new JLabel(new ImageIcon(image));
+                cardLabel2[k].setBounds(510 + (cardWidth + 10)*j, 65 + 10 + cardHeight, cardWidth, cardHeight);
+                int tmp = k;
+                cardLabel2[tmp].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        System.out.println("YESSSS");
+                        cardLabel2[tmp].removeMouseListener(this);
+                        cardLabel2[tmp].setIcon(null);
+                        buyButton = new JButton("Buy");
+                        reserveButton = new JButton("Reserve");
+                        cancelButton = new JButton("Cancel");
+                        buyButton.setFocusable(false);
+                        reserveButton.setFocusable(false);
+                        cancelButton.setFocusable(false);
+                        cardLabel2[tmp].add(buyButton);
+                        cardLabel2[tmp].add(reserveButton);
+                        cardLabel2[tmp].add(cancelButton);
+                        cardLabel2[tmp].setLayout(new FlowLayout());
+                        gamePanel.revalidate();
+                        gamePanel.repaint();
                     }
                 });
-                gamePanel.add(cardLabel);
+                gamePanel.add(cardLabel2[k]);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
     public void drawlevel3() {
-        for (int i = init.level3.size() - 1, j = 0; i > init.level3.size() - 5; i--, j++) {
+        for (int i = init.level3.size() - 1, j = 0, k = 0; i > init.level3.size() - 5; i--, j++, k++) {
             try {
                 level3Card = init.level3.get(i);
                 BufferedImage image = ImageIO.read(getClass().getResource(level3Card.getImage3Path()));
-                cardLabel = new JLabel(new ImageIcon(image));
-                cardLabel.setBounds(510 + (cardWidth + 10)*j, 65 + 2 * (10 + cardHeight), cardWidth, cardHeight);
-                cardLabel.addMouseListener(new MouseAdapter() {
+                cardLabel3[k] = new JLabel(new ImageIcon(image));
+                cardLabel3[k].setBounds(510 + (cardWidth + 10)*j, 65 + 2 * (10 + cardHeight), cardWidth, cardHeight);
+                int tmp = k;
+                cardLabel3[tmp].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        System.out.println("YESSSS");
+                        cardLabel3[tmp].removeMouseListener(this);
+                        cardLabel3[tmp].setIcon(null);
+                        buyButton = new JButton("Buy");
+                        reserveButton = new JButton("Reserve");
+                        cancelButton = new JButton("Cancel");
+                        buyButton.setFocusable(false);
+                        reserveButton.setFocusable(false);
+                        cancelButton.setFocusable(false);
+                        cardLabel3[tmp].add(buyButton);
+                        cardLabel3[tmp].add(reserveButton);
+                        cardLabel3[tmp].add(cancelButton);
+                        cardLabel3[tmp].setLayout(new FlowLayout());
+                        gamePanel.revalidate();
+                        gamePanel.repaint();
                     }
                 });
-                gamePanel.add(cardLabel);
+                gamePanel.add(cardLabel3[k]);
             } catch (Exception e) {
                 e.printStackTrace();
             }

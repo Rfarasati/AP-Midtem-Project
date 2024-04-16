@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -456,6 +457,7 @@ public class AmusementPark extends JFrame {
                 BufferedImage image = ImageIO.read(getClass().getResource(level1Card.getImage1Path()));
                 cardLabel1[k] = new JLabel(new ImageIcon(image));
                 cardLabel1[k].setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
+                int b = j;
                 int tmp = k;
                 cardLabel1[tmp].addMouseListener(new MouseAdapter() {
                     @Override
@@ -474,6 +476,24 @@ public class AmusementPark extends JFrame {
                         cardLabel1[tmp].setLayout(new FlowLayout());
                         gamePanel.revalidate();
                         gamePanel.repaint();
+                        cancelButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                cardLabel1[tmp].remove(buyButton);
+                                cardLabel1[tmp].remove(reserveButton);
+                                cardLabel1[tmp].remove(cancelButton);
+                                try {
+                                    BufferedImage image = ImageIO.read(getClass().getResource(level1Card.getImage1Path()));
+                                    cardLabel1[tmp] = new JLabel(new ImageIcon(image));
+                                    cardLabel1[tmp].setBounds(510 + (cardWidth + 10)*b, 65, cardWidth, cardHeight);
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                                gamePanel.revalidate();
+                                gamePanel.repaint();
+                            }
+                        });
                     }
                 });
                 gamePanel.add(cardLabel1[k]);

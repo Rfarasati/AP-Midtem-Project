@@ -151,15 +151,15 @@ public class Initialization {
         level3.add(card9);
         Card card10 = new Card(4, "white", 2, 2, 0, 2, 2);
         level3.add(card10);
-        Card card11 = new Card(5, "white", 2, 2, 1, 2, 2);
+        Card card11 = new Card(5, "black", 2, 2, 2, 0, 3);
         level3.add(card11);
-        Card card12 = new Card(5, "red", 2, 2, 2, 1, 2);
+        Card card12 = new Card(5, "blue", 2, 2, 2, 2, 2);
         level3.add(card12);
         Card card13 = new Card(5, "green", 1, 2, 2, 2, 2);
         level3.add(card13);
-        Card card14 = new Card(5, "blue", 2, 2, 2, 2, 2);
+        Card card14 = new Card(5, "red", 2, 2, 2, 1, 2);
         level3.add(card14);
-        Card card15 = new Card(5, "black", 2, 3, 2, 0, 3);
+        Card card15 = new Card(5, "white", 2, 2, 1, 2, 2);
         level3.add(card15);
     }
 

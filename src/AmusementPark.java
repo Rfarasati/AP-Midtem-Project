@@ -457,7 +457,6 @@ public class AmusementPark extends JFrame {
                 BufferedImage image = ImageIO.read(getClass().getResource(level1Card.getImage1Path()));
                 cardLabel1[k] = new JLabel(new ImageIcon(image));
                 cardLabel1[k].setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
-                int b = j;
                 int tmp = k;
                 cardLabel1[tmp].addMouseListener(new MouseAdapter() {
                     @Override
@@ -474,26 +473,15 @@ public class AmusementPark extends JFrame {
                         cardLabel1[tmp].add(reserveButton);
                         cardLabel1[tmp].add(cancelButton);
                         cardLabel1[tmp].setLayout(new FlowLayout());
-                        gamePanel.revalidate();
-                        gamePanel.repaint();
                         cancelButton.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
-                                cardLabel1[tmp].remove(buyButton);
-                                cardLabel1[tmp].remove(reserveButton);
-                                cardLabel1[tmp].remove(cancelButton);
-                                try {
-                                    BufferedImage image = ImageIO.read(getClass().getResource(level1Card.getImage1Path()));
-                                    cardLabel1[tmp] = new JLabel(new ImageIcon(image));
-                                    cardLabel1[tmp].setBounds(510 + (cardWidth + 10)*b, 65, cardWidth, cardHeight);
-                                } catch (IOException ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                                gamePanel.revalidate();
-                                gamePanel.repaint();
+                                cardLabel1[tmp].removeAll();
+                                cardLabel1[tmp].setIcon(new ImageIcon(image));
                             }
                         });
+                        cardLabel1[tmp].addMouseListener(this);
                     }
                 });
                 gamePanel.add(cardLabel1[k]);
@@ -525,8 +513,15 @@ public class AmusementPark extends JFrame {
                         cardLabel2[tmp].add(reserveButton);
                         cardLabel2[tmp].add(cancelButton);
                         cardLabel2[tmp].setLayout(new FlowLayout());
-                        gamePanel.revalidate();
-                        gamePanel.repaint();
+                        cancelButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                cardLabel2[tmp].removeAll();
+                                cardLabel2[tmp].setIcon(new ImageIcon(image));
+                            }
+                        });
+                        cardLabel2[tmp].addMouseListener(this);
                     }
                 });
                 gamePanel.add(cardLabel2[k]);
@@ -558,8 +553,15 @@ public class AmusementPark extends JFrame {
                         cardLabel3[tmp].add(reserveButton);
                         cardLabel3[tmp].add(cancelButton);
                         cardLabel3[tmp].setLayout(new FlowLayout());
-                        gamePanel.revalidate();
-                        gamePanel.repaint();
+                        cancelButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                cardLabel3[tmp].removeAll();
+                                cardLabel3[tmp].setIcon(new ImageIcon(image));
+                            }
+                        });
+                        cardLabel3[tmp].addMouseListener(this);
                     }
                 });
                 gamePanel.add(cardLabel3[k]);

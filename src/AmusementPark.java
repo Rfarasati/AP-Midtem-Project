@@ -18,6 +18,7 @@ public class AmusementPark extends JFrame {
     JLabel[] cardLabel1 = new JLabel[4];
     JLabel[] cardLabel2 = new JLabel[4];
     JLabel[] cardLabel3 = new JLabel[4];
+    JLabel[] prizeClawLabel = new JLabel[3];
     JPanel buttonPanel = new JPanel();
     JButton pick3Button;
     JButton pick2Button;
@@ -41,10 +42,16 @@ public class AmusementPark extends JFrame {
     Card level1Card;
     Card level2Card;
     Card level3Card;
+    PrizeClaw prizeClawCard;
     int cardWidth = 108; //ratio should 1/1.4
     int cardHeight = 144;
+    JLabel blackCoinLabel;
+    JLabel blueCoinLabel;
+    JLabel redCoinLabel;
+    JLabel goldCoinLabel;
+    JLabel whiteCoinLabel;
 
-    AmusementPark() {
+    AmusementPark() throws IOException {
         startGame();
 
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -70,6 +77,8 @@ public class AmusementPark extends JFrame {
         drawLevel1();
         drawlevel2();
         drawlevel3();
+        drawCoins();
+        drawPrizeClaws();
 
         frame.setVisible(true);
         gamePanel.setLayout(null);
@@ -570,4 +579,68 @@ public class AmusementPark extends JFrame {
             }
         }
     }
+    public void drawPrizeClaws() {
+        for (int i = init.prizeClaw.size() - 1, j = 0, k = 0; i > init.prizeClaw.size() - 4; i--, j++, k++) {
+            try {
+                prizeClawCard = init.prizeClaw.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(prizeClawCard.getPrizeClawPath()));
+                prizeClawLabel[k] = new JLabel(new ImageIcon(image));
+                prizeClawLabel[k].setBounds(560 + (cardWidth + 10)*j, 65 + 3 * (10 + cardHeight), cardWidth, cardHeight);
+                int tmp = k;
+                prizeClawLabel[tmp].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        prizeClawLabel[tmp].removeMouseListener(this);
+                        prizeClawLabel[tmp].setIcon(null);
+                        buyButton = new JButton("Buy");
+                        cancelButton = new JButton("Cancel");
+                        buyButton.setFocusable(false);
+                        cancelButton.setFocusable(false);
+                        prizeClawLabel[tmp].add(buyButton);
+                        prizeClawLabel[tmp].add(cancelButton);
+                        prizeClawLabel[tmp].setLayout(new FlowLayout());
+                        cancelButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                prizeClawLabel[tmp].removeAll();
+                                prizeClawLabel[tmp].setIcon(new ImageIcon(image));
+                            }
+                        });
+                        prizeClawLabel[tmp].addMouseListener(this);
+                    }
+                });
+                gamePanel.add(prizeClawLabel[k]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void drawCoins() throws IOException {
+        try {
+            BufferedImage image1 = ImageIO.read(getClass().getResource("./coins/black coin.png"));
+            blackCoinLabel = new JLabel(new ImageIcon(image1));
+            blackCoinLabel.setBounds(500, 700, 94, 94);
+            gamePanel.add(blackCoinLabel);
+            BufferedImage image2 = ImageIO.read(getClass().getResource("./coins/blue coin.png"));
+            blackCoinLabel = new JLabel(new ImageIcon(image2));
+            blackCoinLabel.setBounds(500 + 94 + 2, 700, 94, 94);
+            gamePanel.add(blackCoinLabel);
+            BufferedImage image3 = ImageIO.read(getClass().getResource("./coins/green coin.png"));
+            blackCoinLabel = new JLabel(new ImageIcon(image3));
+            blackCoinLabel.setBounds(500 + 2*94 + 4, 700, 94, 94);
+            gamePanel.add(blackCoinLabel);
+            BufferedImage image4 = ImageIO.read(getClass().getResource("./coins/red coin.png"));
+            blackCoinLabel = new JLabel(new ImageIcon(image4));
+            blackCoinLabel.setBounds(500 + 3*94 + 6, 700, 94, 94);
+            gamePanel.add(blackCoinLabel);
+            BufferedImage image5 = ImageIO.read(getClass().getResource("./coins/white coin.png"));
+            blackCoinLabel = new JLabel(new ImageIcon(image5));
+            blackCoinLabel.setBounds(500 + 4*94 + 8, 700, 94, 94);
+            gamePanel.add(blackCoinLabel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -198,7 +198,7 @@ public class Initialization {
     public void buildSlotMachineBlack() { //building black slot machine
         slotMachineBlack = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin("Black");
+            Coin coin = new Coin("black coin");
             slotMachineBlack.add(coin);
         }
     }
@@ -206,7 +206,7 @@ public class Initialization {
     public void buildSlotMachineBlue() { //building blue slot machine
         slotMachineBlue = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin("Blue");
+            Coin coin = new Coin("blue coin");
             slotMachineBlue.add(coin);
         }
     }
@@ -214,7 +214,7 @@ public class Initialization {
     public void buildSlotMachineGreen() { //building green slot machine
         slotMachineGreen = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin("Green");
+            Coin coin = new Coin("green coin");
             slotMachineGreen.add(coin);
         }
     }
@@ -222,7 +222,7 @@ public class Initialization {
     public void buildSlotMachineRed() { //building red slot machine
         slotMachineRed = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin("Red");
+            Coin coin = new Coin("red coin");
             slotMachineRed.add(coin);
         }
     }
@@ -230,7 +230,7 @@ public class Initialization {
     public void buildSlotMachineWhite() { //building white slot machine
         slotMachineWhite = new ArrayList<Coin>();
         for (int i = 0; i < 4; i++) {
-            Coin coin = new Coin("White");
+            Coin coin = new Coin("white coin");
             slotMachineWhite.add(coin);
         }
     }
@@ -238,7 +238,7 @@ public class Initialization {
     public void buildGoldCoins() {
         goldCoins = new ArrayList<Coin>();
         for (int i = 0; i < 5; i++) {
-            Coin coin = new Coin("Gold");
+            Coin coin = new Coin("gold coin");
             goldCoins.add(coin);
         }
     }

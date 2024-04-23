@@ -189,6 +189,7 @@ public class AmusementPark extends JFrame {
                                 if (blackBox.isSelected()) {
                                     if (blueBox.isSelected()) {
                                         if (greenBox.isSelected()) {
+                                            isP1Turn = false;
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player1Black.add(blackC);
                                             p1.blackCoin++;
@@ -210,6 +211,7 @@ public class AmusementPark extends JFrame {
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
                                             buttonPanel.add(pick3Button);
+                                            buttonPanel.add((Component) itemListener);
                                             buttonPanel.revalidate();
                                             buttonPanel.repaint();
                                         }
@@ -328,11 +330,11 @@ public class AmusementPark extends JFrame {
                                         }
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 if (blackBox.isSelected()) {
                                     if (blueBox.isSelected()) {
                                         if (greenBox.isSelected()) {
+                                            isP1Turn = true;
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player2Black.add(blackC);
                                             p2.blackCoin++;
@@ -459,9 +461,12 @@ public class AmusementPark extends JFrame {
                                     }
                                 }
                             }
-                            isP1Turn = !isP1Turn;
-                        }}
+                            System.out.println(isP1Turn);
+
+                        }
+                    }
                 };
+//                itemListener.itemStateChanged(t);
                 blackBox.addItemListener(itemListener);
                 blueBox.addItemListener(itemListener);
                 greenBox.addItemListener(itemListener);

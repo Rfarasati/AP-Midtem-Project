@@ -36,6 +36,7 @@ public class AmusementPark extends JFrame {
     JCheckBox redBox;
     JCheckBox whiteBox;
     ButtonGroup group2;
+    ItemListener itemListener;
     Player p1;
     Player p2;
     boolean isP1Turn = true;
@@ -47,9 +48,16 @@ public class AmusementPark extends JFrame {
     int cardHeight = 144;
     JLabel blackCoinLabel;
     JLabel blueCoinLabel;
+    JLabel greenCoinLabel;
     JLabel redCoinLabel;
     JLabel goldCoinLabel;
     JLabel whiteCoinLabel;
+    Font font = new Font("Arial", Font.BOLD, 30);
+    int blackCoinNum = 4;
+    int blueCoinNum = 4;
+    int greenCoinNum = 4;
+    int redCoinNum = 4;
+    int whiteCoinNum = 4;
 
     AmusementPark() throws IOException {
         startGame();
@@ -157,7 +165,7 @@ public class AmusementPark extends JFrame {
                 checkBoxPanel.add(whiteBox);
 
                 int maxSelections = 3;
-                ItemListener itemListener = new ItemListener() {
+                itemListener = new ItemListener() {
                     private int selectedCount = 0;
 
                     @Override
@@ -193,6 +201,17 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
+                                            greenCoinNum--;
+                                            blackCoinNum--;
+                                            blueCoinNum--;
+                                            blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                            blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                            greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                            buttonPanel.remove(checkBoxPanel);
+                                            buttonPanel.add(pick2Button);
+                                            buttonPanel.add(pick3Button);
+                                            buttonPanel.revalidate();
+                                            buttonPanel.repaint();
                                         }
                                         if (redBox.isSelected()) {
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
@@ -441,19 +460,14 @@ public class AmusementPark extends JFrame {
                                 }
                             }
                             isP1Turn = !isP1Turn;
-                        }
-                    }
+                        }}
                 };
-
-
                 blackBox.addItemListener(itemListener);
                 blueBox.addItemListener(itemListener);
                 greenBox.addItemListener(itemListener);
                 redBox.addItemListener(itemListener);
                 whiteBox.addItemListener(itemListener);
-
                 buttonPanel.add(checkBoxPanel);
-
                 frame.revalidate();
                 frame.repaint();
             }
@@ -621,23 +635,56 @@ public class AmusementPark extends JFrame {
             BufferedImage image1 = ImageIO.read(getClass().getResource("./coins/black coin.png"));
             blackCoinLabel = new JLabel(new ImageIcon(image1));
             blackCoinLabel.setBounds(500, 700, 94, 94);
+            blackCoinLabel.setText(String.valueOf(blackCoinNum));
+            blackCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
+            blackCoinLabel.setVerticalTextPosition(JLabel.CENTER);
+            blackCoinLabel.setForeground(Color.WHITE);
+            blackCoinLabel.setFont(font);
             gamePanel.add(blackCoinLabel);
+
+
             BufferedImage image2 = ImageIO.read(getClass().getResource("./coins/blue coin.png"));
-            blackCoinLabel = new JLabel(new ImageIcon(image2));
-            blackCoinLabel.setBounds(500 + 94 + 2, 700, 94, 94);
-            gamePanel.add(blackCoinLabel);
+            blueCoinLabel = new JLabel(new ImageIcon(image2));
+            blueCoinLabel.setBounds(500 + 94 + 2, 700, 94, 94);
+            blueCoinLabel.setText(String.valueOf(blackCoinNum));
+            blueCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
+            blueCoinLabel.setVerticalTextPosition(JLabel.CENTER);
+            blueCoinLabel.setForeground(Color.WHITE);
+            blueCoinLabel.setFont(font);
+            gamePanel.add(blueCoinLabel);
+
+
             BufferedImage image3 = ImageIO.read(getClass().getResource("./coins/green coin.png"));
-            blackCoinLabel = new JLabel(new ImageIcon(image3));
-            blackCoinLabel.setBounds(500 + 2*94 + 4, 700, 94, 94);
-            gamePanel.add(blackCoinLabel);
+            greenCoinLabel = new JLabel(new ImageIcon(image3));
+            greenCoinLabel.setBounds(500 + 2*94 + 4, 700, 94, 94);
+            greenCoinLabel.setText(String.valueOf(greenCoinNum));
+            greenCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
+            greenCoinLabel.setVerticalTextPosition(JLabel.CENTER);
+            greenCoinLabel.setForeground(Color.WHITE);
+            greenCoinLabel.setFont(font);
+            gamePanel.add(greenCoinLabel);
+
+
             BufferedImage image4 = ImageIO.read(getClass().getResource("./coins/red coin.png"));
-            blackCoinLabel = new JLabel(new ImageIcon(image4));
-            blackCoinLabel.setBounds(500 + 3*94 + 6, 700, 94, 94);
-            gamePanel.add(blackCoinLabel);
+            redCoinLabel = new JLabel(new ImageIcon(image4));
+            redCoinLabel.setBounds(500 + 3*94 + 6, 700, 94, 94);
+            redCoinLabel.setText(String.valueOf(redCoinNum));
+            redCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
+            redCoinLabel.setVerticalTextPosition(JLabel.CENTER);
+            redCoinLabel.setForeground(Color.WHITE);
+            redCoinLabel.setFont(font);
+            gamePanel.add(redCoinLabel);
+
+
             BufferedImage image5 = ImageIO.read(getClass().getResource("./coins/white coin.png"));
-            blackCoinLabel = new JLabel(new ImageIcon(image5));
-            blackCoinLabel.setBounds(500 + 4*94 + 8, 700, 94, 94);
-            gamePanel.add(blackCoinLabel);
+            whiteCoinLabel = new JLabel(new ImageIcon(image5));
+            whiteCoinLabel.setBounds(500 + 4*94 + 8, 700, 94, 94);
+            whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+            whiteCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
+            whiteCoinLabel.setVerticalTextPosition(JLabel.CENTER);
+            whiteCoinLabel.setForeground(Color.BLACK);
+            whiteCoinLabel.setFont(font);
+            gamePanel.add(whiteCoinLabel);
         } catch (Exception e) {
             e.printStackTrace();
         }

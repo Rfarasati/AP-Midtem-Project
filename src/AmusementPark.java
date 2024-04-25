@@ -142,6 +142,8 @@ public class AmusementPark extends JFrame {
             }
         });
     }
+    int maxSelections = 3;
+    int emptySlotCount = 0;
     public void threeBtn () {
         pick3Button.addActionListener(new ActionListener() { //when the pick3Buttons is pressed:
             public void actionPerformed(ActionEvent e) {
@@ -164,12 +166,18 @@ public class AmusementPark extends JFrame {
                 whiteBox.setFocusable(false);
                 checkBoxPanel.add(whiteBox);
 
-                int maxSelections = 3;
+
                 itemListener = new ItemListener() {
                     private int selectedCount = 0;
 
                     @Override
                     public void itemStateChanged(ItemEvent e) {
+                        if (emptySlotCount >= 3) {
+                            maxSelections = 2;
+                            if (emptySlotCount >= 4) {
+                                maxSelections = 1;
+                            }
+                        }
                         JCheckBox source = (JCheckBox) e.getSource();
                         if (source.isSelected()) {
                             selectedCount++;
@@ -177,13 +185,14 @@ public class AmusementPark extends JFrame {
                             selectedCount--;
                         }
 
-                        // Disable other checkboxes when 3 are selected
+                        // Disable other checkboxes when 3 or 2 are selected
                         for (Component component : checkBoxPanel.getComponents()) {
                             if (component instanceof JCheckBox) {
                                 JCheckBox checkBox = (JCheckBox) component;
                                 checkBox.setEnabled(selectedCount < maxSelections || checkBox.isSelected());
                             }
                         }
+
                         if (selectedCount == maxSelections) {
                             if (isP1Turn) {
                                 if (blackBox.isSelected()) {
@@ -191,6 +200,7 @@ public class AmusementPark extends JFrame {
                                         if (greenBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = false;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player1Black.add(blackC);
                                             p1.blackCoin++;
@@ -200,15 +210,28 @@ public class AmusementPark extends JFrame {
                                             Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                                             init.player1Green.add(greenC);
                                             p1.greenCoin++;
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
+
                                             greenCoinNum--;
                                             blackCoinNum--;
                                             blueCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -220,6 +243,7 @@ public class AmusementPark extends JFrame {
                                         if (redBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = false;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player1Black.add(blackC);
                                             p1.blackCoin++;
@@ -229,15 +253,27 @@ public class AmusementPark extends JFrame {
                                             Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
+
                                             blackCoinNum--;
                                             blueCoinNum--;
                                             redCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -249,6 +285,7 @@ public class AmusementPark extends JFrame {
                                         if (whiteBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = false;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player1Black.add(blackC);
                                             p1.blackCoin++;
@@ -258,15 +295,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineWhite);
+
                                             blackCoinNum--;
                                             blueCoinNum--;
                                             whiteCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -280,6 +329,7 @@ public class AmusementPark extends JFrame {
                                         if (redBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = false;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player1Black.add(blackC);
                                             p1.blackCoin++;
@@ -289,15 +339,27 @@ public class AmusementPark extends JFrame {
                                             Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
+
                                             blackCoinNum--;
                                             greenCoinNum--;
                                             redCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -308,8 +370,8 @@ public class AmusementPark extends JFrame {
                                         }
                                         if (whiteBox.isSelected()) {
                                             System.out.println(isP1Turn);
-
                                             isP1Turn = false;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player1Black.add(blackC);
                                             p1.blackCoin++;
@@ -319,15 +381,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineGreen);
+
                                             blackCoinNum--;
                                             greenCoinNum--;
                                             whiteCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum ));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -341,6 +415,7 @@ public class AmusementPark extends JFrame {
                                         if (whiteBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = false;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player1Black.add(blackC);
                                             p1.blackCoin++;
@@ -350,15 +425,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineWhite);
+
                                             blackCoinNum--;
                                             redCoinNum--;
                                             whiteCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -374,6 +461,7 @@ public class AmusementPark extends JFrame {
                                         if (redBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = false;
+
                                             Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
                                             init.player1Blue.add(blueC);
                                             p1.blueCoin++;
@@ -383,15 +471,27 @@ public class AmusementPark extends JFrame {
                                             Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
-                                                                                        System.out.println(init.slotMachineRed);
+
+                                            System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
                                             greenCoinNum--;
                                             blueCoinNum--;
                                             redCoinNum--;
+
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -403,6 +503,7 @@ public class AmusementPark extends JFrame {
                                         if (whiteBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = false;
+
                                             Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
                                             init.player1Blue.add(blueC);
                                             p1.blueCoin++;
@@ -412,15 +513,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineWhite);
+
+                                            System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
+
                                             blueCoinNum--;
                                             greenCoinNum--;
                                             whiteCoinNum--;
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -443,15 +556,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineWhite);
+
+                                            System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
+
                                             blueCoinNum--;
                                             redCoinNum--;
                                             whiteCoinNum--;
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -466,8 +591,8 @@ public class AmusementPark extends JFrame {
                                     if (redBox.isSelected()) {
                                         if (whiteBox.isSelected()) {
                                             System.out.println(isP1Turn);
-
                                             isP1Turn = false;
+
                                             Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                                             init.player1Green.add(greenC);
                                             p1.greenCoin++;
@@ -477,15 +602,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineRed);
+
+                                            System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineGreen);
+
                                             whiteCoinNum--;
                                             greenCoinNum--;
                                             redCoinNum--;
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -496,19 +633,481 @@ public class AmusementPark extends JFrame {
                                         }
                                     }
                                 }
+                                if (blackBox.isSelected()) {
+                                    if (blueBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player1Black.add(blackC);
+                                        p1.blackCoin++;
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player1Blue.add(blueC);
+                                        p1.blueCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineBlue);
+
+                                        blackCoinNum--;
+                                        blueCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (greenBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player1Black.add(blackC);
+                                        p1.blackCoin++;
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player1Green.add(greenC);
+                                        p1.greenCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineGreen);
+
+                                        blackCoinNum--;
+                                        greenCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (redBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player1Black.add(blackC);
+                                        p1.blackCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player1Red.add(redC);
+                                        p1.redCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineRed);
+
+                                        blackCoinNum--;
+                                        redCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player1Black.add(blackC);
+                                        p1.blackCoin++;
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player1White.add(whiteC);
+                                        p1.whiteCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineWhite);
+
+                                        blackCoinNum--;
+                                        whiteCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (blueBox.isSelected()) {
+                                    if (greenBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player1Blue.add(blueC);
+                                        p1.blueCoin++;
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player1Green.add(greenC);
+                                        p1.greenCoin++;
+
+                                        System.out.println(init.slotMachineBlue);
+                                        System.out.println(init.slotMachineGreen);
+
+                                        blueCoinNum--;
+                                        greenCoinNum--;
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (redBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player1Blue.add(blueC);
+                                        p1.blueCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player1Red.add(redC);
+                                        p1.redCoin++;
+
+                                        System.out.println(init.slotMachineBlue);
+                                        System.out.println(init.slotMachineRed);
+
+                                        blueCoinNum--;
+                                        redCoinNum--;
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player1Blue.add(blueC);
+                                        p1.blueCoin++;
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player1White.add(whiteC);
+                                        p1.whiteCoin++;
+
+                                        System.out.println(init.slotMachineBlue);
+                                        System.out.println(init.slotMachineWhite);
+
+                                        blueCoinNum--;
+                                        whiteCoinNum--;
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (greenBox.isSelected()) {
+                                    if (redBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player1Green.add(greenC);
+                                        p1.greenCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player1Red.add(redC);
+                                        p1.redCoin++;
+
+                                        System.out.println(init.slotMachineGreen);
+                                        System.out.println(init.slotMachineRed);
+
+                                        greenCoinNum--;
+                                        redCoinNum--;
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player1Green.add(greenC);
+                                        p1.greenCoin++;
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player1White.add(whiteC);
+                                        p1.whiteCoin++;
+
+                                        System.out.println(init.slotMachineGreen);
+                                        System.out.println(init.slotMachineWhite);
+
+                                        greenCoinNum--;
+                                        whiteCoinNum--;
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (redBox.isSelected()) {
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = false;
+
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player1White.add(whiteC);
+                                        p1.whiteCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player1Red.add(redC);
+                                        p1.redCoin++;
+
+                                        System.out.println(init.slotMachineWhite);
+                                        System.out.println(init.slotMachineRed);
+
+                                        whiteCoinNum--;
+                                        redCoinNum--;
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (blackBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = false;
+
+                                    Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                    init.player1Black.add(blackC);
+                                    p1.blackCoin++;
+
+                                    System.out.println(init.slotMachineBlack);
+
+                                    blackCoinNum--;
+                                    
+                                    blackCoinLabel.setText(String.valueOf(blackCoinNum));
+
+                                    if (blackCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (blueBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = false;
+
+                                    Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                    init.player1Blue.add(blueC);
+                                    p1.blueCoin++;
+
+                                    System.out.println(init.slotMachineBlue);
+
+                                    blueCoinNum--;
+
+                                    blueCoinLabel.setText(String.valueOf(blueCoinNum));
+
+                                    if (blueCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (greenBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = false;
+
+                                    Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                    init.player1Green.add(greenC);
+                                    p1.greenCoin++;
+
+                                    System.out.println(init.slotMachineGreen);
+
+                                    greenCoinNum--;
+
+                                    greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                    if (greenCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (redBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = false;
+
+                                    Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                    init.player1Red.add(redC);
+                                    p1.redCoin++;
+
+                                    System.out.println(init.slotMachineRed);
+
+                                    redCoinNum--;
+
+                                    redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                    if (redCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (whiteBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = false;
+
+                                    Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                    init.player1White.add(whiteC);
+                                    p1.whiteCoin++;
+
+                                    System.out.println(init.slotMachineWhite);
+
+                                    whiteCoinNum--;
+
+                                    whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                    if (whiteCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
                             }
 
 
 
-
-
-
+                            //player2's turn:
                             else {
                                 if (blackBox.isSelected()) {
                                     if (blueBox.isSelected()) {
                                         if (greenBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = true;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player2Black.add(blackC);
                                             p2.blackCoin++;
@@ -518,15 +1117,27 @@ public class AmusementPark extends JFrame {
                                             Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                                             init.player2Green.add(greenC);
                                             p2.greenCoin++;
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
+
                                             greenCoinNum--;
                                             blackCoinNum--;
                                             blueCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -538,6 +1149,7 @@ public class AmusementPark extends JFrame {
                                         if (redBox.isSelected()) {
                                             System.out.println(isP1Turn);
                                             isP1Turn = true;
+
                                             Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                             init.player2Black.add(blackC);
                                             p2.blackCoin++;
@@ -547,15 +1159,27 @@ public class AmusementPark extends JFrame {
                                             Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
+
                                             blackCoinNum--;
                                             blueCoinNum--;
                                             redCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -577,15 +1201,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineWhite);
+
                                             blackCoinNum--;
                                             blueCoinNum--;
                                             whiteCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -609,15 +1245,27 @@ public class AmusementPark extends JFrame {
                                             Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
+
                                             blackCoinNum--;
                                             greenCoinNum--;
                                             redCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -639,15 +1287,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineGreen);
+
                                             blackCoinNum--;
                                             greenCoinNum--;
                                             whiteCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum ));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -671,15 +1331,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineBlack);
+
+                                            System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineWhite);
+
                                             blackCoinNum--;
                                             redCoinNum--;
                                             whiteCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blackCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -705,15 +1377,27 @@ public class AmusementPark extends JFrame {
                                             Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
-                                                                                        System.out.println(init.slotMachineRed);
+
+                                            System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
+
                                             greenCoinNum--;
                                             blueCoinNum--;
                                             redCoinNum--;
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -735,15 +1419,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineWhite);
+
+                                            System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
+
                                             blueCoinNum--;
                                             greenCoinNum--;
                                             whiteCoinNum--;
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -767,15 +1463,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineWhite);
+
+                                            System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
+
                                             blueCoinNum--;
                                             redCoinNum--;
                                             whiteCoinNum--;
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (blueCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -801,15 +1509,27 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
-                                                                                        System.out.println(init.slotMachineWhite);
+
+                                            System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
+
                                             whiteCoinNum--;
                                             greenCoinNum--;
                                             redCoinNum--;
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                            if (greenCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (whiteCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
+                                            if (redCoinNum < 1) {
+                                                emptySlotCount++;
+                                            }
 
                                             buttonPanel.remove(checkBoxPanel);
                                             buttonPanel.add(pick2Button);
@@ -819,6 +1539,469 @@ public class AmusementPark extends JFrame {
                                             buttonPanel.repaint();
                                         }
                                     }
+                                }
+                                if (blackBox.isSelected()) {
+                                    if (blueBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player2Black.add(blackC);
+                                        p2.blackCoin++;
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player2Blue.add(blueC);
+                                        p2.blueCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineBlue);
+
+                                        blackCoinNum--;
+                                        blueCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (greenBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player2Black.add(blackC);
+                                        p2.blackCoin++;
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player2Green.add(greenC);
+                                        p2.greenCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineGreen);
+
+                                        blackCoinNum--;
+                                        greenCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (redBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player2Black.add(blackC);
+                                        p2.blackCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player2Red.add(redC);
+                                        p2.redCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineRed);
+
+                                        blackCoinNum--;
+                                        redCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                        init.player2Black.add(blackC);
+                                        p2.blackCoin++;
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player2White.add(whiteC);
+                                        p2.whiteCoin++;
+
+                                        System.out.println(init.slotMachineBlack);
+                                        System.out.println(init.slotMachineWhite);
+
+                                        blackCoinNum--;
+                                        whiteCoinNum--;
+                                        blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                        if (blackCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (blueBox.isSelected()) {
+                                    if (greenBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player2Blue.add(blueC);
+                                        p2.blueCoin++;
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player2Green.add(greenC);
+                                        p2.greenCoin++;
+
+                                        System.out.println(init.slotMachineBlue);
+                                        System.out.println(init.slotMachineGreen);
+
+                                        blueCoinNum--;
+                                        greenCoinNum--;
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (redBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player2Blue.add(blueC);
+                                        p2.blueCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player2Red.add(redC);
+                                        p2.redCoin++;
+
+                                        System.out.println(init.slotMachineBlue);
+                                        System.out.println(init.slotMachineRed);
+
+                                        blueCoinNum--;
+                                        redCoinNum--;
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                        init.player2Blue.add(blueC);
+                                        p2.blueCoin++;
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player2White.add(whiteC);
+                                        p2.whiteCoin++;
+
+                                        System.out.println(init.slotMachineBlue);
+                                        System.out.println(init.slotMachineWhite);
+
+                                        blueCoinNum--;
+                                        whiteCoinNum--;
+                                        blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                        if (blueCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (greenBox.isSelected()) {
+                                    if (redBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player2Green.add(greenC);
+                                        p2.greenCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player2Red.add(redC);
+                                        p2.redCoin++;
+
+                                        System.out.println(init.slotMachineGreen);
+                                        System.out.println(init.slotMachineRed);
+
+                                        greenCoinNum--;
+                                        redCoinNum--;
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                        init.player2Green.add(greenC);
+                                        p2.greenCoin++;
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player2White.add(whiteC);
+                                        p2.whiteCoin++;
+
+                                        System.out.println(init.slotMachineGreen);
+                                        System.out.println(init.slotMachineWhite);
+
+                                        greenCoinNum--;
+                                        whiteCoinNum--;
+                                        greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                        if (greenCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (redBox.isSelected()) {
+                                    if (whiteBox.isSelected()) {
+                                        System.out.println(isP1Turn);
+                                        isP1Turn = true;
+
+                                        Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                        init.player2White.add(whiteC);
+                                        p2.whiteCoin++;
+                                        Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                        init.player2Red.add(redC);
+                                        p2.redCoin++;
+
+                                        System.out.println(init.slotMachineWhite);
+                                        System.out.println(init.slotMachineRed);
+
+                                        whiteCoinNum--;
+                                        redCoinNum--;
+                                        whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                        redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                        if (whiteCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+                                        if (redCoinNum < 1) {
+                                            emptySlotCount++;
+                                        }
+
+                                        buttonPanel.remove(checkBoxPanel);
+                                        buttonPanel.add(pick2Button);
+                                        buttonPanel.add(pick3Button);
+                                        buttonPanel.add((Component) itemListener);
+                                        buttonPanel.revalidate();
+                                        buttonPanel.repaint();
+                                    }
+                                }
+                                if (blackBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = true;
+
+                                    Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                    init.player2Black.add(blackC);
+                                    p2.blackCoin++;
+
+                                    System.out.println(init.slotMachineBlack);
+
+                                    blackCoinNum--;
+
+                                    blackCoinLabel.setText(String.valueOf(blackCoinNum));
+
+                                    if (blackCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (blueBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = true;
+
+                                    Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                    init.player2Blue.add(blueC);
+                                    p2.blueCoin++;
+
+                                    System.out.println(init.slotMachineBlue);
+
+                                    blueCoinNum--;
+
+                                    blueCoinLabel.setText(String.valueOf(blueCoinNum));
+
+                                    if (blueCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (greenBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = true;
+
+                                    Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                    init.player2Green.add(greenC);
+                                    p2.greenCoin++;
+
+                                    System.out.println(init.slotMachineGreen);
+
+                                    greenCoinNum--;
+
+                                    greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                    if (greenCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (redBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = true;
+
+                                    Coin redC = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                    init.player2Red.add(redC);
+                                    p2.redCoin++;
+
+                                    System.out.println(init.slotMachineRed);
+
+                                    redCoinNum--;
+
+                                    redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                    if (redCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
+                                }
+                                if (whiteBox.isSelected()) {
+                                    System.out.println(isP1Turn);
+                                    isP1Turn = true;
+
+                                    Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                    init.player2White.add(whiteC);
+                                    p2.whiteCoin++;
+
+                                    System.out.println(init.slotMachineWhite);
+
+                                    whiteCoinNum--;
+
+                                    whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                    if (whiteCoinNum < 1) {
+                                        emptySlotCount++;
+                                    }
+
+                                    buttonPanel.remove(checkBoxPanel);
+                                    buttonPanel.add(pick2Button);
+
+                                    buttonPanel.add((Component) itemListener);
+                                    buttonPanel.revalidate();
+                                    buttonPanel.repaint();
                                 }
                             }
                         }

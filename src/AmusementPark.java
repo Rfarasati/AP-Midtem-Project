@@ -195,6 +195,8 @@ public class AmusementPark extends JFrame {
 
                         if (selectedCount == maxSelections) {
                             if (isP1Turn) {
+
+                                //when maxSelection == 3:
                                 if (blackBox.isSelected()) {
                                     if (blueBox.isSelected()) {
                                         if (greenBox.isSelected()) {
@@ -633,6 +635,9 @@ public class AmusementPark extends JFrame {
                                         }
                                     }
                                 }
+
+
+                                //when maxSelection == 2:
                                 if (blackBox.isSelected()) {
                                     if (blueBox.isSelected()) {
                                         System.out.println(isP1Turn);
@@ -662,7 +667,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && blueCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -695,7 +700,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && greenCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -728,7 +733,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && redCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -761,7 +766,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -796,7 +801,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blueCoinNum < 1 && greenCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -829,7 +834,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blueCoinNum < 1 && redCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -862,7 +867,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blueCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -897,7 +902,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(greenCoinNum < 1 && redCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -930,7 +935,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(greenCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -965,12 +970,14 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(redCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
                                     }
                                 }
+
+                                //when maxSelection == 1:
                                 if (blackBox.isSelected()) {
                                     System.out.println(isP1Turn);
                                     isP1Turn = false;
@@ -991,7 +998,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1016,7 +1023,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1041,7 +1048,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1066,7 +1073,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1091,7 +1098,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1102,6 +1109,7 @@ public class AmusementPark extends JFrame {
 
                             //player2's turn:
                             else {
+                                //when maxSelection == 3:
                                 if (blackBox.isSelected()) {
                                     if (blueBox.isSelected()) {
                                         if (greenBox.isSelected()) {
@@ -1540,6 +1548,9 @@ public class AmusementPark extends JFrame {
                                         }
                                     }
                                 }
+
+
+                                //when maxSelection == 2:
                                 if (blackBox.isSelected()) {
                                     if (blueBox.isSelected()) {
                                         System.out.println(isP1Turn);
@@ -1569,7 +1580,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && blueCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1602,7 +1613,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && greenCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1635,7 +1646,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && redCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1668,7 +1679,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blackCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1703,7 +1714,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blueCoinNum < 1 && greenCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1736,7 +1747,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blueCoinNum < 1 && redCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1769,7 +1780,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(blueCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1804,7 +1815,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(greenCoinNum < 1 && redCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1837,7 +1848,7 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(greenCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
@@ -1872,12 +1883,15 @@ public class AmusementPark extends JFrame {
 
                                         buttonPanel.remove(checkBoxPanel);
                                         buttonPanel.add(pick2Button);
-                                        buttonPanel.add(pick3Button);
+                                        if (!(redCoinNum < 1 && whiteCoinNum < 1)) buttonPanel.add(pick3Button);
                                         buttonPanel.add((Component) itemListener);
                                         buttonPanel.revalidate();
                                         buttonPanel.repaint();
                                     }
                                 }
+
+
+                                //when maxSelection == 3:
                                 if (blackBox.isSelected()) {
                                     System.out.println(isP1Turn);
                                     isP1Turn = true;
@@ -1898,7 +1912,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1923,7 +1937,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1948,7 +1962,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1973,7 +1987,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();
@@ -1998,7 +2012,7 @@ public class AmusementPark extends JFrame {
 
                                     buttonPanel.remove(checkBoxPanel);
                                     buttonPanel.add(pick2Button);
-
+                                    if (emptySlotCount < 5) buttonPanel.add(pick3Button);
                                     buttonPanel.add((Component) itemListener);
                                     buttonPanel.revalidate();
                                     buttonPanel.repaint();

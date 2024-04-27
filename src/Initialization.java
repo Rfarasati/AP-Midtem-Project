@@ -6,8 +6,8 @@ public class Initialization {
     ArrayList<Card> level1; //storing level1 cards
     ArrayList<Card> level2; //storing level2 cards
     ArrayList<Card> level3; //storing level3 cards
-    ArrayList<Card> playerOneHand; //storing cards in player one's hand
-    ArrayList<Card> playerTwoHand; //storing cards in player two's hand
+    ArrayList<Card> playerOneHand = new ArrayList<Card>(); //storing cards in player one's hand
+    ArrayList<Card> playerTwoHand = new ArrayList<Card>(); //storing cards in player two's hand
     ArrayList<Card> playerOneReserves; //storing reserve cards of player one
     ArrayList<Card> playerTwoReserves; //storing reserve cards of player two
 

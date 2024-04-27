@@ -40,9 +40,9 @@ public class AmusementPark extends JFrame {
     Player p1;
     Player p2;
     boolean isP1Turn = true;
-    Card level1Card;
-    Card level2Card;
-    Card level3Card;
+    Card[] level1Card = new Card[4];
+    Card[] level2Card = new Card[4];
+    Card[] level3Card = new Card[4];
     PrizeClaw prizeClawCard;
     int cardWidth = 108; //ratio should 1/1.4
     int cardHeight = 144;
@@ -64,7 +64,7 @@ public class AmusementPark extends JFrame {
 
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
-        //frame.setSize(500,300);
+//        frame.setSize(1200,800);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -2367,13 +2367,14 @@ public class AmusementPark extends JFrame {
         });
     }
     public void drawLevel1() {
-        for (int i = init.level1.size() - 1, j = 0, k = 0; i > init.level1.size() - 5; i--, j++, k++) {
+        for (int i = 0, j = 0, k = 0; i < 4; i++, j++, k++) {
             try {
-                level1Card = init.level1.get(i);
-                BufferedImage image = ImageIO.read(getClass().getResource(level1Card.getImage1Path()));
+                level1Card[k] = init.level1.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(level1Card[k].getImage1Path()));
                 cardLabel1[k] = new JLabel(new ImageIcon(image));
                 cardLabel1[k].setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
                 int tmp = k;
+                int tempI = i;
                 cardLabel1[tmp].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -2394,7 +2395,220 @@ public class AmusementPark extends JFrame {
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
                                 cardLabel1[tmp].removeAll();
-                                cardLabel1[tmp].setIcon(new ImageIcon(image));
+                                try {
+                                    reDrawCards();
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+                        buyButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                if (isP1Turn) {
+//                                    System.out.println("P1 Turn");
+//                                    System.out.println(p1.blackCoin);
+//                                    System.out.println(p1.blueCoin);
+//                                    System.out.println(p1.greenCoin);
+//                                    System.out.println(p1.redCoin);
+//                                    System.out.println(p1.whiteCoin);
+//                                    System.out.println("------------");
+//                                    System.out.println(level1Card[tmp].blackCoin);
+//                                    System.out.println(level1Card[tmp].blueCoin);
+//                                    System.out.println(level1Card[tmp].greenCoin);
+//                                    System.out.println(level1Card[tmp].redCoin);
+//                                    System.out.println(level1Card[tmp].whiteCoin);
+
+                                    if (p1.blackCoin >= level1Card[tmp].blackCoin && p1.blueCoin >= level1Card[tmp].blueCoin && p1.greenCoin >= level1Card[tmp].greenCoin && p1.redCoin >= level1Card[tmp].redCoin && p1.whiteCoin >= level1Card[tmp].whiteCoin) {
+                                        System.out.println("YESSSS PLAYER 1");
+                                        //add special coins
+                                        isP1Turn = false;
+                                        init.playerOneHand.add(level1Card[tmp]);
+                                        System.out.println(init.level1.get(tempI).toString());
+                                        init.level1.remove(tempI);
+//                                        System.out.println(level1Card[tmp].point);
+//                                        System.out.println("/////");
+//                                        System.out.println(level1Card[tmp].blackCoin);
+//                                        System.out.println(level1Card[tmp].blueCoin);
+//                                        System.out.println(level1Card[tmp].greenCoin);
+//                                        System.out.println(level1Card[tmp].redCoin);
+//                                        System.out.println(level1Card[tmp].whiteCoin);
+//                                        System.out.println("----------");
+                                        p1.blackCoin -= level1Card[tmp].blackCoin;
+                                        p1.blueCoin -= level1Card[tmp].blueCoin;
+                                        p1.greenCoin -= level1Card[tmp].greenCoin;
+                                        p1.redCoin -= level1Card[tmp].redCoin;
+                                        p1.whiteCoin -= level1Card[tmp].whiteCoin;
+                                        p1.score += level1Card[tmp].point;
+//                                        if (!init.player1Black.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].blackCoin; i++) {
+//                                                init.player1Black.remove(init.player1Black.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player1Blue.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].blueCoin; i++) {
+//                                                init.player1Blue.remove(init.player1Blue.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player1Green.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].greenCoin; i++) {
+//                                                init.player1Green.remove(init.player1Green.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player1Red.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].redCoin; i++) {
+//                                                init.player1Red.remove(init.player1Red.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player1White.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].whiteCoin; i++) {
+//                                                init.player1White.remove(init.player1White.size() - i);
+//                                            }
+//                                        }
+                                        switch (level1Card[tmp].specialCoin) {
+                                            case "black":
+                                                p1.SpecialBlackCoin++;
+                                                break;
+                                            case "blue":
+                                                p1.SpecialBlueCoin++;
+                                                break;
+                                            case "green":
+                                                p1.SpecialGreenCoin++;
+                                                break;
+                                            case "red":
+                                                p1.SpecialRedCoin++;
+                                                break;
+                                            case "white":
+                                                p1.SpecialWhiteCoin++;
+                                                break;
+                                        }
+//                                        System.out.println(p1.score);
+//                                        System.out.println("////");
+//                                        System.out.println(p1.blackCoin);
+//                                        System.out.println(p1.blueCoin);
+//                                        System.out.println(p1.greenCoin);
+//                                        System.out.println(p1.redCoin);
+//                                        System.out.println(p1.whiteCoin);
+//                                        System.out.println("////");
+//                                        System.out.println(p1.SpecialBlackCoin);
+//                                        System.out.println(p1.SpecialBlueCoin);
+//                                        System.out.println(p1.SpecialGreenCoin);
+//                                        System.out.println(p1.SpecialRedCoin);
+//                                        System.out.println(p1.SpecialWhiteCoin);
+                                        cardLabel1[tmp].removeAll();
+                                        try {
+                                            reDrawCards();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
+                                else {
+//                                    System.out.println("P2 Turn");
+//                                    System.out.println(p2.blackCoin);
+//                                    System.out.println(p2.blueCoin);
+//                                    System.out.println(p2.greenCoin);
+//                                    System.out.println(p2.redCoin);
+//                                    System.out.println(p2.whiteCoin);
+//                                    System.out.println("------------");
+//                                    System.out.println(level1Card[tmp].blackCoin);
+//                                    System.out.println(level1Card[tmp].blueCoin);
+//                                    System.out.println(level1Card[tmp].greenCoin);
+//                                    System.out.println(level1Card[tmp].redCoin);
+//                                    System.out.println(level1Card[tmp].whiteCoin);
+                                    if (p2.blackCoin >= level1Card[tmp].blackCoin && p2.blueCoin >= level1Card[tmp].blueCoin && p2.greenCoin >= level1Card[tmp].greenCoin && p2.redCoin >= level1Card[tmp].redCoin && p2.whiteCoin >= level1Card[tmp].whiteCoin) {
+                                        System.out.println("YESSSS PLAYER 2");
+                                        isP1Turn = true;
+                                        init.playerTwoHand.add(level1Card[tmp]);
+                                        System.out.println(init.level1.get(tempI).toString());
+                                        init.level1.remove(tempI);
+//                                        System.out.println(level1Card[tmp].point);
+//                                        System.out.println("/////");
+//                                        System.out.println(level1Card[tmp].blackCoin);
+//                                        System.out.println(level1Card[tmp].blueCoin);
+//                                        System.out.println(level1Card[tmp].greenCoin);
+//                                        System.out.println(level1Card[tmp].redCoin);
+//                                        System.out.println(level1Card[tmp].whiteCoin);
+//                                        System.out.println("---------");
+                                        p2.blackCoin -= level1Card[tmp].blackCoin;
+                                        p2.blueCoin -= level1Card[tmp].blueCoin;
+                                        p2.greenCoin -= level1Card[tmp].greenCoin;
+                                        p2.redCoin -= level1Card[tmp].redCoin;
+                                        p2.whiteCoin -= level1Card[tmp].whiteCoin;
+                                        p2.score += level1Card[tmp].point;
+//                                        if (!init.player2Black.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].blackCoin; i++) {
+//                                                init.player2Black.remove(init.player2Black.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player2Blue.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].blueCoin; i++) {
+//                                                init.player2Blue.remove(init.player2Blue.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player2Green.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].greenCoin; i++) {
+//                                                init.player2Green.remove(init.player2Green.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player2Red.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].redCoin; i++) {
+//                                                init.player2Red.remove(init.player2Red.size() - i);
+//                                            }
+//                                        }
+//                                        if (!init.player2White.isEmpty()) {
+//                                            for (int i = 1; i < level1Card[tmp].whiteCoin; i++) {
+//                                                init.player2White.remove(init.player2White.size() - i);
+//                                            }
+//                                        }
+                                        switch (level1Card[tmp].specialCoin) {
+                                            case "black":
+                                                p2.SpecialBlackCoin++;
+                                                break;
+                                            case "blue":
+                                                p2.SpecialBlueCoin++;
+                                                break;
+                                            case "green":
+                                                p2.SpecialGreenCoin++;
+                                                break;
+                                            case "red":
+                                                p2.SpecialRedCoin++;
+                                                break;
+                                            case "white":
+                                                p2.SpecialWhiteCoin++;
+                                                break;
+                                        }
+//                                        System.out.println(p2.score);
+//                                        System.out.println("////");
+//                                        System.out.println(p2.blackCoin);
+//                                        System.out.println(p2.blueCoin);
+//                                        System.out.println(p2.greenCoin);
+//                                        System.out.println(p2.redCoin);
+//                                        System.out.println(p2.whiteCoin);
+//                                        System.out.println("////");
+//                                        System.out.println(p2.SpecialBlackCoin);
+//                                        System.out.println(p2.SpecialBlueCoin);
+//                                        System.out.println(p2.SpecialGreenCoin);
+//                                        System.out.println(p2.SpecialRedCoin);
+//                                        System.out.println(p2.SpecialWhiteCoin);
+                                        cardLabel1[tmp].removeAll();
+                                        try {
+                                            reDrawCards();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        reserveButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+
+
+
                             }
                         });
                         cardLabel1[tmp].addMouseListener(this);
@@ -2409,8 +2623,8 @@ public class AmusementPark extends JFrame {
     public void drawlevel2() {
         for (int i = init.level2.size() - 1, j = 0, k = 0; i > init.level2.size() - 5; i--, j++, k++) {
             try {
-                level2Card = init.level2.get(i);
-                BufferedImage image = ImageIO.read(getClass().getResource(level2Card.getImage2Path()));
+                level2Card[k] = init.level2.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(level2Card[k].getImage2Path()));
                 cardLabel2[k] = new JLabel(new ImageIcon(image));
                 cardLabel2[k].setBounds(510 + (cardWidth + 10)*j, 65 + 10 + cardHeight, cardWidth, cardHeight);
                 int tmp = k;
@@ -2449,8 +2663,8 @@ public class AmusementPark extends JFrame {
     public void drawlevel3() {
         for (int i = init.level3.size() - 1, j = 0, k = 0; i > init.level3.size() - 5; i--, j++, k++) {
             try {
-                level3Card = init.level3.get(i);
-                BufferedImage image = ImageIO.read(getClass().getResource(level3Card.getImage3Path()));
+                level3Card[k] = init.level3.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(level3Card[k].getImage3Path()));
                 cardLabel3[k] = new JLabel(new ImageIcon(image));
                 cardLabel3[k].setBounds(510 + (cardWidth + 10)*j, 65 + 2 * (10 + cardHeight), cardWidth, cardHeight);
                 int tmp = k;
@@ -2580,6 +2794,18 @@ public class AmusementPark extends JFrame {
             gamePanel.add(whiteCoinLabel);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void reDrawCards() throws IOException {
+        for (int i = 0, j = 0, k = 0; i < 4; i++, j++, k++) {
+            try {
+                level1Card[k] = init.level1.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(level1Card[k].getImage1Path()));
+                cardLabel1[k].setIcon(new ImageIcon(image));
+                cardLabel1[k].setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -7,6 +7,11 @@ public class Player {
     int redCoin;
     int whiteCoin;
     int goldCoin;
+    int SpecialBlackCoin;
+    int SpecialBlueCoin;
+    int SpecialGreenCoin;
+    int SpecialRedCoin;
+    int SpecialWhiteCoin;
 
     public int getTotalCoin() {
         return blackCoin + blueCoin + greenCoin + redCoin + whiteCoin + goldCoin;

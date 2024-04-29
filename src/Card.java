@@ -1,4 +1,5 @@
 public class Card {
+    int level;
     int point;
     String specialCoin;
     int blackCoin;
@@ -7,7 +8,8 @@ public class Card {
     int redCoin;
     int whiteCoin;
 
-    Card(int point, String specialCoin, int blackCoin, int blueCoin, int greenCoin, int redCoin, int whiteCoin) {
+    Card(int level, int point, String specialCoin, int blackCoin, int blueCoin, int greenCoin, int redCoin, int whiteCoin) {
+        this.level = level;
         this.point = point;
         this.specialCoin = specialCoin;
         this.blackCoin = blackCoin;
@@ -18,7 +20,7 @@ public class Card {
     }
 
     public String toString() { // A method in order to print arraylist to check
-        return point + "-" + specialCoin + "-" + blackCoin + "-" + blueCoin + "-" + greenCoin + "-" + redCoin + "-" + whiteCoin;
+        return level + "-" + point + "-" + specialCoin + "-" + blackCoin + "-" + blueCoin + "-" + greenCoin + "-" + redCoin + "-" + whiteCoin;
     }
     public String getImage1Path() {
         return "./level 1/" + toString() + ".png";

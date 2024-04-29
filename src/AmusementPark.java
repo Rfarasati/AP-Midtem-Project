@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -18,6 +19,8 @@ public class AmusementPark extends JFrame {
     JLabel[] cardLabel1 = new JLabel[4];
     JLabel[] cardLabel2 = new JLabel[4];
     JLabel[] cardLabel3 = new JLabel[4];
+    JLabel[] reservesLabel1 = new JLabel[3];
+    JLabel[] reservesLabel2 = new JLabel[3];
     JLabel[] prizeClawLabel = new JLabel[3];
     JLabel player1Label = new JLabel();
     JLabel player2Label = new JLabel();
@@ -71,7 +74,9 @@ public class AmusementPark extends JFrame {
     Card[] level1Card = new Card[4];
     Card[] level2Card = new Card[4];
     Card[] level3Card = new Card[4];
-    PrizeClaw prizeClawCard;
+    Card[] reserves1 = new Card[3];
+    Card[] reserves2 = new Card[3];
+    PrizeClaw[] prizeClawCard = new PrizeClaw[3];
     int cardWidth = 108; //ratio should 1/1.4
     int cardHeight = 144;
     JLabel blackCoinLabel;
@@ -86,6 +91,7 @@ public class AmusementPark extends JFrame {
     int greenCoinNum = 4;
     int redCoinNum = 4;
     int whiteCoinNum = 4;
+    int goldCoinNum = 5;
 
     AmusementPark() throws IOException {
         startGame();
@@ -115,7 +121,7 @@ public class AmusementPark extends JFrame {
         drawLevel3();
         drawCoins();
         drawPrizeClaws();
-
+        
         frame.setVisible(true);
         gamePanel.setLayout(null);
         gamePanel.setBackground(new Color(51, 77, 104));
@@ -2615,12 +2621,12 @@ public class AmusementPark extends JFrame {
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
                                 if (isP1Turn) {
-                                    if (p1.blackCoin >= level1Card[tmp].blackCoin && p1.blueCoin >= level1Card[tmp].blueCoin && p1.greenCoin >= level1Card[tmp].greenCoin && p1.redCoin >= level1Card[tmp].redCoin && p1.whiteCoin >= level1Card[tmp].whiteCoin) {
+                                    if (p1.blackCoin + p1.SpecialBlackCoin >= level1Card[tmp].blackCoin && p1.blueCoin + p1.SpecialBlueCoin >= level1Card[tmp].blueCoin && p1.greenCoin + p1.SpecialGreenCoin >= level1Card[tmp].greenCoin && p1.redCoin + p1.SpecialRedCoin >= level1Card[tmp].redCoin && p1.whiteCoin + p1.SpecialWhiteCoin >= level1Card[tmp].whiteCoin) {
                                         System.out.println("YESSSS PLAYER 1");
-                                        //add special coins and gold coins
+                                        //add gold coins
                                         isP1Turn = false;
                                         init.playerOneHand.add(level1Card[tmp]);
-                                        System.out.println(init.level1.get(tempI).toString());
+//                                        System.out.println(init.level1.get(tempI).toString());
                                         init.level1.remove(tempI);
                                         p1.blackCoin -= level1Card[tmp].blackCoin;
                                         p1.blueCoin -= level1Card[tmp].blueCoin;
@@ -2672,7 +2678,7 @@ public class AmusementPark extends JFrame {
                                         System.out.println("YESSSS PLAYER 2");
                                         isP1Turn = true;
                                         init.playerTwoHand.add(level1Card[tmp]);
-                                        System.out.println(init.level1.get(tempI).toString());
+//                                        System.out.println(init.level1.get(tempI).toString());
                                         init.level1.remove(tempI);
                                         p2.blackCoin -= level1Card[tmp].blackCoin;
                                         p2.blueCoin -= level1Card[tmp].blueCoin;
@@ -2725,9 +2731,73 @@ public class AmusementPark extends JFrame {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
+                                if (isP1Turn) {
+                                    if (++p1.reserveCards <= 3) {
+                                        isP1Turn = false;
+                                        init.playerOneReserves.add(level1Card[tmp]);
+                                        System.out.println(init.playerOneReserves.toString());
+                                        init.level1.remove(tempI);
 
+                                        cardLabel1[tmp].removeAll();
 
+                                        try {
+                                            redrawCards1();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
 
+                                        if(goldCoinNum > 0) {
+                                            goldCoinNum--;
+                                            p1.goldCoin++;
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            updateGold1();
+                                        }
+
+                                        updateReserved1();
+
+                                        if (p1.reserveCards == 1) {
+                                            newJLabels1();
+                                        }
+                                        try {
+                                            drawReserves1();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
+                                else {
+                                    if (++p2.reserveCards <= 3) {
+                                        isP1Turn = true;
+                                        init.playerTwoReserves.add(level1Card[tmp]);
+                                        init.level1.remove(tempI);
+                                        System.out.println(init.playerTwoReserves.toString());
+                                        cardLabel1[tmp].removeAll();
+
+                                        try {
+                                            redrawCards1();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+
+                                        if(goldCoinNum > 0) {
+                                            goldCoinNum--;
+                                            p2.goldCoin++;
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            updateGold2();
+                                        }
+
+                                        updateReserved2();
+
+                                        if (p2.reserveCards == 1) {
+                                            newJLabels2();
+                                        }
+                                        try {
+                                            drawReserves2();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
                             }
                         });
                         cardLabel1[tmp].addMouseListener(this);
@@ -2890,9 +2960,72 @@ public class AmusementPark extends JFrame {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
+                                if (isP1Turn) {
+                                    if (++p1.reserveCards <= 3) {
+                                        isP1Turn = false;
+                                        init.playerOneReserves.add(level2Card[tmp]);
+                                        init.level2.remove(tempI);
 
+                                        cardLabel2[tmp].removeAll();
 
+                                        try {
+                                            redrawCards2();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
 
+                                        if(goldCoinNum > 0) {
+                                            goldCoinNum--;
+                                            p1.goldCoin++;
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            updateGold1();
+                                        }
+
+                                        updateReserved1();
+
+                                        if (p1.reserveCards == 1) {
+                                            newJLabels1();
+                                        }
+                                        try {
+                                            drawReserves1();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
+                                else {
+                                    if (++p2.reserveCards <= 3) {
+                                        isP1Turn = true;
+                                        init.playerTwoReserves.add(level2Card[tmp]);
+                                        init.level2.remove(tempI);
+
+                                        cardLabel2[tmp].removeAll();
+
+                                        try {
+                                            redrawCards2();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+
+                                        if(goldCoinNum > 0) {
+                                            goldCoinNum--;
+                                            p2.goldCoin++;
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            updateGold2();
+                                        }
+
+                                        updateReserved2();
+
+                                        if (p2.reserveCards == 1) {
+                                            newJLabels2();
+                                        }
+                                        try {
+                                            drawReserves2();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
                             }
                         });
                         cardLabel2[tmp].addMouseListener(this);
@@ -2999,10 +3132,10 @@ public class AmusementPark extends JFrame {
                                 }
                                 else {
                                     if (p2.blackCoin >= level3Card[tmp].blackCoin && p2.blueCoin >= level3Card[tmp].blueCoin && p2.greenCoin >= level3Card[tmp].greenCoin && p2.redCoin >= level3Card[tmp].redCoin && p2.whiteCoin >= level3Card[tmp].whiteCoin) {
-                                        System.out.println("YESSSS PLAYER 2");
+//                                        System.out.println("YESSSS PLAYER 2");
                                         isP1Turn = true;
                                         init.playerTwoHand.add(level3Card[tmp]);
-                                        System.out.println(init.level3.get(tempI).toString());
+//                                        System.out.println(init.level3.get(tempI).toString());
                                         init.level3.remove(tempI);
                                         p2.blackCoin -= level3Card[tmp].blackCoin;
                                         p2.blueCoin -= level3Card[tmp].blueCoin;
@@ -3055,9 +3188,72 @@ public class AmusementPark extends JFrame {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
+                                if (isP1Turn) {
+                                    if (++p1.reserveCards <= 3) {
+                                        isP1Turn = false;
+                                        init.playerOneReserves.add(level3Card[tmp]);
+                                        init.level3.remove(tempI);
 
+                                        cardLabel3[tmp].removeAll();
 
+                                        try {
+                                            redrawCards3();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
 
+                                        if(goldCoinNum > 0) {
+                                            goldCoinNum--;
+                                            p1.goldCoin++;
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            updateGold1();
+                                        }
+
+                                        updateReserved1();
+
+                                        if (p1.reserveCards == 1) {
+                                            newJLabels1();
+                                        }
+                                        try {
+                                            drawReserves1();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
+                                else {
+                                    if (++p2.reserveCards <= 3) {
+                                        isP1Turn = true;
+                                        init.playerTwoReserves.add(level3Card[tmp]);
+                                        init.level3.remove(tempI);
+
+                                        cardLabel3[tmp].removeAll();
+
+                                        try {
+                                            redrawCards3();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+
+                                        if(goldCoinNum > 0) {
+                                            goldCoinNum--;
+                                            p2.goldCoin++;
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            updateGold2();
+                                        }
+
+                                        updateReserved2();
+
+                                        if (p2.reserveCards == 1) {
+                                            newJLabels2();
+                                        }
+                                        try {
+                                            drawReserves2();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
                             }
                         });
                         cardLabel3[tmp].addMouseListener(this);
@@ -3070,13 +3266,14 @@ public class AmusementPark extends JFrame {
         }
     }
     public void drawPrizeClaws() {
-        for (int i = init.prizeClaw.size() - 1, j = 0, k = 0; i > init.prizeClaw.size() - 4; i--, j++, k++) {
+        for (int i = 0, j = 0, k = 0; i < init.prizeClaw.size(); i++, j++, k++) {
             try {
-                prizeClawCard = init.prizeClaw.get(i);
-                BufferedImage image = ImageIO.read(getClass().getResource(prizeClawCard.getPrizeClawPath()));
+                prizeClawCard[k] = init.prizeClaw.get(i);
+                BufferedImage image = ImageIO.read(getClass().getResource(prizeClawCard[k].getPrizeClawPath()));
                 prizeClawLabel[k] = new JLabel(new ImageIcon(image));
                 prizeClawLabel[k].setBounds(560 + (cardWidth + 10)*j, 65 + 3 * (10 + cardHeight), cardWidth, cardHeight);
                 int tmp = k;
+                int tempI = i;
                 prizeClawLabel[tmp].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -3089,12 +3286,53 @@ public class AmusementPark extends JFrame {
                         prizeClawLabel[tmp].add(buyButton);
                         prizeClawLabel[tmp].add(cancelButton);
                         prizeClawLabel[tmp].setLayout(new FlowLayout());
+
                         cancelButton.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
                                 prizeClawLabel[tmp].removeAll();
-                                prizeClawLabel[tmp].setIcon(new ImageIcon(image));
+                                try {
+                                    redrawPrizeClaws();
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+                        buyButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                if (!isP1Turn) {
+                                    if (p1.SpecialBlackCoin >= prizeClawCard[tmp].blackCoin && p1.SpecialBlueCoin >= prizeClawCard[tmp].blueCoin && p1.SpecialGreenCoin >= prizeClawCard[tmp].greenCoin && p1.SpecialRedCoin >= prizeClawCard[tmp].redCoin && p1.SpecialWhiteCoin >= prizeClawCard[tmp].whiteCoin) {
+                                        init.prizeClaw.remove(tempI);
+                                        p2.score += prizeClawCard[tmp].point;
+
+                                        updateScore1();
+
+                                        prizeClawLabel[tmp].removeAll();
+                                        try {
+                                            redrawPrizeClaws();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
+                                else {
+                                    if (p2.SpecialBlackCoin >= prizeClawCard[tmp].blackCoin && p2.SpecialBlueCoin >= prizeClawCard[tmp].blueCoin && p2.SpecialGreenCoin >= prizeClawCard[tmp].greenCoin && p2.SpecialRedCoin >= prizeClawCard[tmp].redCoin && p2.SpecialWhiteCoin >= prizeClawCard[tmp].whiteCoin) {
+                                        init.prizeClaw.remove(tempI);
+                                        p2.score += prizeClawCard[tmp].point;
+
+                                        updateScore2();
+
+                                        prizeClawLabel[tmp].removeAll();
+                                        try {
+                                            redrawPrizeClaws();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
                             }
                         });
                         prizeClawLabel[tmp].addMouseListener(this);
@@ -3106,12 +3344,11 @@ public class AmusementPark extends JFrame {
             }
         }
     }
-    // add gold coins
     public void drawCoins() throws IOException {
         try {
             BufferedImage image1 = ImageIO.read(getClass().getResource("./coins/black coin.png"));
             blackCoinLabel = new JLabel(new ImageIcon(image1));
-            blackCoinLabel.setBounds(500, 700, 94, 94);
+            blackCoinLabel.setBounds(450, 700, 94, 94);
             blackCoinLabel.setText(String.valueOf(blackCoinNum));
             blackCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
             blackCoinLabel.setVerticalTextPosition(JLabel.CENTER);
@@ -3122,7 +3359,7 @@ public class AmusementPark extends JFrame {
 
             BufferedImage image2 = ImageIO.read(getClass().getResource("./coins/blue coin.png"));
             blueCoinLabel = new JLabel(new ImageIcon(image2));
-            blueCoinLabel.setBounds(500 + 94 + 2, 700, 94, 94);
+            blueCoinLabel.setBounds(450 + 94 + 2, 700, 94, 94);
             blueCoinLabel.setText(String.valueOf(blackCoinNum));
             blueCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
             blueCoinLabel.setVerticalTextPosition(JLabel.CENTER);
@@ -3133,7 +3370,7 @@ public class AmusementPark extends JFrame {
 
             BufferedImage image3 = ImageIO.read(getClass().getResource("./coins/green coin.png"));
             greenCoinLabel = new JLabel(new ImageIcon(image3));
-            greenCoinLabel.setBounds(500 + 2*94 + 4, 700, 94, 94);
+            greenCoinLabel.setBounds(450 + 2*94 + 4, 700, 94, 94);
             greenCoinLabel.setText(String.valueOf(greenCoinNum));
             greenCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
             greenCoinLabel.setVerticalTextPosition(JLabel.CENTER);
@@ -3144,7 +3381,7 @@ public class AmusementPark extends JFrame {
 
             BufferedImage image4 = ImageIO.read(getClass().getResource("./coins/red coin.png"));
             redCoinLabel = new JLabel(new ImageIcon(image4));
-            redCoinLabel.setBounds(500 + 3*94 + 6, 700, 94, 94);
+            redCoinLabel.setBounds(450 + 3*94 + 6, 700, 94, 94);
             redCoinLabel.setText(String.valueOf(redCoinNum));
             redCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
             redCoinLabel.setVerticalTextPosition(JLabel.CENTER);
@@ -3155,22 +3392,259 @@ public class AmusementPark extends JFrame {
 
             BufferedImage image5 = ImageIO.read(getClass().getResource("./coins/white coin.png"));
             whiteCoinLabel = new JLabel(new ImageIcon(image5));
-            whiteCoinLabel.setBounds(500 + 4*94 + 8, 700, 94, 94);
+            whiteCoinLabel.setBounds(450 + 4*94 + 8, 700, 94, 94);
             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
             whiteCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
             whiteCoinLabel.setVerticalTextPosition(JLabel.CENTER);
             whiteCoinLabel.setForeground(Color.BLACK);
             whiteCoinLabel.setFont(font);
             gamePanel.add(whiteCoinLabel);
+            
+            BufferedImage image6 = ImageIO.read(getClass().getResource("./coins/gold coin.png"));
+            goldCoinLabel = new JLabel(new ImageIcon(image6));
+            goldCoinLabel.setBounds(450 + 5*94 + 8, 700, 94, 94);
+            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+            goldCoinLabel.setHorizontalTextPosition(JLabel.CENTER);
+            goldCoinLabel.setVerticalTextPosition(JLabel.CENTER);
+            goldCoinLabel.setForeground(Color.BLACK);
+            goldCoinLabel.setFont(font);
+            gamePanel.add(goldCoinLabel);
+
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void drawReserves1() throws IOException {
+        for (int i = 0, j = 0, k = 0; i < init.playerOneReserves.size(); i++, j++, k++) {
+            try {
+                reserves1[k] = init.playerOneReserves.get(i);
+                System.out.println(reserves1[k].toString());
+                BufferedImage image;
+                switch (reserves1[k].level) {
+                    case 1 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves1[k].getImage1Path())));
+                        reservesLabel1[k].setIcon(new ImageIcon(image));
+                    break;
+                    case 2 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves1[k].getImage2Path())));
+                        reservesLabel1[k].setIcon(new ImageIcon(image));
+                        break;
+                    case 3 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves1[k].getImage3Path())));
+                        reservesLabel1[k].setIcon(new ImageIcon(image));
+                    break;
+                }
+                reservesLabel1[k].setBounds(50 + (cardWidth + 10) * j, 600, cardWidth, cardHeight);
+                int tmp = k;
+                int tempI = i;
+                reservesLabel1[k].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        super.mouseClicked(e);
+                        reservesLabel1[tmp].removeMouseListener(this);
+                        reservesLabel1[tmp].setIcon(null);
+                        buyButton.setFocusable(false);
+                        cancelButton.setFocusable(false);
+                        reservesLabel1[tmp].add(buyButton);
+                        reservesLabel1[tmp].add(cancelButton);
+                        reservesLabel1[tmp].setLayout(new FlowLayout());
+
+                        cancelButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                reservesLabel1[tmp].removeAll();
+                                try {
+                                    redrawReserves1();
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+
+                        buyButton.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                super.mouseClicked(e);
+                                if (isP1Turn) {
+                                    if (p1.blackCoin >= reserves1[tmp].blackCoin && p1.blueCoin >= reserves1[tmp].blueCoin && p1.greenCoin >= reserves1[tmp].greenCoin && p1.redCoin >= reserves1[tmp].redCoin && p1.whiteCoin >= reserves1[tmp].whiteCoin) {
+                                        System.out.println("sucessssss");
+                                        //add special coins
+                                        isP1Turn = false;
+                                        init.playerOneHand.add(reserves1[tmp]);
+                                        System.out.println(init.level3.get(tempI).toString());
+                                        init.playerOneReserves.remove(tempI);
+                                        p1.blackCoin -= reserves1[tmp].blackCoin;
+                                        p1.blueCoin -= reserves1[tmp].blueCoin;
+                                        p1.greenCoin -= reserves1[tmp].greenCoin;
+                                        p1.redCoin -= reserves1[tmp].redCoin;
+                                        p1.whiteCoin -= reserves1[tmp].whiteCoin;
+                                        p1.score += reserves1[tmp].point;
+
+                                        updateScore1();
+
+                                        updateNormalBlack1();
+                                        updateNormalBlue1();
+                                        updateNormalGreen1();
+                                        updateNormalRed1();
+                                        updateNormalWhite1();
+
+                                        switch (reserves1[tmp].specialCoin) {
+                                            case "black":
+                                                p1.SpecialBlackCoin++;
+                                                updateSpecialBlack1();
+                                                break;
+                                            case "blue":
+                                                p1.SpecialBlueCoin++;
+                                                updateSpecialBlue1();
+                                                break;
+                                            case "green":
+                                                p1.SpecialGreenCoin++;
+                                                updateSpecialGreen1();
+                                                break;
+                                            case "red":
+                                                p1.SpecialRedCoin++;
+                                                updateSpecialRed1();
+                                                break;
+                                            case "white":
+                                                p1.SpecialWhiteCoin++;
+                                                updateSpecialWhite1();
+                                                break;
+                                        }
+                                        reservesLabel1[tmp].removeAll();
+                                        try {
+                                            redrawReserves1();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        reservesLabel1[tmp].addMouseListener(this);
+                    }
+                });
+                gamePanel.add(reservesLabel1[tmp]);
+                gamePanel.repaint();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void drawReserves2() throws IOException {
+        for (int i = 0, j = 0, k = 0; i < init.playerTwoReserves.size(); i++, j++, k++) {
+            try {
+                reserves2[k] = init.playerTwoReserves.get(i);
+                BufferedImage image;
+                switch (reserves2[k].level) {
+                    case 1 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves2[k].getImage1Path())));
+                        reservesLabel2[k].setIcon(new ImageIcon(image));
+                        break;
+                    case 2 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves2[k].getImage2Path())));
+                        reservesLabel2[k].setIcon(new ImageIcon(image));
+                        break;
+                    case 3 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves2[k].getImage3Path())));
+                        reservesLabel2[k].setIcon(new ImageIcon(image));
+                        break;
+                }
+                    reservesLabel2[k].setBounds(1050 + (cardWidth + 10) * j, 600, cardWidth, cardHeight);
+                    int tmp = k;
+                    int tempI = i;
+                    reservesLabel2[k].addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            super.mouseClicked(e);
+                            reservesLabel2[tmp].removeMouseListener(this);
+                            reservesLabel2[tmp].setIcon(null);
+                            buyButton.setFocusable(false);
+                            cancelButton.setFocusable(false);
+                            reservesLabel2[tmp].add(buyButton);
+                            reservesLabel2[tmp].add(cancelButton);
+                            reservesLabel2[tmp].setLayout(new FlowLayout());
+
+                            cancelButton.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                    super.mouseClicked(e);
+                                    reservesLabel2[tmp].removeAll();
+                                    try {
+                                        redrawReserves2();
+                                    } catch (IOException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+                                }
+                            });
+
+                            buyButton.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                    super.mouseClicked(e);
+                                    if (!isP1Turn) {
+                                        if (p2.blackCoin >= reserves2[tmp].blackCoin && p2.blueCoin >= reserves2[tmp].blueCoin && p2.greenCoin >= reserves2[tmp].greenCoin && p2.redCoin >= reserves2[tmp].redCoin && p2.whiteCoin >= reserves2[tmp].whiteCoin) {
+//                                            System.out.println("YESSSS PLAYER 2");
+                                            isP1Turn = true;
+                                            init.playerOneHand.add(reserves2[tmp]);
+                                            System.out.println(init.level3.get(tempI).toString());
+                                            init.playerOneReserves.remove(tempI);
+                                            p2.blackCoin -= reserves2[tmp].blackCoin;
+                                            p2.blueCoin -= reserves2[tmp].blueCoin;
+                                            p2.greenCoin -= reserves2[tmp].greenCoin;
+                                            p2.redCoin -= reserves2[tmp].redCoin;
+                                            p2.whiteCoin -= reserves2[tmp].whiteCoin;
+                                            p2.score += reserves2[tmp].point;
+
+                                            updateScore2();
+
+                                            updateNormalBlack2();
+                                            updateNormalBlue2();
+                                            updateNormalGreen2();
+                                            updateNormalRed2();
+                                            updateNormalWhite2();
+
+                                            switch (reserves2[tmp].specialCoin) {
+                                                case "black":
+                                                    p2.SpecialBlackCoin++;
+                                                    updateSpecialBlack2();
+                                                    break;
+                                                case "blue":
+                                                    p2.SpecialBlueCoin++;
+                                                    updateSpecialBlue2();
+                                                    break;
+                                                case "green":
+                                                    p2.SpecialGreenCoin++;
+                                                    updateSpecialGreen2();
+                                                    break;
+                                                case "red":
+                                                    p2.SpecialRedCoin++;
+                                                    updateSpecialRed2();
+                                                    break;
+                                                case "white":
+                                                    p2.SpecialWhiteCoin++;
+                                                    updateSpecialWhite2();
+                                                    break;
+                                            }
+                                            reservesLabel2[tmp].removeAll();
+                                            try {
+                                                redrawReserves2();
+                                            } catch (IOException ex) {
+                                                throw new RuntimeException(ex);
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            reservesLabel2[tmp].addMouseListener(this);
+                        }
+                    });
+                gamePanel.add(reservesLabel2[tmp]);
+                gamePanel.repaint();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     public void redrawCards1() throws IOException {
         for (int i = 0, j = 0, k = 0; i < 4; i++, j++, k++) {
             try {
                 level1Card[k] = init.level1.get(i);
-                BufferedImage image = ImageIO.read(getClass().getResource(level1Card[k].getImage1Path()));
+                BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResource(level1Card[k].getImage1Path())));
                 cardLabel1[k].setIcon(new ImageIcon(image));
                 cardLabel1[k].setBounds(510 + (cardWidth + 10)*j, 65, cardWidth, cardHeight);
             } catch (Exception e) {
@@ -3182,7 +3656,7 @@ public class AmusementPark extends JFrame {
         for (int i = 0, j = 0, k = 0; i < 4; i++, j++, k++) {
             try {
                 level2Card[k] = init.level2.get(i);
-                BufferedImage image = ImageIO.read(getClass().getResource(level2Card[k].getImage2Path()));
+                BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResource(level2Card[k].getImage2Path())));
                 cardLabel2[k].setIcon(new ImageIcon(image));
                 cardLabel2[k].setBounds(510 + (cardWidth + 10)*j, 65 + 10 + cardHeight, cardWidth, cardHeight);
             } catch (Exception e) {
@@ -3194,9 +3668,70 @@ public class AmusementPark extends JFrame {
         for (int i = 0, j = 0, k = 0; i < 4; i++, j++, k++) {
             try {
                 level3Card[k] = init.level3.get(i);
-                BufferedImage image = ImageIO.read(getClass().getResource(level3Card[k].getImage3Path()));
+                BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResource(level3Card[k].getImage3Path())));
                 cardLabel3[k].setIcon(new ImageIcon(image));
                 cardLabel3[k].setBounds(510 + (cardWidth + 10)*j, 65 + 2 * (10 + cardHeight), cardWidth, cardHeight);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void redrawPrizeClaws() throws IOException {
+        for (int i = 0, j = 0, k = 0; i < init.prizeClaw.size(); i++, j++, k++) {
+            try {
+                prizeClawCard[k] = init.prizeClaw.get(i);
+                BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResource(prizeClawCard[k].getPrizeClawPath())));
+                prizeClawLabel[k].setIcon(new ImageIcon(image));
+                prizeClawLabel[k].setBounds(560 + (cardWidth + 10) * j, 65 + 3 * (10 + cardHeight), cardWidth, cardHeight);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void redrawReserves1() throws IOException {
+        for (int i = 0, j = 0, k = 0; i < init.playerOneReserves.size(); i++, j++, k++) {
+            try {
+                    reserves1[k] = init.playerOneReserves.get(i);
+                    System.out.println(reserves1[k].toString());
+                    BufferedImage image;
+                    switch (reserves1[k].level) {
+                        case 1 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves1[k].getImage1Path())));
+                            reservesLabel1[k].setIcon(new ImageIcon(image));
+                            break;
+                        case 2 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves1[k].getImage2Path())));
+                            reservesLabel1[k].setIcon(new ImageIcon(image));
+                            break;
+                        case 3 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves1[k].getImage3Path())));
+                            reservesLabel1[k].setIcon(new ImageIcon(image));
+                            break;
+                    }
+                    reservesLabel1[k].setBounds(50 + (cardWidth + 10) * j, 600, cardWidth, cardHeight);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }  
+    public void redrawReserves2() throws IOException {
+        for (int i = 0, j = 0, k = 0; i < init.playerTwoReserves.size(); i++, j++, k++) {
+            try {
+                if (reserves2[k] != null) {
+                reserves2[k] = init.playerTwoReserves.get(i);
+                System.out.println(reserves2[k].toString());
+                    BufferedImage image;
+                    switch (reserves2[k].level) {
+                        case 1 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves2[k].getImage1Path())));
+                            reservesLabel2[k].setIcon(new ImageIcon(image));
+                            break;
+                        case 2 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves2[k].getImage2Path())));
+                            reservesLabel2[k].setIcon(new ImageIcon(image));
+                            break;
+                        case 3 : image = ImageIO.read(Objects.requireNonNull(getClass().getResource(reserves2[k].getImage3Path())));
+                            reservesLabel2[k].setIcon(new ImageIcon(image));
+                            break;
+                    }
+                reservesLabel2[k].setBounds(1050 + (cardWidth + 10) * j, 600, cardWidth, cardHeight);
+                }
+                else break;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -3319,6 +3854,15 @@ public class AmusementPark extends JFrame {
         p1SpecialWhite.setHorizontalAlignment(JLabel.CENTER);
         p1SpecialWhite.setFont(new Font("Arial", Font.BOLD, 15));
         gamePanel.add(p1SpecialWhite);
+
+        p1Gold.setOpaque(true);
+        p1Gold.setBackground(Color.ORANGE);
+        p1Gold.setBounds(120, 340, 300, 40);
+        p1Gold.setText("Gold Coins:   " + p1.goldCoin);
+        p1Gold.setHorizontalAlignment(JLabel.CENTER);
+        p1Gold.setFont(new Font("Arial", Font.BOLD, 15));
+        p1Gold.setForeground(Color.BLACK);
+        gamePanel.add(p1Gold);
     }
     public void drawScoreboard2() {
         player2Label.setOpaque(true);
@@ -3437,6 +3981,15 @@ public class AmusementPark extends JFrame {
         p2SpecialWhite.setHorizontalAlignment(JLabel.CENTER);
         p2SpecialWhite.setFont(new Font("Arial", Font.BOLD, 15));
         gamePanel.add(p2SpecialWhite);
+
+        p2Gold.setOpaque(true);
+        p2Gold.setBackground(Color.ORANGE);
+        p2Gold.setBounds(1100, 340, 300, 40);
+        p2Gold.setText("Gold Coins:   " + p2.goldCoin);
+        p2Gold.setHorizontalAlignment(JLabel.CENTER);
+        p2Gold.setFont(new Font("Arial", Font.BOLD, 15));
+        p2Gold.setForeground(Color.BLACK);
+        gamePanel.add(p2Gold);
     }
     public void updateNormalBlack1() {
         p1NormalBlack.setText("Normal Black:   " + p1.blackCoin);
@@ -3502,5 +4055,27 @@ public class AmusementPark extends JFrame {
     }
     public void updateScore2() {
         p2Score.setText("Score:    " + p2.score);
+    }
+    public void updateReserved1() {
+        p1Reserved.setText("Reserved:   " + p1.reserveCards);
+    }
+    public void updateReserved2() {
+        p2Reserved.setText("Reserved:   " + p2.reserveCards);
+    }
+    public void updateGold1() {
+        p1Gold.setText("Gold Coins:   " + p1.goldCoin);
+    }
+    public void updateGold2() {
+        p2Gold.setText("Gold Coins:   " + p2.goldCoin);
+    }
+    public void newJLabels1() {
+        for (int i = 0; i < 3; i++) {
+            reservesLabel1[i] = new JLabel();
+        }
+    }
+    public void newJLabels2() {
+        for (int i = 0; i < 3; i++) {
+            reservesLabel2[i] = new JLabel();
+        }
     }
 }

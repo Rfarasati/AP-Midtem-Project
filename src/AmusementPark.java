@@ -19,6 +19,34 @@ public class AmusementPark extends JFrame {
     JLabel[] cardLabel2 = new JLabel[4];
     JLabel[] cardLabel3 = new JLabel[4];
     JLabel[] prizeClawLabel = new JLabel[3];
+    JLabel player1Label = new JLabel();
+    JLabel player2Label = new JLabel();
+    JLabel p1Score = new JLabel();
+    JLabel p2Score = new JLabel();
+    JLabel p1Reserved = new JLabel();
+    JLabel p2Reserved = new JLabel();
+    JLabel p1NormalBlack = new JLabel();
+    JLabel p1SpecialBlack = new JLabel();
+    JLabel p2NormalBlack = new JLabel();
+    JLabel p2SpecialBlack = new JLabel();
+    JLabel p1NormalBlue = new JLabel();
+    JLabel p1SpecialBlue = new JLabel();
+    JLabel p2NormalBlue = new JLabel();
+    JLabel p2SpecialBlue = new JLabel();
+    JLabel p1NormalGreen = new JLabel();
+    JLabel p1SpecialGreen = new JLabel();
+    JLabel p2NormalGreen = new JLabel();
+    JLabel p2SpecialGreen = new JLabel();
+    JLabel p1NormalRed = new JLabel();
+    JLabel p1SpecialRed = new JLabel();
+    JLabel p2NormalRed = new JLabel();
+    JLabel p2SpecialRed = new JLabel();
+    JLabel p1NormalWhite = new JLabel();
+    JLabel p1SpecialWhite = new JLabel();
+    JLabel p2NormalWhite = new JLabel();
+    JLabel p2SpecialWhite = new JLabel();
+    JLabel p1Gold = new JLabel();
+    JLabel p2Gold = new JLabel();
     JPanel buttonPanel = new JPanel();
     JButton pick3Button;
     JButton pick2Button;
@@ -64,7 +92,7 @@ public class AmusementPark extends JFrame {
 
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
-//        frame.setSize(1200,800);
+//        frame.setSize(1200,1000);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,6 +133,8 @@ public class AmusementPark extends JFrame {
         p1 = new Player();
         p2 = new Player();
         init = new Initialization();
+        drawScoreboard1();
+        drawScoreboard2();
     }
     public void twoBtn () {
         pick2Button.addActionListener(new ActionListener() { //when the pick2Button is pressed:
@@ -148,6 +178,7 @@ public class AmusementPark extends JFrame {
                             init.player1Black.add(blackC2);
                             p1.blackCoin++;
 
+                            updateNormalBlack1();
 
                             System.out.println(init.slotMachineBlack);
 
@@ -180,6 +211,8 @@ public class AmusementPark extends JFrame {
                             init.player1Blue.add(blueC2);
                             p1.blueCoin++;
 
+                            updateNormalBlue1();
+
                             System.out.println(init.slotMachineBlue);
 
                             blueCoinNum -= 2;
@@ -210,6 +243,8 @@ public class AmusementPark extends JFrame {
                             Coin greenC2 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                             init.player1Green.add(greenC2);
                             p1.greenCoin++;
+
+                            updateNormalGreen1();
 
                             System.out.println(init.slotMachineGreen);
 
@@ -242,6 +277,8 @@ public class AmusementPark extends JFrame {
                             init.player1Red.add(redC2);
                             p1.redCoin++;
 
+                            updateNormalRed1();
+
                             System.out.println(init.slotMachineRed);
 
                             redCoinNum -= 2;
@@ -272,6 +309,8 @@ public class AmusementPark extends JFrame {
                             Coin whiteC2 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                             init.player1White.add(whiteC2);
                             p1.whiteCoin++;
+
+                            updateNormalWhite1();
 
                             System.out.println(init.slotMachineWhite);
 
@@ -307,6 +346,7 @@ public class AmusementPark extends JFrame {
                             init.player2Black.add(blackC2);
                             p2.blackCoin++;
 
+                            updateNormalBlack2();
 
                             System.out.println(init.slotMachineBlack);
 
@@ -339,6 +379,8 @@ public class AmusementPark extends JFrame {
                             init.player2Blue.add(blueC2);
                             p2.blueCoin++;
 
+                            updateNormalBlue2();
+
                             System.out.println(init.slotMachineBlue);
 
                             blueCoinNum -= 2;
@@ -369,6 +411,8 @@ public class AmusementPark extends JFrame {
                             Coin greenC2 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                             init.player2Green.add(greenC2);
                             p2.greenCoin++;
+
+                            updateNormalGreen2();
 
                             System.out.println(init.slotMachineGreen);
 
@@ -401,6 +445,8 @@ public class AmusementPark extends JFrame {
                             init.player2Red.add(redC2);
                             p2.redCoin++;
 
+                            updateNormalRed2();
+
                             System.out.println(init.slotMachineRed);
 
                             redCoinNum -= 2;
@@ -431,6 +477,8 @@ public class AmusementPark extends JFrame {
                             Coin whiteC2 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                             init.player2White.add(whiteC2);
                             p2.whiteCoin++;
+
+                            updateNormalWhite2();
 
                             System.out.println(init.slotMachineWhite);
 
@@ -529,6 +577,10 @@ public class AmusementPark extends JFrame {
                                             init.player1Green.add(greenC);
                                             p1.greenCoin++;
 
+                                            updateNormalBlack1();
+                                            updateNormalBlue1();
+                                            updateNormalGreen1();
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
@@ -572,6 +624,10 @@ public class AmusementPark extends JFrame {
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
 
+                                            updateNormalBlack1();
+                                            updateNormalBlue1();
+                                            updateNormalRed1();
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
@@ -613,6 +669,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
+
+                                            updateNormalBlack1();
+                                            updateNormalBlue1();
+                                            updateNormalWhite1();
 
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
@@ -659,6 +719,10 @@ public class AmusementPark extends JFrame {
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
 
+                                            updateNormalBlack1();
+                                            updateNormalGreen1();
+                                            updateNormalRed1();
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
@@ -701,6 +765,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
+
+                                            updateNormalBlack1();
+                                            updateNormalGreen1();
+                                            updateNormalWhite1();
 
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineWhite);
@@ -746,6 +814,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
+
+                                            updateNormalBlack1();
+                                            updateNormalRed1();
+                                            updateNormalWhite1();
 
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
@@ -794,6 +866,10 @@ public class AmusementPark extends JFrame {
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
 
+                                            updateNormalBlue1();
+                                            updateNormalGreen1();
+                                            updateNormalRed1();
+
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
@@ -836,6 +912,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
+
+                                            updateNormalBlue1();
+                                            updateNormalGreen1();
+                                            updateNormalWhite1();
 
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
@@ -880,6 +960,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
+
+                                            updateNormalBlue1();
+                                            updateNormalWhite1();
+                                            updateNormalRed1();
 
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
@@ -927,6 +1011,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
+
+                                            updateNormalWhite1();
+                                            updateNormalGreen1();
+                                            updateNormalRed1();
 
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineWhite);
@@ -974,6 +1062,9 @@ public class AmusementPark extends JFrame {
                                         init.player1Blue.add(blueC);
                                         p1.blueCoin++;
 
+                                        updateNormalBlack1();
+                                        updateNormalBlue1();
+
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineBlue);
 
@@ -1006,6 +1097,9 @@ public class AmusementPark extends JFrame {
                                         Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                                         init.player1Green.add(greenC);
                                         p1.greenCoin++;
+
+                                        updateNormalBlack1();
+                                        updateNormalGreen1();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineGreen);
@@ -1040,6 +1134,9 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        updateNormalBlack1();
+                                        updateNormalRed1();
+
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineRed);
 
@@ -1072,6 +1169,9 @@ public class AmusementPark extends JFrame {
                                         Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                         init.player1White.add(whiteC);
                                         p1.whiteCoin++;
+
+                                        updateNormalBlack1();
+                                        updateNormalWhite1();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineWhite);
@@ -1108,6 +1208,9 @@ public class AmusementPark extends JFrame {
                                         init.player1Green.add(greenC);
                                         p1.greenCoin++;
 
+                                        updateNormalBlue1();
+                                        updateSpecialGreen1();
+
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineGreen);
 
@@ -1141,6 +1244,9 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        updateNormalBlue1();
+                                        updateNormalRed1();
+
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineRed);
 
@@ -1173,6 +1279,9 @@ public class AmusementPark extends JFrame {
                                         Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                         init.player1White.add(whiteC);
                                         p1.whiteCoin++;
+
+                                        updateNormalBlue1();
+                                        updateSpecialWhite1();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineWhite);
@@ -1209,6 +1318,9 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        updateNormalGreen1();
+                                        updateNormalRed1();
+
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineRed);
 
@@ -1241,6 +1353,9 @@ public class AmusementPark extends JFrame {
                                         Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                         init.player1White.add(whiteC);
                                         p1.whiteCoin++;
+
+                                        updateNormalGreen1();
+                                        updateNormalWhite1();
 
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineWhite);
@@ -1277,6 +1392,9 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        updateNormalRed1();
+                                        updateNormalWhite1();
+
                                         System.out.println(init.slotMachineWhite);
                                         System.out.println(init.slotMachineRed);
 
@@ -1310,6 +1428,8 @@ public class AmusementPark extends JFrame {
                                     init.player1Black.add(blackC);
                                     p1.blackCoin++;
 
+                                    updateNormalBlack1();
+
                                     System.out.println(init.slotMachineBlack);
 
                                     blackCoinNum--;
@@ -1334,6 +1454,8 @@ public class AmusementPark extends JFrame {
                                     Coin blueC = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
                                     init.player1Blue.add(blueC);
                                     p1.blueCoin++;
+
+                                    updateNormalBlue1();
 
                                     System.out.println(init.slotMachineBlue);
 
@@ -1360,6 +1482,8 @@ public class AmusementPark extends JFrame {
                                     init.player1Green.add(greenC);
                                     p1.greenCoin++;
 
+                                    updateNormalGreen1();
+
                                     System.out.println(init.slotMachineGreen);
 
                                     greenCoinNum--;
@@ -1385,6 +1509,8 @@ public class AmusementPark extends JFrame {
                                     init.player1Red.add(redC);
                                     p1.redCoin++;
 
+                                    updateNormalRed1();
+
                                     System.out.println(init.slotMachineRed);
 
                                     redCoinNum--;
@@ -1409,6 +1535,8 @@ public class AmusementPark extends JFrame {
                                     Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                     init.player1White.add(whiteC);
                                     p1.whiteCoin++;
+
+                                    updateNormalWhite1();
 
                                     System.out.println(init.slotMachineWhite);
 
@@ -1450,6 +1578,10 @@ public class AmusementPark extends JFrame {
                                             init.player2Green.add(greenC);
                                             p2.greenCoin++;
 
+                                            updateNormalBlack2();
+                                            updateNormalBlue2();
+                                            updateNormalGreen2();
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
@@ -1493,6 +1625,10 @@ public class AmusementPark extends JFrame {
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
 
+                                            updateNormalBlack2();
+                                            updateNormalBlue2();
+                                            updateNormalRed2();
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
@@ -1535,6 +1671,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
+
+                                            updateNormalBlack2();
+                                            updateNormalBlue2();
+                                            updateNormalWhite2();
 
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
@@ -1581,6 +1721,10 @@ public class AmusementPark extends JFrame {
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
 
+                                            updateNormalBlack2();
+                                            updateNormalGreen2();
+                                            updateNormalRed2();
+
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
@@ -1623,6 +1767,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
+
+                                            updateNormalBlack2();
+                                            updateNormalGreen2();
+                                            updateNormalWhite2();
 
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineWhite);
@@ -1668,6 +1816,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
+
+                                            updateNormalBlack2();
+                                            updateNormalRed2();
+                                            updateNormalWhite2();
 
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineRed);
@@ -1716,6 +1868,10 @@ public class AmusementPark extends JFrame {
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
 
+                                            updateNormalBlue2();
+                                            updateNormalGreen2();
+                                            updateNormalRed2();
+
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
@@ -1758,6 +1914,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
+
+                                            updateNormalBlue2();
+                                            updateNormalGreen2();
+                                            updateNormalWhite2();
 
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
@@ -1803,6 +1963,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
+
+                                            updateNormalBlue2();
+                                            updateNormalRed2();
+                                            updateNormalWhite2();
 
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineBlue);
@@ -1850,6 +2014,10 @@ public class AmusementPark extends JFrame {
                                             Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
+
+                                            updateNormalGreen2();
+                                            updateNormalRed2();
+                                            updateNormalWhite2();
 
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineRed);
@@ -1897,6 +2065,9 @@ public class AmusementPark extends JFrame {
                                         init.player2Blue.add(blueC);
                                         p2.blueCoin++;
 
+                                        updateNormalBlack2();
+                                        updateNormalBlue2();
+
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineBlue);
 
@@ -1929,6 +2100,9 @@ public class AmusementPark extends JFrame {
                                         Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                                         init.player2Green.add(greenC);
                                         p2.greenCoin++;
+
+                                        updateNormalBlack2();
+                                        updateNormalGreen2();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineGreen);
@@ -1963,6 +2137,9 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        updateNormalBlack2();
+                                        updateNormalRed2();
+
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineRed);
 
@@ -1995,6 +2172,9 @@ public class AmusementPark extends JFrame {
                                         Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                         init.player2White.add(whiteC);
                                         p2.whiteCoin++;
+
+                                        updateNormalBlack2();
+                                        updateNormalWhite2();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineWhite);
@@ -2031,6 +2211,9 @@ public class AmusementPark extends JFrame {
                                         init.player2Green.add(greenC);
                                         p2.greenCoin++;
 
+                                        updateNormalBlue2();
+                                        updateNormalGreen2();
+
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineGreen);
 
@@ -2064,6 +2247,9 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        updateNormalBlue2();
+                                        updateNormalRed2();
+
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineRed);
 
@@ -2096,6 +2282,9 @@ public class AmusementPark extends JFrame {
                                         Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                         init.player2White.add(whiteC);
                                         p2.whiteCoin++;
+
+                                        updateNormalBlue2();
+                                        updateNormalWhite2();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineWhite);
@@ -2132,6 +2321,9 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        updateNormalGreen2();
+                                        updateNormalRed2();
+
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineRed);
 
@@ -2164,6 +2356,9 @@ public class AmusementPark extends JFrame {
                                         Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                         init.player2White.add(whiteC);
                                         p2.whiteCoin++;
+
+                                        updateNormalGreen2();
+                                        updateNormalWhite2();
 
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineWhite);
@@ -2200,6 +2395,9 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        updateNormalWhite2();
+                                        updateNormalRed2();
+
                                         System.out.println(init.slotMachineWhite);
                                         System.out.println(init.slotMachineRed);
 
@@ -2225,7 +2423,7 @@ public class AmusementPark extends JFrame {
                                 }
 
 
-                                //when maxSelection == 3:
+                                //when maxSelection == 1:
                                 if (blackBox.isSelected()) {
                                     System.out.println(isP1Turn);
                                     isP1Turn = true;
@@ -2233,6 +2431,8 @@ public class AmusementPark extends JFrame {
                                     Coin blackC = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
                                     init.player2Black.add(blackC);
                                     p2.blackCoin++;
+
+                                    updateNormalBlack2();
 
                                     System.out.println(init.slotMachineBlack);
 
@@ -2259,6 +2459,8 @@ public class AmusementPark extends JFrame {
                                     init.player2Blue.add(blueC);
                                     p2.blueCoin++;
 
+                                    updateNormalBlue2();
+
                                     System.out.println(init.slotMachineBlue);
 
                                     blueCoinNum--;
@@ -2283,6 +2485,8 @@ public class AmusementPark extends JFrame {
                                     Coin greenC = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
                                     init.player2Green.add(greenC);
                                     p2.greenCoin++;
+
+                                    updateNormalGreen2();
 
                                     System.out.println(init.slotMachineGreen);
 
@@ -2309,6 +2513,8 @@ public class AmusementPark extends JFrame {
                                     init.player2Red.add(redC);
                                     p2.redCoin++;
 
+                                    updateNormalRed2();
+
                                     System.out.println(init.slotMachineRed);
 
                                     redCoinNum--;
@@ -2333,6 +2539,8 @@ public class AmusementPark extends JFrame {
                                     Coin whiteC = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
                                     init.player2White.add(whiteC);
                                     p2.whiteCoin++;
+
+                                    updateNormalWhite2();
 
                                     System.out.println(init.slotMachineWhite);
 
@@ -2420,21 +2628,35 @@ public class AmusementPark extends JFrame {
                                         p1.redCoin -= level1Card[tmp].redCoin;
                                         p1.whiteCoin -= level1Card[tmp].whiteCoin;
                                         p1.score += level1Card[tmp].point;
+
+                                        updateScore1();
+
+                                        updateNormalBlack1();
+                                        updateNormalBlue1();
+                                        updateNormalGreen1();
+                                        updateNormalRed1();
+                                        updateNormalWhite1();
+
                                         switch (level1Card[tmp].specialCoin) {
                                             case "black":
                                                 p1.SpecialBlackCoin++;
+                                                updateSpecialBlack1();
                                                 break;
                                             case "blue":
                                                 p1.SpecialBlueCoin++;
+                                                updateSpecialBlue1();
                                                 break;
                                             case "green":
                                                 p1.SpecialGreenCoin++;
+                                                updateSpecialGreen1();
                                                 break;
                                             case "red":
                                                 p1.SpecialRedCoin++;
+                                                updateSpecialRed1();
                                                 break;
                                             case "white":
                                                 p1.SpecialWhiteCoin++;
+                                                updateSpecialWhite1();
                                                 break;
                                         }
                                         cardLabel1[tmp].removeAll();
@@ -2458,21 +2680,35 @@ public class AmusementPark extends JFrame {
                                         p2.redCoin -= level1Card[tmp].redCoin;
                                         p2.whiteCoin -= level1Card[tmp].whiteCoin;
                                         p2.score += level1Card[tmp].point;
+
+                                        updateScore2();
+
+                                        updateNormalBlack2();
+                                        updateNormalBlue2();
+                                        updateNormalGreen2();
+                                        updateNormalRed2();
+                                        updateNormalWhite2();
+                                        
                                         switch (level1Card[tmp].specialCoin) {
                                             case "black":
                                                 p2.SpecialBlackCoin++;
+                                                updateSpecialBlack2();
                                                 break;
                                             case "blue":
                                                 p2.SpecialBlueCoin++;
+                                                updateSpecialBlue2();
                                                 break;
                                             case "green":
                                                 p2.SpecialGreenCoin++;
+                                                updateSpecialGreen2();
                                                 break;
                                             case "red":
                                                 p2.SpecialRedCoin++;
+                                                updateSpecialRed2();
                                                 break;
                                             case "white":
                                                 p2.SpecialWhiteCoin++;
+                                                updateSpecialWhite2();
                                                 break;
                                         }
                                         cardLabel1[tmp].removeAll();
@@ -2557,21 +2793,35 @@ public class AmusementPark extends JFrame {
                                         p1.redCoin -= level2Card[tmp].redCoin;
                                         p1.whiteCoin -= level2Card[tmp].whiteCoin;
                                         p1.score += level2Card[tmp].point;
+
+                                        updateScore1();
+
+                                        updateNormalBlack1();
+                                        updateNormalBlue1();
+                                        updateNormalGreen1();
+                                        updateNormalRed1();
+                                        updateNormalWhite1();
+                                        
                                         switch (level2Card[tmp].specialCoin) {
                                             case "black":
                                                 p1.SpecialBlackCoin++;
+                                                updateSpecialBlack1();
                                                 break;
                                             case "blue":
                                                 p1.SpecialBlueCoin++;
+                                                updateSpecialBlue1();
                                                 break;
                                             case "green":
                                                 p1.SpecialGreenCoin++;
+                                                updateSpecialGreen1();
                                                 break;
                                             case "red":
                                                 p1.SpecialRedCoin++;
+                                                updateSpecialRed1();
                                                 break;
                                             case "white":
                                                 p1.SpecialWhiteCoin++;
+                                                updateSpecialWhite1();
                                                 break;
                                         }
                                         cardLabel2[tmp].removeAll();
@@ -2595,21 +2845,35 @@ public class AmusementPark extends JFrame {
                                         p2.redCoin -= level2Card[tmp].redCoin;
                                         p2.whiteCoin -= level2Card[tmp].whiteCoin;
                                         p2.score += level2Card[tmp].point;
+
+                                        updateScore2();
+
+                                        updateNormalBlack2();
+                                        updateNormalBlue2();
+                                        updateNormalGreen2();
+                                        updateNormalRed2();
+                                        updateNormalWhite2();
+                                        
                                         switch (level2Card[tmp].specialCoin) {
                                             case "black":
                                                 p2.SpecialBlackCoin++;
+                                                updateSpecialBlack2();
                                                 break;
                                             case "blue":
                                                 p2.SpecialBlueCoin++;
+                                                updateSpecialBlue2();
                                                 break;
                                             case "green":
                                                 p2.SpecialGreenCoin++;
+                                                updateSpecialGreen2();
                                                 break;
                                             case "red":
                                                 p2.SpecialRedCoin++;
+                                                updateSpecialRed2();
                                                 break;
                                             case "white":
                                                 p2.SpecialWhiteCoin++;
+                                                updateSpecialWhite2();
                                                 break;
                                         }
                                         cardLabel2[tmp].removeAll();
@@ -2694,21 +2958,35 @@ public class AmusementPark extends JFrame {
                                         p1.redCoin -= level3Card[tmp].redCoin;
                                         p1.whiteCoin -= level3Card[tmp].whiteCoin;
                                         p1.score += level3Card[tmp].point;
+
+                                        updateScore1();
+
+                                        updateNormalBlack1();
+                                        updateNormalBlue1();
+                                        updateNormalGreen1();
+                                        updateNormalRed1();
+                                        updateNormalWhite1();
+                                        
                                         switch (level3Card[tmp].specialCoin) {
                                             case "black":
                                                 p1.SpecialBlackCoin++;
+                                                updateSpecialBlack1();
                                                 break;
                                             case "blue":
                                                 p1.SpecialBlueCoin++;
+                                                updateSpecialBlue1();
                                                 break;
                                             case "green":
                                                 p1.SpecialGreenCoin++;
+                                                updateSpecialGreen1();
                                                 break;
                                             case "red":
                                                 p1.SpecialRedCoin++;
+                                                updateSpecialRed1();
                                                 break;
                                             case "white":
                                                 p1.SpecialWhiteCoin++;
+                                                updateSpecialWhite1();
                                                 break;
                                         }
                                         cardLabel3[tmp].removeAll();
@@ -2732,21 +3010,35 @@ public class AmusementPark extends JFrame {
                                         p2.redCoin -= level3Card[tmp].redCoin;
                                         p2.whiteCoin -= level3Card[tmp].whiteCoin;
                                         p2.score += level3Card[tmp].point;
+
+                                        updateScore2();
+
+                                        updateNormalBlack2();
+                                        updateNormalBlue2();
+                                        updateNormalGreen2();
+                                        updateNormalRed2();
+                                        updateNormalWhite2();
+                                        
                                         switch (level3Card[tmp].specialCoin) {
                                             case "black":
                                                 p2.SpecialBlackCoin++;
+                                                updateSpecialBlack2();
                                                 break;
                                             case "blue":
                                                 p2.SpecialBlueCoin++;
+                                                updateSpecialBlue2();
                                                 break;
                                             case "green":
                                                 p2.SpecialGreenCoin++;
+                                                updateSpecialGreen2();
                                                 break;
                                             case "red":
                                                 p2.SpecialRedCoin++;
+                                                updateSpecialRed2();
                                                 break;
                                             case "white":
                                                 p2.SpecialWhiteCoin++;
+                                                updateSpecialWhite2();
                                                 break;
                                         }
                                         cardLabel3[tmp].removeAll();
@@ -2910,5 +3202,305 @@ public class AmusementPark extends JFrame {
             }
         }
     }
+    public void drawScoreboard1() {
+        player1Label.setOpaque(true);
+        player1Label.setBackground(Color.RED);
+        player1Label.setBounds(120, 60, 300, 40);
+        player1Label.setText("Player One");
+        player1Label.setHorizontalAlignment(JLabel.CENTER);
+        player1Label.setFont(font);
+        player1Label.setForeground(Color.WHITE);
+        gamePanel.add(player1Label);
 
+
+        p1Score.setOpaque(true);
+        p1Score.setBackground(Color.PINK);
+        p1Score.setBounds(120, 100, 150, 40);
+        p1Score.setText("Score:    " + p1.score);
+        p1Score.setHorizontalAlignment(JLabel.CENTER);
+        p1Score.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1Score);
+
+
+        p1Reserved.setOpaque(true);
+        p1Reserved.setBackground(Color.CYAN);
+        p1Reserved.setBounds(270, 100, 150, 40);
+        p1Reserved.setText("Reserved:   " + p1.reserveCards);
+        p1Reserved.setHorizontalAlignment(JLabel.CENTER);
+        p1Reserved.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1Reserved);
+
+
+        p1NormalBlack.setOpaque(true);
+        p1NormalBlack.setBackground(Color.BLACK);
+        p1NormalBlack.setBounds(120, 140, 150, 40);
+        p1NormalBlack.setText("Normal Black:   " + p1.blackCoin);
+        p1NormalBlack.setForeground(Color.WHITE);
+        p1NormalBlack.setHorizontalAlignment(JLabel.CENTER);
+        p1NormalBlack.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1NormalBlack);
+        p1SpecialBlack.setOpaque(true);
+        p1SpecialBlack.setBackground(Color.BLACK);
+        p1SpecialBlack.setBounds(270, 140, 150, 40);
+        p1SpecialBlack.setText("Special Black:   " + p1.SpecialBlackCoin);
+        p1SpecialBlack.setForeground(Color.WHITE);
+        p1SpecialBlack.setHorizontalAlignment(JLabel.CENTER);
+        p1SpecialBlack.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1SpecialBlack);
+
+
+        p1NormalBlue.setOpaque(true);
+        p1NormalBlue.setBackground(Color.BLUE);
+        p1NormalBlue.setBounds(120, 180, 150, 40);
+        p1NormalBlue.setText("Normal Blue:   " + p1.blueCoin);
+        p1NormalBlue.setForeground(Color.WHITE);
+        p1NormalBlue.setHorizontalAlignment(JLabel.CENTER);
+        p1NormalBlue.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1NormalBlue);
+        p1SpecialBlue.setOpaque(true);
+        p1SpecialBlue.setBackground(Color.BLUE);
+        p1SpecialBlue.setBounds(270, 180, 150, 40);
+        p1SpecialBlue.setText("Special Blue:   " + p1.SpecialBlueCoin);
+        p1SpecialBlue.setForeground(Color.WHITE);
+        p1SpecialBlue.setHorizontalAlignment(JLabel.CENTER);
+        p1SpecialBlue.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1SpecialBlue);
+
+
+        p1NormalGreen.setOpaque(true);
+        p1NormalGreen.setBackground(Color.GREEN);
+        p1NormalGreen.setBounds(120, 220, 150, 40);
+        p1NormalGreen.setText("Normal Green:   " + p1.greenCoin);
+        p1NormalGreen.setForeground(Color.WHITE);
+        p1NormalGreen.setHorizontalAlignment(JLabel.CENTER);
+        p1NormalGreen.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1NormalGreen);
+        p1SpecialGreen.setOpaque(true);
+        p1SpecialGreen.setBackground(Color.GREEN);
+        p1SpecialGreen.setBounds(270, 220, 150, 40);
+        p1SpecialGreen.setText("Special Green:   " + p1.SpecialGreenCoin);
+        p1SpecialGreen.setForeground(Color.WHITE);
+        p1SpecialGreen.setHorizontalAlignment(JLabel.CENTER);
+        p1SpecialGreen.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1SpecialGreen);
+
+
+        p1NormalRed.setOpaque(true);
+        p1NormalRed.setBackground(Color.RED);
+        p1NormalRed.setBounds(120, 260, 150, 40);
+        p1NormalRed.setText("Normal Red:   " + p1.redCoin);
+        p1NormalRed.setForeground(Color.WHITE);
+        p1NormalRed.setHorizontalAlignment(JLabel.CENTER);
+        p1NormalRed.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1NormalRed);
+        p1SpecialRed.setOpaque(true);
+        p1SpecialRed.setBackground(Color.RED);
+        p1SpecialRed.setBounds(270, 260, 150, 40);
+        p1SpecialRed.setText("Special Red:   " + p1.SpecialRedCoin);
+        p1SpecialRed.setForeground(Color.WHITE);
+        p1SpecialRed.setHorizontalAlignment(JLabel.CENTER);
+        p1SpecialRed.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1SpecialRed);
+
+
+        p1NormalWhite.setOpaque(true);
+        p1NormalWhite.setBackground(Color.WHITE);
+        p1NormalWhite.setBounds(120, 300, 150, 40);
+        p1NormalWhite.setText("Normal White:   " + p1.whiteCoin);
+        p1NormalWhite.setForeground(Color.BLACK);
+        p1NormalWhite.setHorizontalAlignment(JLabel.CENTER);
+        p1NormalWhite.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1NormalWhite);
+        p1SpecialWhite.setOpaque(true);
+        p1SpecialWhite.setBackground(Color.WHITE);
+        p1SpecialWhite.setBounds(270, 300, 150, 40);
+        p1SpecialWhite.setText("Special White:   " + p1.SpecialWhiteCoin);
+        p1SpecialWhite.setForeground(Color.BLACK);
+        p1SpecialWhite.setHorizontalAlignment(JLabel.CENTER);
+        p1SpecialWhite.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p1SpecialWhite);
+    }
+    public void drawScoreboard2() {
+        player2Label.setOpaque(true);
+        player2Label.setBackground(Color.RED);
+        player2Label.setBounds(1100, 60, 300, 40);
+        player2Label.setText("Player Two");
+        player2Label.setHorizontalAlignment(JLabel.CENTER);
+        player2Label.setFont(font);
+        player2Label.setForeground(Color.WHITE);
+        gamePanel.add(player2Label);
+
+
+        p2Score.setOpaque(true);
+        p2Score.setBackground(Color.PINK);
+        p2Score.setBounds(1100, 100, 150, 40);
+        p2Score.setText("Score:    " + p2.score);
+        p2Score.setHorizontalAlignment(JLabel.CENTER);
+        p2Score.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2Score);
+
+
+        p2Reserved.setOpaque(true);
+        p2Reserved.setBackground(Color.CYAN);
+        p2Reserved.setBounds(1250, 100, 150, 40);
+        p2Reserved.setText("Reserved:   " + p2.reserveCards);
+        p2Reserved.setHorizontalAlignment(JLabel.CENTER);
+        p2Reserved.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2Reserved);
+
+
+        p2NormalBlack.setOpaque(true);
+        p2NormalBlack.setBackground(Color.BLACK);
+        p2NormalBlack.setBounds(1100, 140, 150, 40);
+        p2NormalBlack.setText("Normal Black:   " + p2.blackCoin);
+        p2NormalBlack.setForeground(Color.WHITE);
+        p2NormalBlack.setHorizontalAlignment(JLabel.CENTER);
+        p2NormalBlack.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2NormalBlack);
+        p2SpecialBlack.setOpaque(true);
+        p2SpecialBlack.setBackground(Color.BLACK);
+        p2SpecialBlack.setBounds(1250, 140, 150, 40);
+        p2SpecialBlack.setText("Special Black:   " + p2.SpecialBlackCoin);
+        p2SpecialBlack.setForeground(Color.WHITE);
+        p2SpecialBlack.setHorizontalAlignment(JLabel.CENTER);
+        p2SpecialBlack.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2SpecialBlack);
+
+
+        p2NormalBlue.setOpaque(true);
+        p2NormalBlue.setBackground(Color.BLUE);
+        p2NormalBlue.setBounds(1100, 180, 150, 40);
+        p2NormalBlue.setText("Normal Blue:   " + p2.blueCoin);
+        p2NormalBlue.setForeground(Color.WHITE);
+        p2NormalBlue.setHorizontalAlignment(JLabel.CENTER);
+        p2NormalBlue.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2NormalBlue);
+        p2SpecialBlue.setOpaque(true);
+        p2SpecialBlue.setBackground(Color.BLUE);
+        p2SpecialBlue.setBounds(1250, 180, 150, 40);
+        p2SpecialBlue.setText("Special Blue:   " + p2.SpecialBlueCoin);
+        p2SpecialBlue.setForeground(Color.WHITE);
+        p2SpecialBlue.setHorizontalAlignment(JLabel.CENTER);
+        p2SpecialBlue.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2SpecialBlue);
+
+
+        p2NormalGreen.setOpaque(true);
+        p2NormalGreen.setBackground(Color.GREEN);
+        p2NormalGreen.setBounds(1100, 220, 150, 40);
+        p2NormalGreen.setText("Normal Green:   " + p2.greenCoin);
+        p2NormalGreen.setForeground(Color.WHITE);
+        p2NormalGreen.setHorizontalAlignment(JLabel.CENTER);
+        p2NormalGreen.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2NormalGreen);
+        p2SpecialGreen.setOpaque(true);
+        p2SpecialGreen.setBackground(Color.GREEN);
+        p2SpecialGreen.setBounds(1250, 220, 150, 40);
+        p2SpecialGreen.setText("Special Green:   " + p2.SpecialGreenCoin);
+        p2SpecialGreen.setForeground(Color.WHITE);
+        p2SpecialGreen.setHorizontalAlignment(JLabel.CENTER);
+        p2SpecialGreen.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2SpecialGreen);
+
+
+        p2NormalRed.setOpaque(true);
+        p2NormalRed.setBackground(Color.RED);
+        p2NormalRed.setBounds(1100, 260, 150, 40);
+        p2NormalRed.setText("Normal Red:   " + p2.redCoin);
+        p2NormalRed.setForeground(Color.WHITE);
+        p2NormalRed.setHorizontalAlignment(JLabel.CENTER);
+        p2NormalRed.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2NormalRed);
+        p2SpecialRed.setOpaque(true);
+        p2SpecialRed.setBackground(Color.RED);
+        p2SpecialRed.setBounds(1250, 260, 150, 40);
+        p2SpecialRed.setText("Special Red:   " + p2.SpecialRedCoin);
+        p2SpecialRed.setForeground(Color.WHITE);
+        p2SpecialRed.setHorizontalAlignment(JLabel.CENTER);
+        p2SpecialRed.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2SpecialRed);
+
+
+        p2NormalWhite.setOpaque(true);
+        p2NormalWhite.setBackground(Color.WHITE);
+        p2NormalWhite.setBounds(1100, 300, 150, 40);
+        p2NormalWhite.setText("Normal White:   " + p2.whiteCoin);
+        p2NormalWhite.setForeground(Color.BLACK);
+        p2NormalWhite.setHorizontalAlignment(JLabel.CENTER);
+        p2NormalWhite.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2NormalWhite);
+        p2SpecialWhite.setOpaque(true);
+        p2SpecialWhite.setBackground(Color.WHITE);
+        p2SpecialWhite.setBounds(1250, 300, 150, 40);
+        p2SpecialWhite.setText("Special White:   " + p2.SpecialWhiteCoin);
+        p2SpecialWhite.setForeground(Color.BLACK);
+        p2SpecialWhite.setHorizontalAlignment(JLabel.CENTER);
+        p2SpecialWhite.setFont(new Font("Arial", Font.BOLD, 15));
+        gamePanel.add(p2SpecialWhite);
+    }
+    public void updateNormalBlack1() {
+        p1NormalBlack.setText("Normal Black:   " + p1.blackCoin);
+    }
+    public void updateSpecialBlack1() {
+        p1SpecialBlack.setText("Special Black:   " + p1.SpecialBlackCoin);
+    }
+    public void updateNormalBlue1() {
+        p1NormalBlue.setText("Normal Blue:   " + p1.blueCoin);
+    }
+    public void updateSpecialBlue1() {
+        p1SpecialBlue.setText("Special Blue:   " + p1.SpecialBlueCoin);
+    }
+    public void updateNormalGreen1() {
+        p1NormalGreen.setText("Normal Green:   " + p1.greenCoin);
+    }
+    public void updateSpecialGreen1() {
+        p1SpecialGreen.setText("Special Green:   " + p1.SpecialGreenCoin);
+    }
+    public void updateNormalRed1() {
+        p1NormalRed.setText("Normal Red:   " + p1.redCoin);
+    }
+    public void updateSpecialRed1() {
+        p1SpecialRed.setText("Special Red:   " + p1.SpecialRedCoin);
+    }
+    public void updateNormalWhite1() {
+        p1NormalWhite.setText("Normal White:   " + p1.whiteCoin);
+    }
+    public void updateSpecialWhite1() {
+        p1SpecialWhite.setText("Special White:   " + p1.SpecialWhiteCoin);
+    }    public void updateNormalBlack2() {
+        p2NormalBlack.setText("Normal Black:   " + p2.blackCoin);
+    }
+    public void updateSpecialBlack2() {
+        p2SpecialBlack.setText("Special Black:   " + p2.SpecialBlackCoin);
+    }
+    public void updateNormalBlue2() {
+        p2NormalBlue.setText("Normal Blue:   " + p2.blueCoin);
+    }
+    public void updateSpecialBlue2() {
+        p2SpecialBlue.setText("Special Blue:   " + p2.SpecialBlueCoin);
+    }
+    public void updateNormalGreen2() {
+        p2NormalGreen.setText("Normal Green:   " + p2.greenCoin);
+    }
+    public void updateSpecialGreen2() {
+        p2SpecialGreen.setText("Special Green:   " + p2.SpecialGreenCoin);
+    }
+    public void updateNormalRed2() {
+        p2NormalRed.setText("Normal Red:   " + p2.redCoin);
+    }
+    public void updateSpecialRed2() {
+        p2SpecialRed.setText("Special Red:   " + p2.SpecialRedCoin);
+    }
+    public void updateNormalWhite2() {
+        p2NormalWhite.setText("Normal White:   " + p2.whiteCoin);
+    }
+    public void updateSpecialWhite2() {
+        p2SpecialWhite.setText("Special White:   " + p2.SpecialWhiteCoin);
+    }
+    public void updateScore1() {
+        p1Score.setText("Score:    " + p1.score);
+    }
+    public void updateScore2() {
+        p2Score.setText("Score:    " + p2.score);
+    }
 }

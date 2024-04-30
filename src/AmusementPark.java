@@ -174,166 +174,239 @@ public class AmusementPark extends JFrame {
                     blackBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = false;
+                            if (blackCoinNum == 4) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = false;
 
-                            Coin blackC1 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
-                            init.player1Black.add(blackC1);
-                            p1.blackCoin++;
-                            Coin blackC2 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
-                            init.player1Black.add(blackC2);
-                            p1.blackCoin++;
+                                Coin blackC1 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                init.player1Black.add(blackC1);
+                                p1.blackCoin++;
+                                Coin blackC2 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                init.player1Black.add(blackC2);
+                                p1.blackCoin++;
 
-                            updateNormalBlack1();
+                                blackCoinNum -= 2;
+                                
+                                if (p1.getTotalCoin() > 10) {
+                                    p1.blackCoin--;
+                                    blackCoinNum++;
+                                    
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.blackCoin--;
+                                        blackCoinNum++;
+                                    }
+                                }
 
-                            System.out.println(init.slotMachineBlack);
+                                updateNormalBlack1();
 
-                            blackCoinNum -= 2;
+                                System.out.println(init.slotMachineBlack);
+                                
+                                
 
-                            blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
 
-                            if (blackCoinNum < 1) {
-                                emptySlotCount++;
+                                if (blackCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                blackBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            blackBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     blueBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = false;
+                            if (blueCoinNum == 4) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = false;
 
-                            Coin blueC1 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
-                            init.player1Blue.add(blueC1);
-                            p1.blueCoin++;
-                            Coin blueC2 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
-                            init.player1Blue.add(blueC2);
-                            p1.blueCoin++;
+                                Coin blueC1 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                init.player1Blue.add(blueC1);
+                                p1.blueCoin++;
+                                Coin blueC2 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                init.player1Blue.add(blueC2);
+                                p1.blueCoin++;
 
-                            updateNormalBlue1();
+                                blueCoinNum -= 2;
 
-                            System.out.println(init.slotMachineBlue);
+                                if (p1.getTotalCoin() > 10) {
+                                    p1.blueCoin--;
+                                    blueCoinNum++;
 
-                            blueCoinNum -= 2;
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.blueCoin--;
+                                        blueCoinNum++;
+                                    }
+                                }
 
-                            blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                updateNormalBlue1();
 
-                            if (blueCoinNum < 1) {
-                                emptySlotCount++;
+                                System.out.println(init.slotMachineBlue);
+                                
+
+                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+
+                                if (blueCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                blueBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            blueBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     greenBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = false;
+                            if (greenCoinNum == 4) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = false;
 
-                            Coin greenC1 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
-                            init.player1Green.add(greenC1);
-                            p1.greenCoin++;
-                            Coin greenC2 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
-                            init.player1Green.add(greenC2);
-                            p1.greenCoin++;
+                                Coin greenC1 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                init.player1Green.add(greenC1);
+                                p1.greenCoin++;
+                                Coin greenC2 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                init.player1Green.add(greenC2);
+                                p1.greenCoin++;
 
-                            updateNormalGreen1();
+                                greenCoinNum -= 2;
+                                if (p1.getTotalCoin() > 10) {
+                                    p1.greenCoin--;
+                                    greenCoinNum++;
 
-                            System.out.println(init.slotMachineGreen);
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.greenCoin--;
+                                        greenCoinNum++;
+                                    }
+                                }
+                                updateNormalGreen1();
 
-                            greenCoinNum -= 2;
+                                System.out.println(init.slotMachineGreen);
 
-                            greenCoinLabel.setText(String.valueOf(greenCoinNum));
 
-                            if (greenCoinNum < 1) {
-                                emptySlotCount++;
+                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                if (greenCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                greenBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            greenBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     redBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = false;
+                            if (redCoinNum == 4) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = false;
 
-                            Coin redC1 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
-                            init.player1Red.add(redC1);
-                            p1.redCoin++;
-                            Coin redC2 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
-                            init.player1Red.add(redC2);
-                            p1.redCoin++;
+                                Coin redC1 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                init.player1Red.add(redC1);
+                                p1.redCoin++;
+                                Coin redC2 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                init.player1Red.add(redC2);
+                                p1.redCoin++;
 
-                            updateNormalRed1();
+                                redCoinNum -= 2;
+                                if (p1.getTotalCoin() > 10) {
+                                    p1.redCoin--;
+                                    redCoinNum++;
 
-                            System.out.println(init.slotMachineRed);
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.redCoin--;
+                                        redCoinNum++;
+                                    }
+                                }
+                                updateNormalRed1();
 
-                            redCoinNum -= 2;
+                                System.out.println(init.slotMachineRed);
 
-                            redCoinLabel.setText(String.valueOf(redCoinNum));
+                                
 
-                            if (redCoinNum < 1) {
-                                emptySlotCount++;
+                                redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                if (redCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                redBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            redBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     whiteBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = false;
+                            if (whiteCoinNum == 4 ) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = false;
 
-                            Coin whiteC1 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
-                            init.player1White.add(whiteC1);
-                            p1.whiteCoin++;
-                            Coin whiteC2 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
-                            init.player1White.add(whiteC2);
-                            p1.whiteCoin++;
+                                Coin whiteC1 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                init.player1White.add(whiteC1);
+                                p1.whiteCoin++;
+                                Coin whiteC2 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                init.player1White.add(whiteC2);
+                                p1.whiteCoin++;
 
-                            updateNormalWhite1();
+                                whiteCoinNum -= 2;
 
-                            System.out.println(init.slotMachineWhite);
+                                if (p1.getTotalCoin() > 10) {
+                                    p1.whiteCoin--;
+                                    whiteCoinNum++;
 
-                            whiteCoinNum -= 2;
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.whiteCoin--;
+                                        whiteCoinNum++;
+                                    }
+                                }
 
-                            whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                updateNormalWhite1();
 
-                            if (whiteCoinNum < 1) {
-                                emptySlotCount++;
+                                System.out.println(init.slotMachineWhite);
+
+
+                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                if (whiteCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                whiteBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            whiteBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                 }
@@ -342,166 +415,239 @@ public class AmusementPark extends JFrame {
                     blackBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = true;
+                            if (blackCoinNum == 4 ) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = true;
 
-                            Coin blackC1 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
-                            init.player2Black.add(blackC1);
-                            p2.blackCoin++;
-                            Coin blackC2 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
-                            init.player2Black.add(blackC2);
-                            p2.blackCoin++;
+                                Coin blackC1 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                init.player2Black.add(blackC1);
+                                p2.blackCoin++;
+                                Coin blackC2 = init.slotMachineBlack.remove(init.slotMachineBlack.size() - 1);
+                                init.player2Black.add(blackC2);
+                                p2.blackCoin++;
 
-                            updateNormalBlack2();
+                                blackCoinNum -= 2;
+                                if (p2.getTotalCoin() > 10) {
+                                    p2.blackCoin--;
+                                    blackCoinNum++;
 
-                            System.out.println(init.slotMachineBlack);
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.blackCoin--;
+                                        blackCoinNum++;
+                                    }
+                                }
+                                
+                                updateNormalBlack2();
 
-                            blackCoinNum -= 2;
+                                System.out.println(init.slotMachineBlack);
 
-                            blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                
 
-                            if (blackCoinNum < 1) {
-                                emptySlotCount++;
+                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+
+                                if (blackCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                blackBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            blackBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     blueBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = true;
+                            if (blueCoinNum == 4) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = true;
 
-                            Coin blueC1 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
-                            init.player2Blue.add(blueC1);
-                            p2.blueCoin++;
-                            Coin blueC2 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
-                            init.player2Blue.add(blueC2);
-                            p2.blueCoin++;
+                                Coin blueC1 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                init.player2Blue.add(blueC1);
+                                p2.blueCoin++;
+                                Coin blueC2 = init.slotMachineBlue.remove(init.slotMachineBlue.size() - 1);
+                                init.player2Blue.add(blueC2);
+                                p2.blueCoin++;
 
-                            updateNormalBlue2();
+                                blueCoinNum -= 2;
+                                
 
-                            System.out.println(init.slotMachineBlue);
+                                System.out.println(init.slotMachineBlue);
 
-                            blueCoinNum -= 2;
+                                if (p2.getTotalCoin() > 10) {
+                                    p2.blueCoin--;
+                                    blueCoinNum++;
 
-                            blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.blueCoin--;
+                                        blueCoinNum++;
+                                    }
+                                }
+                                updateNormalBlue2();
 
-                            if (blueCoinNum < 1) {
-                                emptySlotCount++;
+                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+
+                                if (blueCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                blueBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            blueBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     greenBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = true;
+                            if (greenCoinNum == 4 ) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = true;
 
-                            Coin greenC1 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
-                            init.player2Green.add(greenC1);
-                            p2.greenCoin++;
-                            Coin greenC2 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
-                            init.player2Green.add(greenC2);
-                            p2.greenCoin++;
+                                Coin greenC1 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                init.player2Green.add(greenC1);
+                                p2.greenCoin++;
+                                Coin greenC2 = init.slotMachineGreen.remove(init.slotMachineGreen.size() - 1);
+                                init.player2Green.add(greenC2);
+                                p2.greenCoin++;
+                                
+                                greenCoinNum -= 2;
 
-                            updateNormalGreen2();
+                                if (p2.getTotalCoin() > 10) {
+                                    p2.greenCoin--;
+                                    greenCoinNum++;
 
-                            System.out.println(init.slotMachineGreen);
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.greenCoin--;
+                                        greenCoinNum++;
+                                    }
+                                }
 
-                            greenCoinNum -= 2;
+                                updateNormalGreen2();
 
-                            greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                System.out.println(init.slotMachineGreen);
+                                
 
-                            if (greenCoinNum < 1) {
-                                emptySlotCount++;
+                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+
+                                if (greenCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                greenBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            greenBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     redBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = true;
+                            if (redCoinNum == 4 ) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = true;
 
-                            Coin redC1 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
-                            init.player2Red.add(redC1);
-                            p2.redCoin++;
-                            Coin redC2 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
-                            init.player2Red.add(redC2);
-                            p2.redCoin++;
+                                Coin redC1 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                init.player2Red.add(redC1);
+                                p2.redCoin++;
+                                Coin redC2 = init.slotMachineRed.remove(init.slotMachineRed.size() - 1);
+                                init.player2Red.add(redC2);
+                                p2.redCoin++;
 
-                            updateNormalRed2();
+                                redCoinNum -= 2;
+                                
 
-                            System.out.println(init.slotMachineRed);
+                                System.out.println(init.slotMachineRed);
 
-                            redCoinNum -= 2;
+                                if (p2.getTotalCoin() > 10) {
+                                    p2.redCoin--;
+                                    redCoinNum++;
 
-                            redCoinLabel.setText(String.valueOf(redCoinNum));
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.redCoin--;
+                                        redCoinNum++;
+                                    }
+                                }
 
-                            if (redCoinNum < 1) {
-                                emptySlotCount++;
+                                updateNormalRed2();
+                                
+                                redCoinLabel.setText(String.valueOf(redCoinNum));
+
+                                if (redCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                redBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            redBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                     whiteBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(isP1Turn);
-                            isP1Turn = true;
+                            if (whiteCoinNum == 4 ) {
+                                System.out.println(isP1Turn);
+                                isP1Turn = true;
 
-                            Coin whiteC1 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
-                            init.player2White.add(whiteC1);
-                            p2.whiteCoin++;
-                            Coin whiteC2 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
-                            init.player2White.add(whiteC2);
-                            p2.whiteCoin++;
+                                Coin whiteC1 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                init.player2White.add(whiteC1);
+                                p2.whiteCoin++;
+                                Coin whiteC2 = init.slotMachineWhite.remove(init.slotMachineWhite.size() - 1);
+                                init.player2White.add(whiteC2);
+                                p2.whiteCoin++;
 
-                            updateNormalWhite2();
+                                whiteCoinNum -= 2;
 
-                            System.out.println(init.slotMachineWhite);
+                                if (p2.getTotalCoin() > 10) {
+                                    p2.whiteCoin--;
+                                    whiteCoinNum++;
 
-                            whiteCoinNum -= 2;
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.whiteCoin--;
+                                        whiteCoinNum++;
+                                    }
+                                }
+                                updateNormalWhite2();
 
-                            whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                System.out.println(init.slotMachineWhite);
+                                
 
-                            if (whiteCoinNum < 1) {
-                                emptySlotCount++;
+                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+
+                                if (whiteCoinNum < 1) {
+                                    emptySlotCount++;
+                                }
+
+                                buttonPanel.remove(radioPanel);
+                                if (blackCoinNum >= 4 || blueCoinNum >= 4 || greenCoinNum >= 4 || redCoinNum >= 4 || whiteCoinNum >= 4)
+                                    buttonPanel.add(pick2Button);
+                                if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0)
+                                    buttonPanel.add(pick3Button);
+                                whiteBtn.addActionListener(this);
+                                buttonPanel.revalidate();
+                                buttonPanel.repaint();
                             }
-
-                            buttonPanel.remove(radioPanel);
-                            if (blackCoinNum >= 2 || blueCoinNum >= 2 || greenCoinNum >= 2 || redCoinNum >= 2 || whiteCoinNum >= 2) buttonPanel.add(pick2Button);
-                            if (blackCoinNum > 0 || blueCoinNum > 0 || greenCoinNum > 0 || redCoinNum > 0 || whiteCoinNum > 0) buttonPanel.add(pick3Button);
-                            whiteBtn.addActionListener(this);
-                            buttonPanel.revalidate();
-                            buttonPanel.repaint();
                         }
                     });
                 }
@@ -583,6 +729,17 @@ public class AmusementPark extends JFrame {
                                             init.player1Green.add(greenC);
                                             p1.greenCoin++;
 
+                                            greenCoinNum--;
+                                            blackCoinNum--;
+                                            blueCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blackCoin--;
+                                                whiteCoinNum++;
+                                            }
+
+
                                             updateNormalBlack1();
                                             updateNormalBlue1();
                                             updateNormalGreen1();
@@ -591,9 +748,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
 
-                                            greenCoinNum--;
-                                            blackCoinNum--;
-                                            blueCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
@@ -2621,18 +2776,169 @@ public class AmusementPark extends JFrame {
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
                                 if (isP1Turn) {
-                                    if (p1.blackCoin + p1.SpecialBlackCoin >= level1Card[tmp].blackCoin && p1.blueCoin + p1.SpecialBlueCoin >= level1Card[tmp].blueCoin && p1.greenCoin + p1.SpecialGreenCoin >= level1Card[tmp].greenCoin && p1.redCoin + p1.SpecialRedCoin >= level1Card[tmp].redCoin && p1.whiteCoin + p1.SpecialWhiteCoin >= level1Card[tmp].whiteCoin) {
+                                    int black = p1.blackCoin;
+                                    int blackSw = 0;
+                                    int tmpGold1 = 0;
+                                    int blue = p1.blueCoin;
+                                    int blueSw = 0;
+                                    int tmpGold2 = 0;
+                                    int green = p1.greenCoin;
+                                    int greenSw = 0;
+                                    int tmpGold3 = 0;
+                                    int red = p1.redCoin;
+                                    int redSw = 0;
+                                    int tmpGold4 = 0;
+                                    int white = p1.whiteCoin;
+                                    int whiteSw = 0;
+                                    int tmpGold5 = 0;
+                                    if (p1.blackCoin >= level1Card[tmp].blackCoin) {
+                                        blackSw = 1;
+                                    }
+                                    else if (level1Card[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) >= level1Card[tmp].blackCoin) {
+                                        blackSw = 2;
+                                        black = p1.blackCoin + p1.SpecialBlackCoin;
+                                    }
+                                    else if (level1Card[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) - level1Card[tmp].blackCoin < 0) {
+                                        if (level1Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin) <= p1.goldCoin) {
+                                            black = p1.blackCoin + p1.SpecialBlackCoin + (level1Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin));
+                                            p1.goldCoin -= level1Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            tmpGold1 = level1Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            blackSw = 3;
+                                            goldCoinNum += level1Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+                                    
+                                    
+                                    if (p1.blueCoin >= level1Card[tmp].blueCoin) {
+                                        blueSw = 1;
+                                    }
+                                    else if (level1Card[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) >= level1Card[tmp].blueCoin) {
+                                        blueSw = 2;
+                                        blue = p1.blueCoin + p1.SpecialBlueCoin;
+                                    }
+                                    else if (level1Card[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) - level1Card[tmp].blueCoin < 0) {
+                                        if (level1Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin) <= p1.goldCoin) {
+                                            blue = p1.blueCoin + p1.SpecialBlueCoin + (level1Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin));
+                                            p1.goldCoin -= level1Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            tmpGold2 = level1Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            blueSw = 3;
+                                            goldCoinNum += level1Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.greenCoin >= level1Card[tmp].greenCoin) {
+                                        greenSw = 1;
+                                    }
+                                    else if (level1Card[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) >= level1Card[tmp].greenCoin) {
+                                        greenSw = 2;
+                                        green = p1.greenCoin + p1.SpecialGreenCoin;
+                                    }
+                                    else if (level1Card[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) - level1Card[tmp].greenCoin < 0) {
+                                        if (level1Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin) <= p1.goldCoin) {
+                                            green = p1.greenCoin + p1.SpecialGreenCoin + (level1Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin));
+                                            p1.goldCoin -= level1Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            tmpGold3 = level1Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            greenSw = 3;
+                                            goldCoinNum += level1Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+                                    
+                                    
+                                    if (p1.redCoin >= level1Card[tmp].redCoin) {
+                                        redSw = 1;
+                                    }
+                                    else if (level1Card[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) >= level1Card[tmp].redCoin) {
+                                        redSw = 2;
+                                        red = p1.redCoin + p1.SpecialRedCoin;
+                                    }
+                                    else if (level1Card[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) - level1Card[tmp].redCoin < 0) {
+                                        if (level1Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin) <= p1.goldCoin) {
+                                            red = p1.redCoin + p1.SpecialRedCoin + (level1Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin));
+                                            p1.goldCoin -= level1Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            tmpGold4 = level1Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            redSw = 3;
+                                            goldCoinNum += level1Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+                                    
+                                    
+                                    if (p1.whiteCoin >= level1Card[tmp].whiteCoin) {
+                                        whiteSw = 1;
+                                    }
+                                    else if (level1Card[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) >= level1Card[tmp].whiteCoin) {
+                                        whiteSw = 2;
+                                        white = p1.whiteCoin + p1.SpecialWhiteCoin;
+                                    }
+                                    else if (level1Card[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) - level1Card[tmp].whiteCoin < 0) {
+                                        if (level1Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin) <= p1.goldCoin) {
+                                            white = p1.whiteCoin + p1.SpecialWhiteCoin + (level1Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin));
+                                            p1.goldCoin -= level1Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            tmpGold5 = level1Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            whiteSw = 3;
+                                            goldCoinNum += level1Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+                                    if (black >= level1Card[tmp].blackCoin && blue >= level1Card[tmp].blueCoin && green >= level1Card[tmp].greenCoin && red >= level1Card[tmp].redCoin && white >= level1Card[tmp].whiteCoin) {
                                         System.out.println("YESSSS PLAYER 1");
                                         //add gold coins
                                         isP1Turn = false;
                                         init.playerOneHand.add(level1Card[tmp]);
 //                                        System.out.println(init.level1.get(tempI).toString());
                                         init.level1.remove(tempI);
-                                        p1.blackCoin -= level1Card[tmp].blackCoin;
-                                        p1.blueCoin -= level1Card[tmp].blueCoin;
-                                        p1.greenCoin -= level1Card[tmp].greenCoin;
-                                        p1.redCoin -= level1Card[tmp].redCoin;
-                                        p1.whiteCoin -= level1Card[tmp].whiteCoin;
+                                        
+                                        switch (blackSw) {
+                                            case 1 : p1.blackCoin -= level1Card[tmp].blackCoin;
+                                            break;
+                                            case 2 : p1.blackCoin -= level1Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                            break;
+                                            case 3 : p1.blackCoin -= level1Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                            break;
+                                        }
+                                        switch (blueSw) {
+                                            case 1 : p1.blueCoin -= level1Card[tmp].blueCoin;
+                                            break;
+                                            case 2 : p1.blueCoin -= level1Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                            break;
+                                            case 3 : p1.blueCoin -= level1Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold2;
+                                            break;
+                                        }
+                                        switch (greenSw) {
+                                            case 1 : p1.greenCoin -= level1Card[tmp].greenCoin;
+                                                break;
+                                            case 2 : p1.greenCoin -= level1Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                break;
+                                            case 3 : p1.greenCoin -= level1Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold3;
+                                                break;
+                                        }
+                                        switch (redSw) {
+                                            case 1 : p1.redCoin -= level1Card[tmp].redCoin;
+                                                break;
+                                            case 2 : p1.redCoin -= level1Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                break;
+                                            case 3 : p1.redCoin -= level1Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold4;
+                                                break;
+                                        }
+                                        switch (whiteSw) {
+                                            case 1 : p1.whiteCoin -= level1Card[tmp].whiteCoin;
+                                                break;
+                                            case 2 : p1.whiteCoin -= level1Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                break;
+                                            case 3 : p1.whiteCoin -= level1Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold5;
+                                                break;
+                                        }
+                                        
                                         p1.score += level1Card[tmp].point;
 
                                         updateScore1();
@@ -2674,18 +2980,166 @@ public class AmusementPark extends JFrame {
                                     }
                                 }
                                 else {
-                                    if (p2.blackCoin >= level1Card[tmp].blackCoin && p2.blueCoin >= level1Card[tmp].blueCoin && p2.greenCoin >= level1Card[tmp].greenCoin && p2.redCoin >= level1Card[tmp].redCoin && p2.whiteCoin >= level1Card[tmp].whiteCoin) {
+                                    int black = p2.blackCoin;
+                                    int blackSw = 0;
+                                    int tmpGold1 = 0;
+                                    int blue = p2.blueCoin;
+                                    int blueSw = 0;
+                                    int tmpGold2 = 0;
+                                    int green = p2.greenCoin;
+                                    int greenSw = 0;
+                                    int tmpGold3 = 0;
+                                    int red = p2.redCoin;
+                                    int redSw = 0;
+                                    int tmpGold4 = 0;
+                                    int white = p2.whiteCoin;
+                                    int whiteSw = 0;
+                                    int tmpGold5 = 0;
+                                    if (p2.blackCoin >= level1Card[tmp].blackCoin) {
+                                        blackSw = 1;
+                                    }
+                                    else if (level1Card[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) >= level1Card[tmp].blackCoin) {
+                                        blackSw = 2;
+                                        black = p2.blackCoin + p2.SpecialBlackCoin;
+                                    }
+                                    else if (level1Card[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) - level1Card[tmp].blackCoin < 0) {
+                                        if (level1Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin) <= p2.goldCoin) {
+                                            black = p2.blackCoin + p2.SpecialBlackCoin + (level1Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin));
+                                            p2.goldCoin -= level1Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            tmpGold1 = level1Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            blackSw = 3;
+                                            goldCoinNum += level1Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.blueCoin >= level1Card[tmp].blueCoin) {
+                                        blueSw = 1;
+                                    }
+                                    else if (level1Card[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) >= level1Card[tmp].blueCoin) {
+                                        blueSw = 2;
+                                        blue = p2.blueCoin + p2.SpecialBlueCoin;
+                                    }
+                                    else if (level1Card[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) - level1Card[tmp].blueCoin < 0) {
+                                        if (level1Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin) <= p2.goldCoin) {
+                                            blue = p2.blueCoin + p2.SpecialBlueCoin + (level1Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin));
+                                            p2.goldCoin -= level1Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            tmpGold2 = level1Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            blueSw = 3;
+                                            goldCoinNum += level1Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.greenCoin >= level1Card[tmp].greenCoin) {
+                                        greenSw = 1;
+                                    }
+                                    else if (level1Card[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) >= level1Card[tmp].greenCoin) {
+                                        greenSw = 2;
+                                        green = p2.greenCoin + p2.SpecialGreenCoin;
+                                    }
+                                    else if (level1Card[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) - level1Card[tmp].greenCoin < 0) {
+                                        if (level1Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin) <= p2.goldCoin) {
+                                            green = p2.greenCoin + p2.SpecialGreenCoin + (level1Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin));
+                                            p2.goldCoin -= level1Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            tmpGold3 = level1Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            greenSw = 3;
+                                            goldCoinNum += level1Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.redCoin >= level1Card[tmp].redCoin) {
+                                        redSw = 1;
+                                    }
+                                    else if (level1Card[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) >= level1Card[tmp].redCoin) {
+                                        redSw = 2;
+                                        red = p2.redCoin + p2.SpecialRedCoin;
+                                    }
+                                    else if (level1Card[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) - level1Card[tmp].redCoin < 0) {
+                                        if (level1Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin) <= p2.goldCoin) {
+                                            red = p2.redCoin + p2.SpecialRedCoin + (level1Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin));
+                                            p2.goldCoin -= level1Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            tmpGold4 = level1Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            redSw = 3;
+                                            goldCoinNum += level1Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.whiteCoin >= level1Card[tmp].whiteCoin) {
+                                        whiteSw = 1;
+                                    }
+                                    else if (level1Card[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) >= level1Card[tmp].whiteCoin) {
+                                        whiteSw = 2;
+                                        white = p2.whiteCoin + p2.SpecialWhiteCoin;
+                                    }
+                                    else if (level1Card[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) - level1Card[tmp].whiteCoin < 0) {
+                                        if (level1Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin) <= p2.goldCoin) {
+                                            white = p2.whiteCoin + p2.SpecialWhiteCoin + (level1Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin));
+                                            p2.goldCoin -= level1Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            tmpGold5 = level1Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            whiteSw = 3;
+                                            goldCoinNum += level1Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+                                    if (black >= level1Card[tmp].blackCoin && blue >= level1Card[tmp].blueCoin && green >= level1Card[tmp].greenCoin && red >= level1Card[tmp].redCoin && white >= level1Card[tmp].whiteCoin) {
                                         System.out.println("YESSSS PLAYER 2");
                                         isP1Turn = true;
                                         init.playerTwoHand.add(level1Card[tmp]);
 //                                        System.out.println(init.level1.get(tempI).toString());
                                         init.level1.remove(tempI);
-                                        p2.blackCoin -= level1Card[tmp].blackCoin;
-                                        p2.blueCoin -= level1Card[tmp].blueCoin;
-                                        p2.greenCoin -= level1Card[tmp].greenCoin;
-                                        p2.redCoin -= level1Card[tmp].redCoin;
-                                        p2.whiteCoin -= level1Card[tmp].whiteCoin;
-                                        p2.score += level1Card[tmp].point;
+                                        switch (blackSw) {
+                                            case 1 : p2.blackCoin -= level1Card[tmp].blackCoin;
+                                                break;
+                                            case 2 : p2.blackCoin -= level1Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                break;
+                                            case 3 : p2.blackCoin -= level1Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                break;
+                                        }
+                                        switch (blueSw) {
+                                            case 1 : p2.blueCoin -= level1Card[tmp].blueCoin;
+                                                break;
+                                            case 2 : p2.blueCoin -= level1Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                break;
+                                            case 3 : p2.blueCoin -= level1Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold2;
+                                                break;
+                                        }
+                                        switch (greenSw) {
+                                            case 1 : p2.greenCoin -= level1Card[tmp].greenCoin;
+                                                break;
+                                            case 2 : p2.greenCoin -= level1Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                break;
+                                            case 3 : p2.greenCoin -= level1Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold3;
+                                                break;
+                                        }
+                                        switch (redSw) {
+                                            case 1 : p2.redCoin -= level1Card[tmp].redCoin;
+                                                break;
+                                            case 2 : p2.redCoin -= level1Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                break;
+                                            case 3 : p2.redCoin -= level1Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold4;
+                                                break;
+                                        }
+                                        switch (whiteSw) {
+                                            case 1 : p2.whiteCoin -= level1Card[tmp].whiteCoin;
+                                                break;
+                                            case 2 : p2.whiteCoin -= level1Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                break;
+                                            case 3 : p2.whiteCoin -= level1Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold5;
+                                                break;
+                                        }
 
                                         updateScore2();
 
@@ -2850,18 +3304,167 @@ public class AmusementPark extends JFrame {
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
                                 if (isP1Turn) {
-                                    if (p1.blackCoin >= level2Card[tmp].blackCoin && p1.blueCoin >= level2Card[tmp].blueCoin && p1.greenCoin >= level2Card[tmp].greenCoin && p1.redCoin >= level2Card[tmp].redCoin && p1.whiteCoin >= level2Card[tmp].whiteCoin) {
+                                    int black = p1.blackCoin;
+                                    int blackSw = 0;
+                                    int tmpGold1 = 0;
+                                    int blue = p1.blueCoin;
+                                    int blueSw = 0;
+                                    int tmpGold2 = 0;
+                                    int green = p1.greenCoin;
+                                    int greenSw = 0;
+                                    int tmpGold3 = 0;
+                                    int red = p1.redCoin;
+                                    int redSw = 0;
+                                    int tmpGold4 = 0;
+                                    int white = p1.whiteCoin;
+                                    int whiteSw = 0;
+                                    int tmpGold5 = 0;
+                                    if (p1.blackCoin >= level2Card[tmp].blackCoin) {
+                                        blackSw = 1;
+                                    }
+                                    else if (level2Card[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) >= level2Card[tmp].blackCoin) {
+                                        blackSw = 2;
+                                        black = p1.blackCoin + p1.SpecialBlackCoin;
+                                    }
+                                    else if (level2Card[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) - level2Card[tmp].blackCoin < 0) {
+                                        if (level2Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin) <= p1.goldCoin) {
+                                            black = p1.blackCoin + p1.SpecialBlackCoin + (level2Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin));
+                                            p1.goldCoin -= level2Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            tmpGold1 = level2Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            blackSw = 3;
+                                            goldCoinNum += level2Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.blueCoin >= level2Card[tmp].blueCoin) {
+                                        blueSw = 1;
+                                    }
+                                    else if (level2Card[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) >= level2Card[tmp].blueCoin) {
+                                        blueSw = 2;
+                                        blue = p1.blueCoin + p1.SpecialBlueCoin;
+                                    }
+                                    else if (level2Card[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) - level2Card[tmp].blueCoin < 0) {
+                                        if (level2Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin) <= p1.goldCoin) {
+                                            blue = p1.blueCoin + p1.SpecialBlueCoin + (level2Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin));
+                                            p1.goldCoin -= level2Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            tmpGold2 = level2Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            blueSw = 3;
+                                            goldCoinNum += level2Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.greenCoin >= level2Card[tmp].greenCoin) {
+                                        greenSw = 1;
+                                    }
+                                    else if (level2Card[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) >= level2Card[tmp].greenCoin) {
+                                        greenSw = 2;
+                                        green = p1.greenCoin + p1.SpecialGreenCoin;
+                                    }
+                                    else if (level2Card[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) - level2Card[tmp].greenCoin < 0) {
+                                        if (level2Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin) <= p1.goldCoin) {
+                                            green = p1.greenCoin + p1.SpecialGreenCoin + (level2Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin));
+                                            p1.goldCoin -= level2Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            tmpGold3 = level2Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            greenSw = 3;
+                                            goldCoinNum += level2Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.redCoin >= level2Card[tmp].redCoin) {
+                                        redSw = 1;
+                                    }
+                                    else if (level2Card[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) >= level2Card[tmp].redCoin) {
+                                        redSw = 2;
+                                        red = p1.redCoin + p1.SpecialRedCoin;
+                                    }
+                                    else if (level2Card[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) - level2Card[tmp].redCoin < 0) {
+                                        if (level2Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin) <= p1.goldCoin) {
+                                            red = p1.redCoin + p1.SpecialRedCoin + (level2Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin));
+                                            p1.goldCoin -= level2Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            tmpGold4 = level2Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            redSw = 3;
+                                            goldCoinNum += level2Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.whiteCoin >= level2Card[tmp].whiteCoin) {
+                                        whiteSw = 1;
+                                    }
+                                    else if (level2Card[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) >= level2Card[tmp].whiteCoin) {
+                                        whiteSw = 2;
+                                        white = p1.whiteCoin + p1.SpecialWhiteCoin;
+                                    }
+                                    else if (level2Card[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) - level2Card[tmp].whiteCoin < 0) {
+                                        if (level2Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin) <= p1.goldCoin) {
+                                            white = p1.whiteCoin + p1.SpecialWhiteCoin + (level2Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin));
+                                            p1.goldCoin -= level2Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            tmpGold5 = level2Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            whiteSw = 3;
+                                            goldCoinNum += level2Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+                                    if (black >= level2Card[tmp].blackCoin && blue >= level2Card[tmp].blueCoin && green >= level2Card[tmp].greenCoin && red >= level2Card[tmp].redCoin && white >= level2Card[tmp].whiteCoin) {
                                         System.out.println("YESSSS PLAYER 1");
                                         //add special coins
                                         isP1Turn = false;
                                         init.playerOneHand.add(level2Card[tmp]);
                                         System.out.println(init.level2.get(tempI).toString());
                                         init.level2.remove(tempI);
-                                        p1.blackCoin -= level2Card[tmp].blackCoin;
-                                        p1.blueCoin -= level2Card[tmp].blueCoin;
-                                        p1.greenCoin -= level2Card[tmp].greenCoin;
-                                        p1.redCoin -= level2Card[tmp].redCoin;
-                                        p1.whiteCoin -= level2Card[tmp].whiteCoin;
+                                        switch (blackSw) {
+                                            case 1 : p1.blackCoin -= level2Card[tmp].blackCoin;
+                                                break;
+                                            case 2 : p1.blackCoin -= level2Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                break;
+                                            case 3 : p1.blackCoin -= level2Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                break;
+                                        }
+                                        switch (blueSw) {
+                                            case 1 : p1.blueCoin -= level2Card[tmp].blueCoin;
+                                                break;
+                                            case 2 : p1.blueCoin -= level2Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                break;
+                                            case 3 : p1.blueCoin -= level2Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold2;
+                                                break;
+                                        }
+                                        switch (greenSw) {
+                                            case 1 : p1.greenCoin -= level2Card[tmp].greenCoin;
+                                                break;
+                                            case 2 : p1.greenCoin -= level2Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                break;
+                                            case 3 : p1.greenCoin -= level2Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold3;
+                                                break;
+                                        }
+                                        switch (redSw) {
+                                            case 1 : p1.redCoin -= level2Card[tmp].redCoin;
+                                                break;
+                                            case 2 : p1.redCoin -= level2Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                break;
+                                            case 3 : p1.redCoin -= level2Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold4;
+                                                break;
+                                        }
+                                        switch (whiteSw) {
+                                            case 1 : p1.whiteCoin -= level2Card[tmp].whiteCoin;
+                                                break;
+                                            case 2 : p1.whiteCoin -= level2Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                break;
+                                            case 3 : p1.whiteCoin -= level2Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold5;
+                                                break;
+                                        }
                                         p1.score += level2Card[tmp].point;
 
                                         updateScore1();
@@ -2903,17 +3506,166 @@ public class AmusementPark extends JFrame {
                                     }
                                 }
                                 else {
-                                    if (p2.blackCoin >= level2Card[tmp].blackCoin && p2.blueCoin >= level2Card[tmp].blueCoin && p2.greenCoin >= level2Card[tmp].greenCoin && p2.redCoin >= level2Card[tmp].redCoin && p2.whiteCoin >= level2Card[tmp].whiteCoin) {
+                                    int black = p2.blackCoin;
+                                    int blackSw = 0;
+                                    int tmpGold1 = 0;
+                                    int blue = p2.blueCoin;
+                                    int blueSw = 0;
+                                    int tmpGold2 = 0;
+                                    int green = p2.greenCoin;
+                                    int greenSw = 0;
+                                    int tmpGold3 = 0;
+                                    int red = p2.redCoin;
+                                    int redSw = 0;
+                                    int tmpGold4 = 0;
+                                    int white = p2.whiteCoin;
+                                    int whiteSw = 0;
+                                    int tmpGold5 = 0;
+                                    if (p2.blackCoin >= level2Card[tmp].blackCoin) {
+                                        blackSw = 1;
+                                    }
+                                    else if (level2Card[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) >= level2Card[tmp].blackCoin) {
+                                        blackSw = 2;
+                                        black = p2.blackCoin + p2.SpecialBlackCoin;
+                                    }
+                                    else if (level2Card[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) - level2Card[tmp].blackCoin < 0) {
+                                        if (level2Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin) <= p2.goldCoin) {
+                                            black = p2.blackCoin + p2.SpecialBlackCoin + (level2Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin));
+                                            p2.goldCoin -= level2Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            tmpGold1 = level2Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            blackSw = 3;
+                                            goldCoinNum += level2Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.blueCoin >= level2Card[tmp].blueCoin) {
+                                        blueSw = 1;
+                                    }
+                                    else if (level2Card[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) >= level2Card[tmp].blueCoin) {
+                                        blueSw = 2;
+                                        blue = p2.blueCoin + p2.SpecialBlueCoin;
+                                    }
+                                    else if (level2Card[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) - level2Card[tmp].blueCoin < 0) {
+                                        if (level2Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin) <= p2.goldCoin) {
+                                            blue = p2.blueCoin + p2.SpecialBlueCoin + (level2Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin));
+                                            p2.goldCoin -= level2Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            tmpGold2 = level2Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            blueSw = 3;
+                                            goldCoinNum += level2Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.greenCoin >= level2Card[tmp].greenCoin) {
+                                        greenSw = 1;
+                                    }
+                                    else if (level2Card[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) >= level2Card[tmp].greenCoin) {
+                                        greenSw = 2;
+                                        green = p2.greenCoin + p2.SpecialGreenCoin;
+                                    }
+                                    else if (level2Card[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) - level2Card[tmp].greenCoin < 0) {
+                                        if (level2Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin) <= p2.goldCoin) {
+                                            green = p2.greenCoin + p2.SpecialGreenCoin + (level2Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin));
+                                            p2.goldCoin -= level2Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            tmpGold3 = level2Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            greenSw = 3;
+                                            goldCoinNum += level2Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.redCoin >= level2Card[tmp].redCoin) {
+                                        redSw = 1;
+                                    }
+                                    else if (level2Card[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) >= level2Card[tmp].redCoin) {
+                                        redSw = 2;
+                                        red = p2.redCoin + p2.SpecialRedCoin;
+                                    }
+                                    else if (level2Card[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) - level2Card[tmp].redCoin < 0) {
+                                        if (level2Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin) <= p2.goldCoin) {
+                                            red = p2.redCoin + p2.SpecialRedCoin + (level2Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin));
+                                            p2.goldCoin -= level2Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            tmpGold4 = level2Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            redSw = 3;
+                                            goldCoinNum += level2Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.whiteCoin >= level2Card[tmp].whiteCoin) {
+                                        whiteSw = 1;
+                                    }
+                                    else if (level2Card[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) >= level2Card[tmp].whiteCoin) {
+                                        whiteSw = 2;
+                                        white = p2.whiteCoin + p2.SpecialWhiteCoin;
+                                    }
+                                    else if (level2Card[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) - level2Card[tmp].whiteCoin < 0) {
+                                        if (level2Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin) <= p2.goldCoin) {
+                                            white = p2.whiteCoin + p2.SpecialWhiteCoin + (level2Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin));
+                                            p2.goldCoin -= level2Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            tmpGold5 = level2Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            whiteSw = 3;
+                                            goldCoinNum += level2Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+                                    if (black >= level2Card[tmp].blackCoin && blue >= level2Card[tmp].blueCoin && green >= level2Card[tmp].greenCoin && red >= level2Card[tmp].redCoin && white >= level2Card[tmp].whiteCoin) {
                                         System.out.println("YESSSS PLAYER 2");
                                         isP1Turn = true;
                                         init.playerTwoHand.add(level2Card[tmp]);
                                         System.out.println(init.level2.get(tempI).toString());
                                         init.level2.remove(tempI);
-                                        p2.blackCoin -= level2Card[tmp].blackCoin;
-                                        p2.blueCoin -= level2Card[tmp].blueCoin;
-                                        p2.greenCoin -= level2Card[tmp].greenCoin;
-                                        p2.redCoin -= level2Card[tmp].redCoin;
-                                        p2.whiteCoin -= level2Card[tmp].whiteCoin;
+                                        switch (blackSw) {
+                                            case 1 : p2.blackCoin -= level2Card[tmp].blackCoin;
+                                                break;
+                                            case 2 : p2.blackCoin -= level2Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                break;
+                                            case 3 : p2.blackCoin -= level2Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                break;
+                                        }
+                                        switch (blueSw) {
+                                            case 1 : p2.blueCoin -= level2Card[tmp].blueCoin;
+                                                break;
+                                            case 2 : p2.blueCoin -= level2Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                break;
+                                            case 3 : p2.blueCoin -= level2Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold2;
+                                                break;
+                                        }
+                                        switch (greenSw) {
+                                            case 1 : p2.greenCoin -= level2Card[tmp].greenCoin;
+                                                break;
+                                            case 2 : p2.greenCoin -= level2Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                break;
+                                            case 3 : p2.greenCoin -= level2Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold3;
+                                                break;
+                                        }
+                                        switch (redSw) {
+                                            case 1 : p2.redCoin -= level2Card[tmp].redCoin;
+                                                break;
+                                            case 2 : p2.redCoin -= level2Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                break;
+                                            case 3 : p2.redCoin -= level2Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold4;
+                                                break;
+                                        }
+                                        switch (whiteSw) {
+                                            case 1 : p2.whiteCoin -= level2Card[tmp].whiteCoin;
+                                                break;
+                                            case 2 : p2.whiteCoin -= level2Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                break;
+                                            case 3 : p2.whiteCoin -= level2Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold5;
+                                                break;
+                                        }
                                         p2.score += level2Card[tmp].point;
 
                                         updateScore2();
@@ -3078,18 +3830,167 @@ public class AmusementPark extends JFrame {
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
                                 if (isP1Turn) {
-                                    if (p1.blackCoin >= level3Card[tmp].blackCoin && p1.blueCoin >= level3Card[tmp].blueCoin && p1.greenCoin >= level3Card[tmp].greenCoin && p1.redCoin >= level3Card[tmp].redCoin && p1.whiteCoin >= level3Card[tmp].whiteCoin) {
+                                    int black = p1.blackCoin;
+                                    int blackSw = 0;
+                                    int tmpGold1 = 0;
+                                    int blue = p1.blueCoin;
+                                    int blueSw = 0;
+                                    int tmpGold2 = 0;
+                                    int green = p1.greenCoin;
+                                    int greenSw = 0;
+                                    int tmpGold3 = 0;
+                                    int red = p1.redCoin;
+                                    int redSw = 0;
+                                    int tmpGold4 = 0;
+                                    int white = p1.whiteCoin;
+                                    int whiteSw = 0;
+                                    int tmpGold5 = 0;
+                                    if (p1.blackCoin >= level3Card[tmp].blackCoin) {
+                                        blackSw = 1;
+                                    }
+                                    else if (level3Card[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) >= level3Card[tmp].blackCoin) {
+                                        blackSw = 2;
+                                        black = p1.blackCoin + p1.SpecialBlackCoin;
+                                    }
+                                    else if (level3Card[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) - level3Card[tmp].blackCoin < 0) {
+                                        if (level3Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin) <= p1.goldCoin) {
+                                            black = p1.blackCoin + p1.SpecialBlackCoin + (level3Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin));
+                                            p1.goldCoin -= level3Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            tmpGold1 = level3Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            blackSw = 3;
+                                            goldCoinNum += level3Card[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.blueCoin >= level3Card[tmp].blueCoin) {
+                                        blueSw = 1;
+                                    }
+                                    else if (level3Card[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) >= level3Card[tmp].blueCoin) {
+                                        blueSw = 2;
+                                        blue = p1.blueCoin + p1.SpecialBlueCoin;
+                                    }
+                                    else if (level3Card[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) - level3Card[tmp].blueCoin < 0) {
+                                        if (level3Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin) <= p1.goldCoin) {
+                                            blue = p1.blueCoin + p1.SpecialBlueCoin + (level3Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin));
+                                            p1.goldCoin -= level3Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            tmpGold2 = level3Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            blueSw = 3;
+                                            goldCoinNum += level3Card[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.greenCoin >= level3Card[tmp].greenCoin) {
+                                        greenSw = 1;
+                                    }
+                                    else if (level3Card[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) >= level3Card[tmp].greenCoin) {
+                                        greenSw = 2;
+                                        green = p1.greenCoin + p1.SpecialGreenCoin;
+                                    }
+                                    else if (level3Card[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) - level3Card[tmp].greenCoin < 0) {
+                                        if (level3Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin) <= p1.goldCoin) {
+                                            green = p1.greenCoin + p1.SpecialGreenCoin + (level3Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin));
+                                            p1.goldCoin -= level3Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            tmpGold3 = level3Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            greenSw = 3;
+                                            goldCoinNum += level3Card[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.redCoin >= level3Card[tmp].redCoin) {
+                                        redSw = 1;
+                                    }
+                                    else if (level3Card[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) >= level3Card[tmp].redCoin) {
+                                        redSw = 2;
+                                        red = p1.redCoin + p1.SpecialRedCoin;
+                                    }
+                                    else if (level3Card[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) - level3Card[tmp].redCoin < 0) {
+                                        if (level3Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin) <= p1.goldCoin) {
+                                            red = p1.redCoin + p1.SpecialRedCoin + (level3Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin));
+                                            p1.goldCoin -= level3Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            tmpGold4 = level3Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            redSw = 3;
+                                            goldCoinNum += level3Card[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.whiteCoin >= level3Card[tmp].whiteCoin) {
+                                        whiteSw = 1;
+                                    }
+                                    else if (level3Card[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) >= level3Card[tmp].whiteCoin) {
+                                        whiteSw = 2;
+                                        white = p1.whiteCoin + p1.SpecialWhiteCoin;
+                                    }
+                                    else if (level3Card[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) - level3Card[tmp].whiteCoin < 0) {
+                                        if (level3Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin) <= p1.goldCoin) {
+                                            white = p1.whiteCoin + p1.SpecialWhiteCoin + (level3Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin));
+                                            p1.goldCoin -= level3Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            tmpGold5 = level3Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            whiteSw = 3;
+                                            goldCoinNum += level3Card[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+                                    if (black >= level3Card[tmp].blackCoin && blue >= level3Card[tmp].blueCoin && green >= level3Card[tmp].greenCoin && red >= level3Card[tmp].redCoin && white >= level3Card[tmp].whiteCoin) {
                                         System.out.println("YESSSS PLAYER 1");
                                         //add special coins
                                         isP1Turn = false;
                                         init.playerOneHand.add(level3Card[tmp]);
                                         System.out.println(init.level3.get(tempI).toString());
                                         init.level3.remove(tempI);
-                                        p1.blackCoin -= level3Card[tmp].blackCoin;
-                                        p1.blueCoin -= level3Card[tmp].blueCoin;
-                                        p1.greenCoin -= level3Card[tmp].greenCoin;
-                                        p1.redCoin -= level3Card[tmp].redCoin;
-                                        p1.whiteCoin -= level3Card[tmp].whiteCoin;
+                                        switch (blackSw) {
+                                            case 1 : p1.blackCoin -= level3Card[tmp].blackCoin;
+                                                break;
+                                            case 2 : p1.blackCoin -= level3Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                break;
+                                            case 3 : p1.blackCoin -= level3Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                break;
+                                        }
+                                        switch (blueSw) {
+                                            case 1 : p1.blueCoin -= level3Card[tmp].blueCoin;
+                                                break;
+                                            case 2 : p1.blueCoin -= level3Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                break;
+                                            case 3 : p1.blueCoin -= level3Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold2;
+                                                break;
+                                        }
+                                        switch (greenSw) {
+                                            case 1 : p1.greenCoin -= level3Card[tmp].greenCoin;
+                                                break;
+                                            case 2 : p1.greenCoin -= level3Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                break;
+                                            case 3 : p1.greenCoin -= level3Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold3;
+                                                break;
+                                        }
+                                        switch (redSw) {
+                                            case 1 : p1.redCoin -= level3Card[tmp].redCoin;
+                                                break;
+                                            case 2 : p1.redCoin -= level3Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                break;
+                                            case 3 : p1.redCoin -= level3Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold4;
+                                                break;
+                                        }
+                                        switch (whiteSw) {
+                                            case 1 : p1.whiteCoin -= level3Card[tmp].whiteCoin;
+                                                break;
+                                            case 2 : p1.whiteCoin -= level3Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                break;
+                                            case 3 : p1.whiteCoin -= level3Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold5;
+                                                break;
+                                        }
                                         p1.score += level3Card[tmp].point;
 
                                         updateScore1();
@@ -3131,17 +4032,166 @@ public class AmusementPark extends JFrame {
                                     }
                                 }
                                 else {
-                                    if (p2.blackCoin >= level3Card[tmp].blackCoin && p2.blueCoin >= level3Card[tmp].blueCoin && p2.greenCoin >= level3Card[tmp].greenCoin && p2.redCoin >= level3Card[tmp].redCoin && p2.whiteCoin >= level3Card[tmp].whiteCoin) {
+                                    int black = p2.blackCoin;
+                                    int blackSw = 0;
+                                    int tmpGold1 = 0;
+                                    int blue = p2.blueCoin;
+                                    int blueSw = 0;
+                                    int tmpGold2 = 0;
+                                    int green = p2.greenCoin;
+                                    int greenSw = 0;
+                                    int tmpGold3 = 0;
+                                    int red = p2.redCoin;
+                                    int redSw = 0;
+                                    int tmpGold4 = 0;
+                                    int white = p2.whiteCoin;
+                                    int whiteSw = 0;
+                                    int tmpGold5 = 0;
+                                    if (p2.blackCoin >= level3Card[tmp].blackCoin) {
+                                        blackSw = 1;
+                                    }
+                                    else if (level3Card[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) >= level3Card[tmp].blackCoin) {
+                                        blackSw = 2;
+                                        black = p2.blackCoin + p2.SpecialBlackCoin;
+                                    }
+                                    else if (level3Card[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) - level3Card[tmp].blackCoin < 0) {
+                                        if (level3Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin) <= p2.goldCoin) {
+                                            black = p2.blackCoin + p2.SpecialBlackCoin + (level3Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin));
+                                            p2.goldCoin -= level3Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            tmpGold1 = level3Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            blackSw = 3;
+                                            goldCoinNum += level3Card[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.blueCoin >= level3Card[tmp].blueCoin) {
+                                        blueSw = 1;
+                                    }
+                                    else if (level3Card[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) >= level3Card[tmp].blueCoin) {
+                                        blueSw = 2;
+                                        blue = p2.blueCoin + p2.SpecialBlueCoin;
+                                    }
+                                    else if (level3Card[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) - level3Card[tmp].blueCoin < 0) {
+                                        if (level3Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin) <= p2.goldCoin) {
+                                            blue = p2.blueCoin + p2.SpecialBlueCoin + (level3Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin));
+                                            p2.goldCoin -= level3Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            tmpGold2 = level3Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            blueSw = 3;
+                                            goldCoinNum += level3Card[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.greenCoin >= level3Card[tmp].greenCoin) {
+                                        greenSw = 1;
+                                    }
+                                    else if (level3Card[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) >= level3Card[tmp].greenCoin) {
+                                        greenSw = 2;
+                                        green = p2.greenCoin + p2.SpecialGreenCoin;
+                                    }
+                                    else if (level3Card[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) - level3Card[tmp].greenCoin < 0) {
+                                        if (level3Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin) <= p2.goldCoin) {
+                                            green = p2.greenCoin + p2.SpecialGreenCoin + (level3Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin));
+                                            p2.goldCoin -= level3Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            tmpGold3 = level3Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            greenSw = 3;
+                                            goldCoinNum += level3Card[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.redCoin >= level3Card[tmp].redCoin) {
+                                        redSw = 1;
+                                    }
+                                    else if (level3Card[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) >= level3Card[tmp].redCoin) {
+                                        redSw = 2;
+                                        red = p2.redCoin + p2.SpecialRedCoin;
+                                    }
+                                    else if (level3Card[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) - level3Card[tmp].redCoin < 0) {
+                                        if (level3Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin) <= p2.goldCoin) {
+                                            red = p2.redCoin + p2.SpecialRedCoin + (level3Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin));
+                                            p2.goldCoin -= level3Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            tmpGold4 = level3Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            redSw = 3;
+                                            goldCoinNum += level3Card[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p2.whiteCoin >= level3Card[tmp].whiteCoin) {
+                                        whiteSw = 1;
+                                    }
+                                    else if (level3Card[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) >= level3Card[tmp].whiteCoin) {
+                                        whiteSw = 2;
+                                        white = p2.whiteCoin + p2.SpecialWhiteCoin;
+                                    }
+                                    else if (level3Card[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) - level3Card[tmp].whiteCoin < 0) {
+                                        if (level3Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin) <= p2.goldCoin) {
+                                            white = p2.whiteCoin + p2.SpecialWhiteCoin + (level3Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin));
+                                            p2.goldCoin -= level3Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            tmpGold5 = level3Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            whiteSw = 3;
+                                            goldCoinNum += level3Card[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+                                    if (black >= level3Card[tmp].blackCoin && blue >= level3Card[tmp].blueCoin && green >= level3Card[tmp].greenCoin && red >= level3Card[tmp].redCoin && white >= level3Card[tmp].whiteCoin){
 //                                        System.out.println("YESSSS PLAYER 2");
                                         isP1Turn = true;
                                         init.playerTwoHand.add(level3Card[tmp]);
 //                                        System.out.println(init.level3.get(tempI).toString());
                                         init.level3.remove(tempI);
-                                        p2.blackCoin -= level3Card[tmp].blackCoin;
-                                        p2.blueCoin -= level3Card[tmp].blueCoin;
-                                        p2.greenCoin -= level3Card[tmp].greenCoin;
-                                        p2.redCoin -= level3Card[tmp].redCoin;
-                                        p2.whiteCoin -= level3Card[tmp].whiteCoin;
+                                        switch (blackSw) {
+                                            case 1 : p2.blackCoin -= level3Card[tmp].blackCoin;
+                                                break;
+                                            case 2 : p2.blackCoin -= level3Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                break;
+                                            case 3 : p2.blackCoin -= level3Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                break;
+                                        }
+                                        switch (blueSw) {
+                                            case 1 : p2.blueCoin -= level3Card[tmp].blueCoin;
+                                                break;
+                                            case 2 : p2.blueCoin -= level3Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                break;
+                                            case 3 : p2.blueCoin -= level3Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold2;
+                                                break;
+                                        }
+                                        switch (greenSw) {
+                                            case 1 : p2.greenCoin -= level3Card[tmp].greenCoin;
+                                                break;
+                                            case 2 : p2.greenCoin -= level3Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                break;
+                                            case 3 : p2.greenCoin -= level3Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold3;
+                                                break;
+                                        }
+                                        switch (redSw) {
+                                            case 1 : p2.redCoin -= level3Card[tmp].redCoin;
+                                                break;
+                                            case 2 : p2.redCoin -= level3Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                break;
+                                            case 3 : p2.redCoin -= level3Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold4;
+                                                break;
+                                        }
+                                        switch (whiteSw) {
+                                            case 1 : p2.whiteCoin -= level3Card[tmp].whiteCoin;
+                                                break;
+                                            case 2 : p2.whiteCoin -= level3Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                break;
+                                            case 3 : p2.whiteCoin -= level3Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold5;
+                                                break;
+                                        }
                                         p2.score += level3Card[tmp].point;
 
                                         updateScore2();

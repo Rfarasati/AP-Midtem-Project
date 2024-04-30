@@ -50,6 +50,8 @@ public class AmusementPark extends JFrame {
     JLabel p2SpecialWhite = new JLabel();
     JLabel p1Gold = new JLabel();
     JLabel p2Gold = new JLabel();
+    JLabel endGame1 = new JLabel();
+    JLabel endGame2 = new JLabel();
     JPanel buttonPanel = new JPanel();
     JButton pick3Button;
     JButton pick2Button;
@@ -736,7 +738,17 @@ public class AmusementPark extends JFrame {
 
                                             if (p1.getTotalCoin() > 10) {
                                                 p1.blackCoin--;
-                                                whiteCoinNum++;
+                                                blackCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.blueCoin--;
+                                                    blueCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.greenCoin--;
+                                                        greenCoinNum++;
+                                                    }
+                                                }
                                             }
 
 
@@ -785,6 +797,29 @@ public class AmusementPark extends JFrame {
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
 
+
+                                            redCoinNum--;
+                                            blackCoinNum--;
+                                            blueCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.blueCoin--;
+                                                    blueCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.greenCoin--;
+                                                        redCoinNum++;
+                                                    }
+                                                }
+                                            }
+
+
+
                                             updateNormalBlack1();
                                             updateNormalBlue1();
                                             updateNormalRed1();
@@ -793,9 +828,6 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
 
-                                            blackCoinNum--;
-                                            blueCoinNum--;
-                                            redCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -831,6 +863,26 @@ public class AmusementPark extends JFrame {
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
 
+                                            whiteCoinNum--;
+                                            blackCoinNum--;
+                                            blueCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.blueCoin--;
+                                                    blueCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.whiteCoin--;
+                                                        whiteCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack1();
                                             updateNormalBlue1();
                                             updateNormalWhite1();
@@ -839,9 +891,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineWhite);
 
-                                            blackCoinNum--;
-                                            blueCoinNum--;
-                                            whiteCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
@@ -880,6 +930,26 @@ public class AmusementPark extends JFrame {
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
 
+                                            greenCoinNum--;
+                                            blackCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.greenCoin--;
+                                                    greenCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.redCoin--;
+                                                        redCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack1();
                                             updateNormalGreen1();
                                             updateNormalRed1();
@@ -888,9 +958,6 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
 
-                                            blackCoinNum--;
-                                            greenCoinNum--;
-                                            redCoinNum--;
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -927,6 +994,26 @@ public class AmusementPark extends JFrame {
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
 
+                                            greenCoinNum--;
+                                            blackCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.greenCoin--;
+                                                    greenCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.whiteCoin--;
+                                                        whiteCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack1();
                                             updateNormalGreen1();
                                             updateNormalWhite1();
@@ -935,9 +1022,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineGreen);
 
-                                            blackCoinNum--;
-                                            greenCoinNum--;
-                                            whiteCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum ));
@@ -976,6 +1061,26 @@ public class AmusementPark extends JFrame {
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
 
+                                            whiteCoinNum--;
+                                            blackCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.redCoin--;
+                                                    redCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.whiteCoin--;
+                                                        whiteCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack1();
                                             updateNormalRed1();
                                             updateNormalWhite1();
@@ -984,9 +1089,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineWhite);
 
-                                            blackCoinNum--;
-                                            redCoinNum--;
-                                            whiteCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
@@ -1027,6 +1130,27 @@ public class AmusementPark extends JFrame {
                                             init.player1Red.add(redC);
                                             p1.redCoin++;
 
+
+                                            greenCoinNum--;
+                                            blueCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blueCoin--;
+                                                blueCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.greenCoin--;
+                                                    greenCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.redCoin--;
+                                                        redCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlue1();
                                             updateNormalGreen1();
                                             updateNormalRed1();
@@ -1034,9 +1158,6 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
-                                            greenCoinNum--;
-                                            blueCoinNum--;
-                                            redCoinNum--;
 
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
@@ -1074,6 +1195,27 @@ public class AmusementPark extends JFrame {
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
 
+
+                                            greenCoinNum--;
+                                            blueCoinNum--;
+                                            whiteCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blueCoin--;
+                                                blueCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.greenCoin--;
+                                                    greenCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.whiteCoin--;
+                                                        whiteCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlue1();
                                             updateNormalGreen1();
                                             updateNormalWhite1();
@@ -1082,9 +1224,6 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
 
-                                            blueCoinNum--;
-                                            greenCoinNum--;
-                                            whiteCoinNum--;
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
@@ -1122,6 +1261,26 @@ public class AmusementPark extends JFrame {
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
 
+                                            whiteCoinNum--;
+                                            blueCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blueCoin--;
+                                                blueCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.whiteCoin--;
+                                                    whiteCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.redCoin--;
+                                                        redCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlue1();
                                             updateNormalWhite1();
                                             updateNormalRed1();
@@ -1130,9 +1289,6 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
 
-                                            blueCoinNum--;
-                                            redCoinNum--;
-                                            whiteCoinNum--;
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -1173,6 +1329,26 @@ public class AmusementPark extends JFrame {
                                             init.player1White.add(whiteC);
                                             p1.whiteCoin++;
 
+                                            greenCoinNum--;
+                                            whiteCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.greenCoin--;
+                                                greenCoinNum++;
+
+                                                if (p1.getTotalCoin() > 10) {
+                                                    p1.redCoin--;
+                                                    redCoinNum++;
+
+                                                    if (p1.getTotalCoin() > 10) {
+                                                        p1.whiteCoin--;
+                                                        whiteCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalWhite1();
                                             updateNormalGreen1();
                                             updateNormalRed1();
@@ -1181,9 +1357,6 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineGreen);
 
-                                            whiteCoinNum--;
-                                            greenCoinNum--;
-                                            redCoinNum--;
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -1223,14 +1396,26 @@ public class AmusementPark extends JFrame {
                                         init.player1Blue.add(blueC);
                                         p1.blueCoin++;
 
+                                        blueCoinNum--;
+                                        blackCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.blackCoin--;
+                                            blackCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blueCoin--;
+                                                blueCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlack1();
                                         updateNormalBlue1();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineBlue);
 
-                                        blackCoinNum--;
-                                        blueCoinNum--;
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
 
@@ -1259,14 +1444,27 @@ public class AmusementPark extends JFrame {
                                         init.player1Green.add(greenC);
                                         p1.greenCoin++;
 
+
+                                        greenCoinNum--;
+                                        blackCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.blackCoin--;
+                                            blackCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.greenCoin--;
+                                                greenCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlack1();
                                         updateNormalGreen1();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineGreen);
 
-                                        blackCoinNum--;
-                                        greenCoinNum--;
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
 
@@ -1295,14 +1493,27 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        redCoinNum--;
+                                        blackCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.blackCoin--;
+                                            blackCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.redCoin--;
+                                                redCoinNum++;
+                                            }
+                                        }
+
+
                                         updateNormalBlack1();
                                         updateNormalRed1();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineRed);
 
-                                        blackCoinNum--;
-                                        redCoinNum--;
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -1331,14 +1542,26 @@ public class AmusementPark extends JFrame {
                                         init.player1White.add(whiteC);
                                         p1.whiteCoin++;
 
+                                        whiteCoinNum--;
+                                        blackCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.blackCoin--;
+                                            blackCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.whiteCoin--;
+                                                whiteCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlack1();
                                         updateNormalWhite1();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineWhite);
 
-                                        blackCoinNum--;
-                                        whiteCoinNum--;
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
 
@@ -1369,14 +1592,26 @@ public class AmusementPark extends JFrame {
                                         init.player1Green.add(greenC);
                                         p1.greenCoin++;
 
+                                        blueCoinNum--;
+                                        greenCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.greenCoin--;
+                                            greenCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blueCoin--;
+                                                blueCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlue1();
                                         updateSpecialGreen1();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineGreen);
 
-                                        blueCoinNum--;
-                                        greenCoinNum--;
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
 
@@ -1405,14 +1640,27 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        blueCoinNum--;
+                                        redCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.redCoin--;
+                                            redCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blueCoin--;
+                                                blueCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlue1();
                                         updateNormalRed1();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineRed);
 
-                                        blueCoinNum--;
-                                        redCoinNum--;
+
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -1441,14 +1689,26 @@ public class AmusementPark extends JFrame {
                                         init.player1White.add(whiteC);
                                         p1.whiteCoin++;
 
+                                        blueCoinNum--;
+                                        whiteCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.whiteCoin--;
+                                            whiteCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.blueCoin--;
+                                                blueCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlue1();
                                         updateSpecialWhite1();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineWhite);
 
-                                        blueCoinNum--;
-                                        whiteCoinNum--;
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
 
@@ -1479,14 +1739,26 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        greenCoinNum--;
+                                        redCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.greenCoin--;
+                                            greenCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.redCoin--;
+                                                redCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalGreen1();
                                         updateNormalRed1();
 
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineRed);
 
-                                        greenCoinNum--;
-                                        redCoinNum--;
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -1515,14 +1787,26 @@ public class AmusementPark extends JFrame {
                                         init.player1White.add(whiteC);
                                         p1.whiteCoin++;
 
+                                        greenCoinNum--;
+                                        whiteCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.greenCoin--;
+                                            greenCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.whiteCoin--;
+                                                whiteCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalGreen1();
                                         updateNormalWhite1();
 
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineWhite);
 
-                                        greenCoinNum--;
-                                        whiteCoinNum--;
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
 
@@ -1553,14 +1837,27 @@ public class AmusementPark extends JFrame {
                                         init.player1Red.add(redC);
                                         p1.redCoin++;
 
+                                        whiteCoinNum--;
+                                        redCoinNum--;
+
+
+                                        if (p1.getTotalCoin() > 10) {
+                                            p1.whiteCoin--;
+                                            whiteCoinNum++;
+
+                                            if (p1.getTotalCoin() > 10) {
+                                                p1.redCoin--;
+                                                redCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalRed1();
                                         updateNormalWhite1();
 
                                         System.out.println(init.slotMachineWhite);
                                         System.out.println(init.slotMachineRed);
 
-                                        whiteCoinNum--;
-                                        redCoinNum--;
+
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -1589,11 +1886,18 @@ public class AmusementPark extends JFrame {
                                     init.player1Black.add(blackC);
                                     p1.blackCoin++;
 
+                                    blackCoinNum--;
+
+
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.blackCoin--;
+                                        blackCoinNum++;
+                                    }
+
                                     updateNormalBlack1();
 
                                     System.out.println(init.slotMachineBlack);
 
-                                    blackCoinNum--;
                                     
                                     blackCoinLabel.setText(String.valueOf(blackCoinNum));
 
@@ -1616,11 +1920,18 @@ public class AmusementPark extends JFrame {
                                     init.player1Blue.add(blueC);
                                     p1.blueCoin++;
 
+                                    blueCoinNum--;
+
+
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.blueCoin--;
+                                        blueCoinNum++;
+                                    }
+
                                     updateNormalBlue1();
 
                                     System.out.println(init.slotMachineBlue);
 
-                                    blueCoinNum--;
 
                                     blueCoinLabel.setText(String.valueOf(blueCoinNum));
 
@@ -1643,11 +1954,18 @@ public class AmusementPark extends JFrame {
                                     init.player1Green.add(greenC);
                                     p1.greenCoin++;
 
+                                    greenCoinNum--;
+
+
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.greenCoin--;
+                                        greenCoinNum++;
+                                    }
+
                                     updateNormalGreen1();
 
                                     System.out.println(init.slotMachineGreen);
 
-                                    greenCoinNum--;
 
                                     greenCoinLabel.setText(String.valueOf(greenCoinNum));
 
@@ -1670,11 +1988,18 @@ public class AmusementPark extends JFrame {
                                     init.player1Red.add(redC);
                                     p1.redCoin++;
 
+                                    redCoinNum--;
+
+
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.redCoin--;
+                                        redCoinNum++;
+                                    }
+
                                     updateNormalRed1();
 
                                     System.out.println(init.slotMachineRed);
 
-                                    redCoinNum--;
 
                                     redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -1697,11 +2022,18 @@ public class AmusementPark extends JFrame {
                                     init.player1White.add(whiteC);
                                     p1.whiteCoin++;
 
+                                    whiteCoinNum--;
+
+
+                                    if (p1.getTotalCoin() > 10) {
+                                        p1.whiteCoin--;
+                                        whiteCoinNum++;
+                                    }
+
                                     updateNormalWhite1();
 
                                     System.out.println(init.slotMachineWhite);
 
-                                    whiteCoinNum--;
 
                                     whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
 
@@ -1739,6 +2071,27 @@ public class AmusementPark extends JFrame {
                                             init.player2Green.add(greenC);
                                             p2.greenCoin++;
 
+
+                                            greenCoinNum--;
+                                            blackCoinNum--;
+                                            blueCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.blueCoin--;
+                                                    blueCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.greenCoin--;
+                                                        greenCoinNum++;
+                                                    }
+                                                }
+                                            }
+                                            
                                             updateNormalBlack2();
                                             updateNormalBlue2();
                                             updateNormalGreen2();
@@ -1746,10 +2099,8 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlack);
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
-
-                                            greenCoinNum--;
-                                            blackCoinNum--;
-                                            blueCoinNum--;
+                                            
+                                            
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
@@ -1786,6 +2137,26 @@ public class AmusementPark extends JFrame {
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
 
+                                            redCoinNum--;
+                                            blackCoinNum--;
+                                            blueCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.blueCoin--;
+                                                    blueCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.redCoin--;
+                                                        redCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack2();
                                             updateNormalBlue2();
                                             updateNormalRed2();
@@ -1794,9 +2165,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
 
-                                            blackCoinNum--;
-                                            blueCoinNum--;
-                                            redCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -1833,6 +2202,27 @@ public class AmusementPark extends JFrame {
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
 
+
+                                            whiteCoinNum--;
+                                            blackCoinNum--;
+                                            blueCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.blueCoin--;
+                                                    blueCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.whiteCoin--;
+                                                        whiteCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack2();
                                             updateNormalBlue2();
                                             updateNormalWhite2();
@@ -1841,9 +2231,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineWhite);
 
-                                            blackCoinNum--;
-                                            blueCoinNum--;
-                                            whiteCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
@@ -1882,6 +2270,27 @@ public class AmusementPark extends JFrame {
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
 
+
+                                            greenCoinNum--;
+                                            blackCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.redCoin--;
+                                                    redCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.greenCoin--;
+                                                        greenCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack2();
                                             updateNormalGreen2();
                                             updateNormalRed2();
@@ -1890,9 +2299,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
 
-                                            blackCoinNum--;
-                                            greenCoinNum--;
-                                            redCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -1929,6 +2336,27 @@ public class AmusementPark extends JFrame {
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
 
+
+                                            greenCoinNum--;
+                                            blackCoinNum--;
+                                            whiteCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.whiteCoin--;
+                                                    whiteCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.greenCoin--;
+                                                        greenCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack2();
                                             updateNormalGreen2();
                                             updateNormalWhite2();
@@ -1937,9 +2365,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineWhite);
                                             System.out.println(init.slotMachineGreen);
 
-                                            blackCoinNum--;
-                                            greenCoinNum--;
-                                            whiteCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum ));
@@ -1978,6 +2404,26 @@ public class AmusementPark extends JFrame {
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
 
+                                            whiteCoinNum--;
+                                            blackCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.redCoin--;
+                                                    redCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.whiteCoin--;
+                                                        whiteCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlack2();
                                             updateNormalRed2();
                                             updateNormalWhite2();
@@ -1986,9 +2432,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineWhite);
 
-                                            blackCoinNum--;
-                                            redCoinNum--;
-                                            whiteCoinNum--;
+
                                             blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
@@ -2029,6 +2473,26 @@ public class AmusementPark extends JFrame {
                                             init.player2Red.add(redC);
                                             p2.redCoin++;
 
+                                            greenCoinNum--;
+                                            blueCoinNum--;
+                                            redCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blueCoin--;
+                                                blueCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.redCoin--;
+                                                    redCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.greenCoin--;
+                                                        greenCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlue2();
                                             updateNormalGreen2();
                                             updateNormalRed2();
@@ -2037,9 +2501,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
 
-                                            greenCoinNum--;
-                                            blueCoinNum--;
-                                            redCoinNum--;
+
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -2076,6 +2538,26 @@ public class AmusementPark extends JFrame {
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
 
+                                            greenCoinNum--;
+                                            blueCoinNum--;
+                                            whiteCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blueCoin--;
+                                                blueCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.whiteCoin--;
+                                                    whiteCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.greenCoin--;
+                                                        greenCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlue2();
                                             updateNormalGreen2();
                                             updateNormalWhite2();
@@ -2084,9 +2566,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineGreen);
 
-                                            blueCoinNum--;
-                                            greenCoinNum--;
-                                            whiteCoinNum--;
+
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
@@ -2125,6 +2605,26 @@ public class AmusementPark extends JFrame {
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
 
+                                            redCoinNum--;
+                                            blueCoinNum--;
+                                            whiteCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blueCoin--;
+                                                blueCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.whiteCoin--;
+                                                    whiteCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.redCoin--;
+                                                        redCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalBlue2();
                                             updateNormalRed2();
                                             updateNormalWhite2();
@@ -2133,9 +2633,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineBlue);
                                             System.out.println(init.slotMachineRed);
 
-                                            blueCoinNum--;
-                                            redCoinNum--;
-                                            whiteCoinNum--;
+
                                             blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -2176,6 +2674,27 @@ public class AmusementPark extends JFrame {
                                             init.player2White.add(whiteC);
                                             p2.whiteCoin++;
 
+
+                                            redCoinNum--;
+                                            greenCoinNum--;
+                                            whiteCoinNum--;
+
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.greenCoin--;
+                                                greenCoinNum++;
+
+                                                if (p2.getTotalCoin() > 10) {
+                                                    p2.whiteCoin--;
+                                                    whiteCoinNum++;
+
+                                                    if (p2.getTotalCoin() > 10) {
+                                                        p2.redCoin--;
+                                                        redCoinNum++;
+                                                    }
+                                                }
+                                            }
+
                                             updateNormalGreen2();
                                             updateNormalRed2();
                                             updateNormalWhite2();
@@ -2184,9 +2703,7 @@ public class AmusementPark extends JFrame {
                                             System.out.println(init.slotMachineRed);
                                             System.out.println(init.slotMachineGreen);
 
-                                            whiteCoinNum--;
-                                            greenCoinNum--;
-                                            redCoinNum--;
+
                                             whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                             greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                             redCoinLabel.setText(String.valueOf(redCoinNum));
@@ -2226,14 +2743,27 @@ public class AmusementPark extends JFrame {
                                         init.player2Blue.add(blueC);
                                         p2.blueCoin++;
 
+                                        blackCoinNum--;
+                                        blueCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.blueCoin--;
+                                            blueCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlack2();
                                         updateNormalBlue2();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineBlue);
 
-                                        blackCoinNum--;
-                                        blueCoinNum--;
+
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
 
@@ -2262,14 +2792,27 @@ public class AmusementPark extends JFrame {
                                         init.player2Green.add(greenC);
                                         p2.greenCoin++;
 
+                                        blackCoinNum--;
+                                        greenCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.greenCoin--;
+                                            greenCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlack2();
                                         updateNormalGreen2();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineGreen);
 
-                                        blackCoinNum--;
-                                        greenCoinNum--;
+
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
 
@@ -2298,14 +2841,26 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        blackCoinNum--;
+                                        redCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.redCoin--;
+                                            redCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlack2();
                                         updateNormalRed2();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineRed);
 
-                                        blackCoinNum--;
-                                        redCoinNum--;
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -2334,14 +2889,27 @@ public class AmusementPark extends JFrame {
                                         init.player2White.add(whiteC);
                                         p2.whiteCoin++;
 
+                                        blackCoinNum--;
+                                        whiteCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.whiteCoin--;
+                                            whiteCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.blackCoin--;
+                                                blackCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlack2();
                                         updateNormalWhite2();
 
                                         System.out.println(init.slotMachineBlack);
                                         System.out.println(init.slotMachineWhite);
 
-                                        blackCoinNum--;
-                                        whiteCoinNum--;
+
                                         blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
 
@@ -2372,14 +2940,26 @@ public class AmusementPark extends JFrame {
                                         init.player2Green.add(greenC);
                                         p2.greenCoin++;
 
+                                        blueCoinNum--;
+                                        greenCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.blueCoin--;
+                                            blueCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.greenCoin--;
+                                                greenCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlue2();
                                         updateNormalGreen2();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineGreen);
 
-                                        blueCoinNum--;
-                                        greenCoinNum--;
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
 
@@ -2408,14 +2988,27 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        blueCoinNum--;
+                                        redCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.blueCoin--;
+                                            blueCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.redCoin--;
+                                                redCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlue2();
                                         updateNormalRed2();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineRed);
 
-                                        blueCoinNum--;
-                                        redCoinNum--;
+
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -2444,14 +3037,27 @@ public class AmusementPark extends JFrame {
                                         init.player2White.add(whiteC);
                                         p2.whiteCoin++;
 
+                                        blueCoinNum--;
+                                        whiteCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.blueCoin--;
+                                            blueCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.whiteCoin--;
+                                                whiteCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalBlue2();
                                         updateNormalWhite2();
 
                                         System.out.println(init.slotMachineBlue);
                                         System.out.println(init.slotMachineWhite);
 
-                                        blueCoinNum--;
-                                        whiteCoinNum--;
+
                                         blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
 
@@ -2482,14 +3088,27 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        redCoinNum--;
+                                        greenCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.redCoin--;
+                                            redCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.greenCoin--;
+                                                greenCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalGreen2();
                                         updateNormalRed2();
 
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineRed);
 
-                                        greenCoinNum--;
-                                        redCoinNum--;
+
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -2518,14 +3137,26 @@ public class AmusementPark extends JFrame {
                                         init.player2White.add(whiteC);
                                         p2.whiteCoin++;
 
+                                        whiteCoinNum--;
+                                        greenCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.whiteCoin--;
+                                            whiteCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.greenCoin--;
+                                                greenCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalGreen2();
                                         updateNormalWhite2();
 
                                         System.out.println(init.slotMachineGreen);
                                         System.out.println(init.slotMachineWhite);
 
-                                        greenCoinNum--;
-                                        whiteCoinNum--;
                                         greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
 
@@ -2556,14 +3187,27 @@ public class AmusementPark extends JFrame {
                                         init.player2Red.add(redC);
                                         p2.redCoin++;
 
+                                        redCoinNum--;
+                                        whiteCoinNum--;
+
+
+                                        if (p2.getTotalCoin() > 10) {
+                                            p2.whiteCoin--;
+                                            whiteCoinNum++;
+
+                                            if (p2.getTotalCoin() > 10) {
+                                                p2.redCoin--;
+                                                redCoinNum++;
+                                            }
+                                        }
+
                                         updateNormalWhite2();
                                         updateNormalRed2();
 
                                         System.out.println(init.slotMachineWhite);
                                         System.out.println(init.slotMachineRed);
 
-                                        whiteCoinNum--;
-                                        redCoinNum--;
+
                                         whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                         redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -2593,11 +3237,17 @@ public class AmusementPark extends JFrame {
                                     init.player2Black.add(blackC);
                                     p2.blackCoin++;
 
+                                    blackCoinNum--;
+
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.blackCoin--;
+                                        blackCoinNum++;
+                                    }
+
                                     updateNormalBlack2();
 
                                     System.out.println(init.slotMachineBlack);
 
-                                    blackCoinNum--;
 
                                     blackCoinLabel.setText(String.valueOf(blackCoinNum));
 
@@ -2620,11 +3270,17 @@ public class AmusementPark extends JFrame {
                                     init.player2Blue.add(blueC);
                                     p2.blueCoin++;
 
+                                    blueCoinNum--;
+
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.blueCoin--;
+                                        blueCoinNum++;
+                                    }
+
                                     updateNormalBlue2();
 
                                     System.out.println(init.slotMachineBlue);
 
-                                    blueCoinNum--;
 
                                     blueCoinLabel.setText(String.valueOf(blueCoinNum));
 
@@ -2647,11 +3303,17 @@ public class AmusementPark extends JFrame {
                                     init.player2Green.add(greenC);
                                     p2.greenCoin++;
 
+                                    greenCoinNum--;
+
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.greenCoin--;
+                                        greenCoinNum++;
+                                    }
+
                                     updateNormalGreen2();
 
                                     System.out.println(init.slotMachineGreen);
 
-                                    greenCoinNum--;
 
                                     greenCoinLabel.setText(String.valueOf(greenCoinNum));
 
@@ -2674,11 +3336,17 @@ public class AmusementPark extends JFrame {
                                     init.player2Red.add(redC);
                                     p2.redCoin++;
 
+                                    redCoinNum--;
+
+                                    if (p2.getTotalCoin() > 10) {
+                                        p2.redCoin--;
+                                        redCoinNum++;
+                                    }
+
                                     updateNormalRed2();
 
                                     System.out.println(init.slotMachineRed);
 
-                                    redCoinNum--;
 
                                     redCoinLabel.setText(String.valueOf(redCoinNum));
 
@@ -2900,42 +3568,77 @@ public class AmusementPark extends JFrame {
                                         
                                         switch (blackSw) {
                                             case 1 : p1.blackCoin -= level1Card[tmp].blackCoin;
+                                            blackCoinNum += level1Card[tmp].blackCoin;
+                                            blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             break;
                                             case 2 : p1.blackCoin -= level1Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                            blackCoinNum += level1Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                            blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                             break;
                                             case 3 : p1.blackCoin -= level1Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinNum += level1Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                             break;
                                         }
                                         switch (blueSw) {
                                             case 1 : p1.blueCoin -= level1Card[tmp].blueCoin;
-                                            break;
+                                                blueCoinNum += level1Card[tmp].blueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                break;
                                             case 2 : p1.blueCoin -= level1Card[tmp].blueCoin - p1.SpecialBlueCoin;
-                                            break;
-                                            case 3 : p1.blueCoin -= level1Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold2;
-                                            break;
+                                                blueCoinNum += level1Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                break;
+                                            case 3 : p1.blueCoin -= level1Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinNum += level1Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                break;
                                         }
                                         switch (greenSw) {
                                             case 1 : p1.greenCoin -= level1Card[tmp].greenCoin;
+                                                greenCoinNum += level1Card[tmp].greenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
                                             case 2 : p1.greenCoin -= level1Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinNum += level1Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
-                                            case 3 : p1.greenCoin -= level1Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold3;
+                                            case 3 : p1.greenCoin -= level1Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinNum += level1Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (redSw) {
                                             case 1 : p1.redCoin -= level1Card[tmp].redCoin;
+                                                redCoinNum += level1Card[tmp].redCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
                                             case 2 : p1.redCoin -= level1Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinNum += level1Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
-                                            case 3 : p1.redCoin -= level1Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold4;
+                                            case 3 : p1.redCoin -= level1Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinNum += level1Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (whiteSw) {
                                             case 1 : p1.whiteCoin -= level1Card[tmp].whiteCoin;
+                                                whiteCoinNum += level1Card[tmp].whiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
                                             case 2 : p1.whiteCoin -= level1Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinNum += level1Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
-                                            case 3 : p1.whiteCoin -= level1Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold5;
+                                            case 3 : p1.whiteCoin -= level1Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinNum += level1Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         
@@ -3102,42 +3805,77 @@ public class AmusementPark extends JFrame {
                                         init.level1.remove(tempI);
                                         switch (blackSw) {
                                             case 1 : p2.blackCoin -= level1Card[tmp].blackCoin;
+                                                blackCoinNum += level1Card[tmp].blackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 2 : p2.blackCoin -= level1Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                blackCoinNum += level1Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 3 : p2.blackCoin -= level1Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                blackCoinNum += level1Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (blueSw) {
                                             case 1 : p2.blueCoin -= level1Card[tmp].blueCoin;
+                                                blueCoinNum += level1Card[tmp].blueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
                                             case 2 : p2.blueCoin -= level1Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                blueCoinNum += level1Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
-                                            case 3 : p2.blueCoin -= level1Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold2;
+                                            case 3 : p2.blueCoin -= level1Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                blueCoinNum += level1Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (greenSw) {
                                             case 1 : p2.greenCoin -= level1Card[tmp].greenCoin;
+                                                greenCoinNum += level1Card[tmp].greenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
                                             case 2 : p2.greenCoin -= level1Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                greenCoinNum += level1Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
-                                            case 3 : p2.greenCoin -= level1Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold3;
+                                            case 3 : p2.greenCoin -= level1Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                greenCoinNum += level1Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (redSw) {
                                             case 1 : p2.redCoin -= level1Card[tmp].redCoin;
+                                                redCoinNum += level1Card[tmp].redCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
                                             case 2 : p2.redCoin -= level1Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                redCoinNum += level1Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
-                                            case 3 : p2.redCoin -= level1Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold4;
+                                            case 3 : p2.redCoin -= level1Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                redCoinNum += level1Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (whiteSw) {
                                             case 1 : p2.whiteCoin -= level1Card[tmp].whiteCoin;
+                                                whiteCoinNum += level1Card[tmp].whiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
                                             case 2 : p2.whiteCoin -= level1Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                whiteCoinNum += level1Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
-                                            case 3 : p2.whiteCoin -= level1Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold5;
+                                            case 3 : p2.whiteCoin -= level1Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinNum += level1Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
 
@@ -3427,42 +4165,77 @@ public class AmusementPark extends JFrame {
                                         init.level2.remove(tempI);
                                         switch (blackSw) {
                                             case 1 : p1.blackCoin -= level2Card[tmp].blackCoin;
+                                                blackCoinNum += level2Card[tmp].blackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 2 : p1.blackCoin -= level2Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                blackCoinNum += level2Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 3 : p1.blackCoin -= level2Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinNum += level2Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (blueSw) {
                                             case 1 : p1.blueCoin -= level2Card[tmp].blueCoin;
+                                                blueCoinNum += level2Card[tmp].blueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
                                             case 2 : p1.blueCoin -= level2Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                blueCoinNum += level2Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
-                                            case 3 : p1.blueCoin -= level2Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold2;
+                                            case 3 : p1.blueCoin -= level2Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinNum += level2Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (greenSw) {
                                             case 1 : p1.greenCoin -= level2Card[tmp].greenCoin;
+                                                greenCoinNum += level2Card[tmp].greenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
                                             case 2 : p1.greenCoin -= level2Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinNum += level2Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
-                                            case 3 : p1.greenCoin -= level2Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold3;
+                                            case 3 : p1.greenCoin -= level2Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinNum += level2Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (redSw) {
                                             case 1 : p1.redCoin -= level2Card[tmp].redCoin;
+                                                redCoinNum += level2Card[tmp].redCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
                                             case 2 : p1.redCoin -= level2Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinNum += level2Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
-                                            case 3 : p1.redCoin -= level2Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold4;
+                                            case 3 : p1.redCoin -= level2Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinNum += level2Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (whiteSw) {
                                             case 1 : p1.whiteCoin -= level2Card[tmp].whiteCoin;
+                                                whiteCoinNum += level2Card[tmp].whiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
                                             case 2 : p1.whiteCoin -= level2Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinNum += level2Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
-                                            case 3 : p1.whiteCoin -= level2Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold5;
+                                            case 3 : p1.whiteCoin -= level2Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinNum += level2Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         p1.score += level2Card[tmp].point;
@@ -3628,42 +4401,77 @@ public class AmusementPark extends JFrame {
                                         init.level2.remove(tempI);
                                         switch (blackSw) {
                                             case 1 : p2.blackCoin -= level2Card[tmp].blackCoin;
+                                                blackCoinNum += level2Card[tmp].blackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 2 : p2.blackCoin -= level2Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                blackCoinNum += level2Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 3 : p2.blackCoin -= level2Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                blackCoinNum += level2Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (blueSw) {
                                             case 1 : p2.blueCoin -= level2Card[tmp].blueCoin;
+                                                blueCoinNum += level2Card[tmp].blueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
                                             case 2 : p2.blueCoin -= level2Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                blueCoinNum += level2Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
-                                            case 3 : p2.blueCoin -= level2Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold2;
+                                            case 3 : p2.blueCoin -= level2Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                blueCoinNum += level2Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (greenSw) {
                                             case 1 : p2.greenCoin -= level2Card[tmp].greenCoin;
+                                                greenCoinNum += level2Card[tmp].greenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
                                             case 2 : p2.greenCoin -= level2Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                greenCoinNum += level2Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
-                                            case 3 : p2.greenCoin -= level2Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold3;
+                                            case 3 : p2.greenCoin -= level2Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                greenCoinNum += level2Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (redSw) {
                                             case 1 : p2.redCoin -= level2Card[tmp].redCoin;
+                                                redCoinNum += level2Card[tmp].redCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
                                             case 2 : p2.redCoin -= level2Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                redCoinNum += level2Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
-                                            case 3 : p2.redCoin -= level2Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold4;
+                                            case 3 : p2.redCoin -= level2Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                redCoinNum += level2Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (whiteSw) {
                                             case 1 : p2.whiteCoin -= level2Card[tmp].whiteCoin;
+                                                whiteCoinNum += level2Card[tmp].whiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
                                             case 2 : p2.whiteCoin -= level2Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                whiteCoinNum += level2Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
-                                            case 3 : p2.whiteCoin -= level2Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold5;
+                                            case 3 : p2.whiteCoin -= level2Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinNum += level2Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         p2.score += level2Card[tmp].point;
@@ -3953,42 +4761,77 @@ public class AmusementPark extends JFrame {
                                         init.level3.remove(tempI);
                                         switch (blackSw) {
                                             case 1 : p1.blackCoin -= level3Card[tmp].blackCoin;
+                                                blackCoinNum += level3Card[tmp].blackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 2 : p1.blackCoin -= level3Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                blackCoinNum += level3Card[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 3 : p1.blackCoin -= level3Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinNum += level3Card[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (blueSw) {
                                             case 1 : p1.blueCoin -= level3Card[tmp].blueCoin;
+                                                blueCoinNum += level3Card[tmp].blueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
                                             case 2 : p1.blueCoin -= level3Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                blueCoinNum += level3Card[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
-                                            case 3 : p1.blueCoin -= level3Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold2;
+                                            case 3 : p1.blueCoin -= level3Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinNum += level3Card[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (greenSw) {
                                             case 1 : p1.greenCoin -= level3Card[tmp].greenCoin;
+                                                greenCoinNum += level3Card[tmp].greenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
                                             case 2 : p1.greenCoin -= level3Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinNum += level3Card[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
-                                            case 3 : p1.greenCoin -= level3Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold3;
+                                            case 3 : p1.greenCoin -= level3Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinNum += level3Card[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (redSw) {
                                             case 1 : p1.redCoin -= level3Card[tmp].redCoin;
+                                                redCoinNum += level3Card[tmp].redCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
                                             case 2 : p1.redCoin -= level3Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinNum += level3Card[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
-                                            case 3 : p1.redCoin -= level3Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold4;
+                                            case 3 : p1.redCoin -= level3Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinNum += level3Card[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (whiteSw) {
                                             case 1 : p1.whiteCoin -= level3Card[tmp].whiteCoin;
+                                                whiteCoinNum += level3Card[tmp].whiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
                                             case 2 : p1.whiteCoin -= level3Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinNum += level3Card[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
-                                            case 3 : p1.whiteCoin -= level3Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold5;
+                                            case 3 : p1.whiteCoin -= level3Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinNum += level3Card[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         p1.score += level3Card[tmp].point;
@@ -4154,42 +4997,77 @@ public class AmusementPark extends JFrame {
                                         init.level3.remove(tempI);
                                         switch (blackSw) {
                                             case 1 : p2.blackCoin -= level3Card[tmp].blackCoin;
+                                                blackCoinNum += level3Card[tmp].blackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 2 : p2.blackCoin -= level3Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                blackCoinNum += level3Card[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
                                                 break;
                                             case 3 : p2.blackCoin -= level3Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                blackCoinNum += level3Card[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (blueSw) {
                                             case 1 : p2.blueCoin -= level3Card[tmp].blueCoin;
+                                                blueCoinNum += level3Card[tmp].blueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
                                             case 2 : p2.blueCoin -= level3Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                blueCoinNum += level3Card[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
                                                 break;
-                                            case 3 : p2.blueCoin -= level3Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold2;
+                                            case 3 : p2.blueCoin -= level3Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                blueCoinNum += level3Card[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (greenSw) {
                                             case 1 : p2.greenCoin -= level3Card[tmp].greenCoin;
+                                                greenCoinNum += level3Card[tmp].greenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
                                             case 2 : p2.greenCoin -= level3Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                greenCoinNum += level3Card[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
                                                 break;
-                                            case 3 : p2.greenCoin -= level3Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold3;
+                                            case 3 : p2.greenCoin -= level3Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                greenCoinNum += level3Card[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (redSw) {
                                             case 1 : p2.redCoin -= level3Card[tmp].redCoin;
+                                                redCoinNum += level3Card[tmp].redCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
                                             case 2 : p2.redCoin -= level3Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                redCoinNum += level3Card[tmp].redCoin - p2.SpecialRedCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
                                                 break;
-                                            case 3 : p2.redCoin -= level3Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold4;
+                                            case 3 : p2.redCoin -= level3Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                redCoinNum += level3Card[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         switch (whiteSw) {
                                             case 1 : p2.whiteCoin -= level3Card[tmp].whiteCoin;
+                                                whiteCoinNum += level3Card[tmp].whiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
                                             case 2 : p2.whiteCoin -= level3Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                whiteCoinNum += level3Card[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
                                                 break;
-                                            case 3 : p2.whiteCoin -= level3Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold5;
+                                            case 3 : p2.whiteCoin -= level3Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinNum += level3Card[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
                                                 break;
                                         }
                                         p2.score += level3Card[tmp].point;
@@ -5102,9 +5980,11 @@ public class AmusementPark extends JFrame {
     }
     public void updateScore1() {
         p1Score.setText("Score:    " + p1.score);
+        if (p1.score >= 1) drawEndGame1();
     }
     public void updateScore2() {
         p2Score.setText("Score:    " + p2.score);
+        if (p2.score >= 1) drawEndGame2();
     }
     public void updateReserved1() {
         p1Reserved.setText("Reserved:   " + p1.reserveCards);
@@ -5128,4 +6008,27 @@ public class AmusementPark extends JFrame {
             reservesLabel2[i] = new JLabel();
         }
     }
+    public void drawEndGame1() {
+        endGame1.setOpaque(true);
+        endGame1.setBackground(Color.RED);
+        endGame1.setBounds(80, 400, 400, 120);
+        endGame1.setText("Player one is the winner!");
+        endGame1.setHorizontalAlignment(JLabel.CENTER);
+        endGame1.setFont(font);
+        endGame1.setForeground(Color.WHITE);
+        gamePanel.add(endGame1);
+        gamePanel.repaint();
+    }
+    public void drawEndGame2() {
+        endGame2.setOpaque(true);
+        endGame2.setBackground(Color.RED);
+        endGame2.setBounds(80, 400, 400, 120);
+        endGame2.setText("Player two is the winner!");
+        endGame2.setHorizontalAlignment(JLabel.CENTER);
+        endGame2.setFont(font);
+        endGame2.setForeground(Color.WHITE);
+        gamePanel.add(endGame2);
+        gamePanel.repaint();
+    }
+    
 }

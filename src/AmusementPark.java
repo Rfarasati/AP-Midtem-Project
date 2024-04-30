@@ -5378,11 +5378,28 @@ public class AmusementPark extends JFrame {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
-                                reservesLabel1[tmp].removeAll();
-                                try {
-                                    redrawReserves1();
-                                } catch (IOException ex) {
-                                    throw new RuntimeException(ex);
+                                if (isP1Turn) {
+                                    isP1Turn = false;
+                                    init.playerOneReserves.remove(tempI);
+                                    switch (reserves1[tmp].level) {
+                                        case 1 : init.level1.add(reserves1[tmp]);
+                                        break;
+                                        case 2 : init.level2.add(reserves1[tmp]);
+                                        break;
+                                        case 3 : init.level3.add(reserves1[tmp]);
+                                        break;
+                                    }
+
+                                    reservesLabel1[tmp].removeAll();
+                                    try {
+                                        redrawReserves1();
+                                        redrawCards1();
+                                        redrawCards2();
+                                        redrawCards3();
+                                        gamePanel.repaint();
+                                    } catch (IOException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
                                 }
                             }
                         });
@@ -5392,18 +5409,202 @@ public class AmusementPark extends JFrame {
                             public void mouseClicked(MouseEvent e) {
                                 super.mouseClicked(e);
                                 if (isP1Turn) {
-                                    if (p1.blackCoin >= reserves1[tmp].blackCoin && p1.blueCoin >= reserves1[tmp].blueCoin && p1.greenCoin >= reserves1[tmp].greenCoin && p1.redCoin >= reserves1[tmp].redCoin && p1.whiteCoin >= reserves1[tmp].whiteCoin) {
+                                    int black = p1.blackCoin;
+                                    int blackSw = 0;
+                                    int tmpGold1 = 0;
+                                    int blue = p1.blueCoin;
+                                    int blueSw = 0;
+                                    int tmpGold2 = 0;
+                                    int green = p1.greenCoin;
+                                    int greenSw = 0;
+                                    int tmpGold3 = 0;
+                                    int red = p1.redCoin;
+                                    int redSw = 0;
+                                    int tmpGold4 = 0;
+                                    int white = p1.whiteCoin;
+                                    int whiteSw = 0;
+                                    int tmpGold5 = 0;
+                                    if (p1.blackCoin >= reserves1[tmp].blackCoin) {
+                                        blackSw = 1;
+                                    }
+                                    else if (reserves1[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) >= reserves1[tmp].blackCoin) {
+                                        blackSw = 2;
+                                        black = p1.blackCoin + p1.SpecialBlackCoin;
+                                    }
+                                    else if (reserves1[tmp].blackCoin > 0 && (p1.blackCoin + p1.SpecialBlackCoin) - reserves1[tmp].blackCoin < 0) {
+                                        if (reserves1[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin) <= p1.goldCoin) {
+                                            black = p1.blackCoin + p1.SpecialBlackCoin + (reserves1[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin));
+                                            p1.goldCoin -= reserves1[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            tmpGold1 = reserves1[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            blackSw = 3;
+                                            goldCoinNum += reserves1[tmp].blackCoin - (p1.blackCoin + p1.SpecialBlackCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.blueCoin >= reserves1[tmp].blueCoin) {
+                                        blueSw = 1;
+                                    }
+                                    else if (reserves1[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) >= reserves1[tmp].blueCoin) {
+                                        blueSw = 2;
+                                        blue = p1.blueCoin + p1.SpecialBlueCoin;
+                                    }
+                                    else if (reserves1[tmp].blueCoin > 0 && (p1.blueCoin + p1.SpecialBlueCoin) - reserves1[tmp].blueCoin < 0) {
+                                        if (reserves1[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin) <= p1.goldCoin) {
+                                            blue = p1.blueCoin + p1.SpecialBlueCoin + (reserves1[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin));
+                                            p1.goldCoin -= reserves1[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            tmpGold2 = reserves1[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            blueSw = 3;
+                                            goldCoinNum += reserves1[tmp].blueCoin - (p1.blueCoin + p1.SpecialBlueCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.greenCoin >= reserves1[tmp].greenCoin) {
+                                        greenSw = 1;
+                                    }
+                                    else if (reserves1[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) >= reserves1[tmp].greenCoin) {
+                                        greenSw = 2;
+                                        green = p1.greenCoin + p1.SpecialGreenCoin;
+                                    }
+                                    else if (reserves1[tmp].greenCoin > 0 && (p1.greenCoin + p1.SpecialGreenCoin) - reserves1[tmp].greenCoin < 0) {
+                                        if (reserves1[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin) <= p1.goldCoin) {
+                                            green = p1.greenCoin + p1.SpecialGreenCoin + (reserves1[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin));
+                                            p1.goldCoin -= reserves1[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            tmpGold3 = reserves1[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            greenSw = 3;
+                                            goldCoinNum += reserves1[tmp].greenCoin - (p1.greenCoin + p1.SpecialGreenCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.redCoin >= reserves1[tmp].redCoin) {
+                                        redSw = 1;
+                                    }
+                                    else if (reserves1[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) >= reserves1[tmp].redCoin) {
+                                        redSw = 2;
+                                        red = p1.redCoin + p1.SpecialRedCoin;
+                                    }
+                                    else if (reserves1[tmp].redCoin > 0 && (p1.redCoin + p1.SpecialRedCoin) - reserves1[tmp].redCoin < 0) {
+                                        if (reserves1[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin) <= p1.goldCoin) {
+                                            red = p1.redCoin + p1.SpecialRedCoin + (reserves1[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin));
+                                            p1.goldCoin -= reserves1[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            tmpGold4 = reserves1[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            redSw = 3;
+                                            goldCoinNum += reserves1[tmp].redCoin - (p1.redCoin + p1.SpecialRedCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+
+
+                                    if (p1.whiteCoin >= reserves1[tmp].whiteCoin) {
+                                        whiteSw = 1;
+                                    }
+                                    else if (reserves1[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) >= reserves1[tmp].whiteCoin) {
+                                        whiteSw = 2;
+                                        white = p1.whiteCoin + p1.SpecialWhiteCoin;
+                                    }
+                                    else if (reserves1[tmp].whiteCoin > 0 && (p1.whiteCoin + p1.SpecialWhiteCoin) - reserves1[tmp].whiteCoin < 0) {
+                                        if (reserves1[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin) <= p1.goldCoin) {
+                                            white = p1.whiteCoin + p1.SpecialWhiteCoin + (reserves1[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin));
+                                            p1.goldCoin -= reserves1[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            tmpGold5 = reserves1[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            whiteSw = 3;
+                                            goldCoinNum += reserves1[tmp].whiteCoin - (p1.whiteCoin + p1.SpecialWhiteCoin);
+                                            updateGold1();
+                                            goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                        }
+                                    }
+                                    if (black >= reserves1[tmp].blackCoin && blue >= reserves1[tmp].blueCoin && green >= reserves1[tmp].greenCoin && red >= reserves1[tmp].redCoin && white >= reserves1[tmp].whiteCoin) {
                                         System.out.println("sucessssss");
                                         //add special coins
                                         isP1Turn = false;
                                         init.playerOneHand.add(reserves1[tmp]);
-                                        System.out.println(init.level3.get(tempI).toString());
+//                                        System.out.println(init.reserves.get(tempI).toString());
                                         init.playerOneReserves.remove(tempI);
-                                        p1.blackCoin -= reserves1[tmp].blackCoin;
-                                        p1.blueCoin -= reserves1[tmp].blueCoin;
-                                        p1.greenCoin -= reserves1[tmp].greenCoin;
-                                        p1.redCoin -= reserves1[tmp].redCoin;
-                                        p1.whiteCoin -= reserves1[tmp].whiteCoin;
+                                        System.out.println(init.playerOneReserves.toString());
+                                        switch (blackSw) {
+                                            case 1 : p1.blackCoin -= reserves1[tmp].blackCoin;
+                                                blackCoinNum += reserves1[tmp].blackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                break;
+                                            case 2 : p1.blackCoin -= reserves1[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                blackCoinNum += reserves1[tmp].blackCoin - p1.SpecialBlackCoin;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                break;
+                                            case 3 : p1.blackCoin -= reserves1[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinNum += reserves1[tmp].blackCoin - p1.SpecialBlackCoin - tmpGold1;
+                                                blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                break;
+                                        }
+                                        switch (blueSw) {
+                                            case 1 : p1.blueCoin -= reserves1[tmp].blueCoin;
+                                                blueCoinNum += reserves1[tmp].blueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                break;
+                                            case 2 : p1.blueCoin -= reserves1[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                blueCoinNum += reserves1[tmp].blueCoin - p1.SpecialBlueCoin;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                break;
+                                            case 3 : p1.blueCoin -= reserves1[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinNum += reserves1[tmp].blueCoin - p1.SpecialBlueCoin - tmpGold1;
+                                                blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                break;
+                                        }
+                                        switch (greenSw) {
+                                            case 1 : p1.greenCoin -= reserves1[tmp].greenCoin;
+                                                greenCoinNum += reserves1[tmp].greenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                break;
+                                            case 2 : p1.greenCoin -= reserves1[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinNum += reserves1[tmp].greenCoin - p1.SpecialGreenCoin;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                break;
+                                            case 3 : p1.greenCoin -= reserves1[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinNum += reserves1[tmp].greenCoin - p1.SpecialGreenCoin - tmpGold1;
+                                                greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                break;
+                                        }
+                                        switch (redSw) {
+                                            case 1 : p1.redCoin -= reserves1[tmp].redCoin;
+                                                redCoinNum += reserves1[tmp].redCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                break;
+                                            case 2 : p1.redCoin -= reserves1[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinNum += reserves1[tmp].redCoin - p1.SpecialRedCoin;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                break;
+                                            case 3 : p1.redCoin -= reserves1[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinNum += reserves1[tmp].redCoin - p1.SpecialRedCoin - tmpGold1;
+                                                redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                break;
+                                        }
+                                        switch (whiteSw) {
+                                            case 1 : p1.whiteCoin -= reserves1[tmp].whiteCoin;
+                                                whiteCoinNum += reserves1[tmp].whiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                break;
+                                            case 2 : p1.whiteCoin -= reserves1[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinNum += reserves1[tmp].whiteCoin - p1.SpecialWhiteCoin;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                break;
+                                            case 3 : p1.whiteCoin -= reserves1[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinNum += reserves1[tmp].whiteCoin - p1.SpecialWhiteCoin - tmpGold1;
+                                                whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                break;
+                                        }
                                         p1.score += reserves1[tmp].point;
 
                                         updateScore1();
@@ -5439,6 +5640,10 @@ public class AmusementPark extends JFrame {
                                         reservesLabel1[tmp].removeAll();
                                         try {
                                             redrawReserves1();
+                                            redrawCards1();
+                                            redrawCards2();
+                                            redrawCards3();
+                                            gamePanel.repaint();
                                         } catch (IOException ex) {
                                             throw new RuntimeException(ex);
                                         }
@@ -5491,11 +5696,28 @@ public class AmusementPark extends JFrame {
                                 @Override
                                 public void mouseClicked(MouseEvent e) {
                                     super.mouseClicked(e);
-                                    reservesLabel2[tmp].removeAll();
-                                    try {
-                                        redrawReserves2();
-                                    } catch (IOException ex) {
-                                        throw new RuntimeException(ex);
+                                    if (!isP1Turn) {
+                                        isP1Turn = true;
+                                        init.playerTwoReserves.remove(tempI);
+                                        switch (reserves2[tmp].level) {
+                                            case 1 : init.level1.add(reserves2[tmp]);
+                                                break;
+                                            case 2 : init.level2.add(reserves2[tmp]);
+                                                break;
+                                            case 3 : init.level3.add(reserves2[tmp]);
+                                                break;
+                                        }
+
+                                        reservesLabel2[tmp].removeAll();
+                                        try {
+                                            redrawReserves2();
+                                            redrawCards1();
+                                            redrawCards2();
+                                            redrawCards3();
+                                            gamePanel.repaint();
+                                        } catch (IOException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
                                     }
                                 }
                             });
@@ -5505,17 +5727,200 @@ public class AmusementPark extends JFrame {
                                 public void mouseClicked(MouseEvent e) {
                                     super.mouseClicked(e);
                                     if (!isP1Turn) {
-                                        if (p2.blackCoin >= reserves2[tmp].blackCoin && p2.blueCoin >= reserves2[tmp].blueCoin && p2.greenCoin >= reserves2[tmp].greenCoin && p2.redCoin >= reserves2[tmp].redCoin && p2.whiteCoin >= reserves2[tmp].whiteCoin) {
+                                        int black = p2.blackCoin;
+                                        int blackSw = 0;
+                                        int tmpGold1 = 0;
+                                        int blue = p2.blueCoin;
+                                        int blueSw = 0;
+                                        int tmpGold2 = 0;
+                                        int green = p2.greenCoin;
+                                        int greenSw = 0;
+                                        int tmpGold3 = 0;
+                                        int red = p2.redCoin;
+                                        int redSw = 0;
+                                        int tmpGold4 = 0;
+                                        int white = p2.whiteCoin;
+                                        int whiteSw = 0;
+                                        int tmpGold5 = 0;
+                                        if (p2.blackCoin >= reserves2[tmp].blackCoin) {
+                                            blackSw = 1;
+                                        }
+                                        else if (reserves2[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) >= reserves2[tmp].blackCoin) {
+                                            blackSw = 2;
+                                            black = p2.blackCoin + p2.SpecialBlackCoin;
+                                        }
+                                        else if (reserves2[tmp].blackCoin > 0 && (p2.blackCoin + p2.SpecialBlackCoin) - reserves2[tmp].blackCoin < 0) {
+                                            if (reserves2[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin) <= p2.goldCoin) {
+                                                black = p2.blackCoin + p2.SpecialBlackCoin + (reserves2[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin));
+                                                p2.goldCoin -= reserves2[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                                tmpGold1 = reserves2[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                                blackSw = 3;
+                                                goldCoinNum += reserves2[tmp].blackCoin - (p2.blackCoin + p2.SpecialBlackCoin);
+                                                updateGold1();
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            }
+                                        }
+
+
+                                        if (p2.blueCoin >= reserves2[tmp].blueCoin) {
+                                            blueSw = 1;
+                                        }
+                                        else if (reserves2[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) >= reserves2[tmp].blueCoin) {
+                                            blueSw = 2;
+                                            blue = p2.blueCoin + p2.SpecialBlueCoin;
+                                        }
+                                        else if (reserves2[tmp].blueCoin > 0 && (p2.blueCoin + p2.SpecialBlueCoin) - reserves2[tmp].blueCoin < 0) {
+                                            if (reserves2[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin) <= p2.goldCoin) {
+                                                blue = p2.blueCoin + p2.SpecialBlueCoin + (reserves2[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin));
+                                                p2.goldCoin -= reserves2[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                                tmpGold2 = reserves2[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                                blueSw = 3;
+                                                goldCoinNum += reserves2[tmp].blueCoin - (p2.blueCoin + p2.SpecialBlueCoin);
+                                                updateGold1();
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            }
+                                        }
+
+
+                                        if (p2.greenCoin >= reserves2[tmp].greenCoin) {
+                                            greenSw = 1;
+                                        }
+                                        else if (reserves2[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) >= reserves2[tmp].greenCoin) {
+                                            greenSw = 2;
+                                            green = p2.greenCoin + p2.SpecialGreenCoin;
+                                        }
+                                        else if (reserves2[tmp].greenCoin > 0 && (p2.greenCoin + p2.SpecialGreenCoin) - reserves2[tmp].greenCoin < 0) {
+                                            if (reserves2[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin) <= p2.goldCoin) {
+                                                green = p2.greenCoin + p2.SpecialGreenCoin + (reserves2[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin));
+                                                p2.goldCoin -= reserves2[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                                tmpGold3 = reserves2[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                                greenSw = 3;
+                                                goldCoinNum += reserves2[tmp].greenCoin - (p2.greenCoin + p2.SpecialGreenCoin);
+                                                updateGold1();
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            }
+                                        }
+
+
+                                        if (p2.redCoin >= reserves2[tmp].redCoin) {
+                                            redSw = 1;
+                                        }
+                                        else if (reserves2[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) >= reserves2[tmp].redCoin) {
+                                            redSw = 2;
+                                            red = p2.redCoin + p2.SpecialRedCoin;
+                                        }
+                                        else if (reserves2[tmp].redCoin > 0 && (p2.redCoin + p2.SpecialRedCoin) - reserves2[tmp].redCoin < 0) {
+                                            if (reserves2[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin) <= p2.goldCoin) {
+                                                red = p2.redCoin + p2.SpecialRedCoin + (reserves2[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin));
+                                                p2.goldCoin -= reserves2[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                                tmpGold4 = reserves2[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                                redSw = 3;
+                                                goldCoinNum += reserves2[tmp].redCoin - (p2.redCoin + p2.SpecialRedCoin);
+                                                updateGold1();
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            }
+                                        }
+
+
+                                        if (p2.whiteCoin >= reserves2[tmp].whiteCoin) {
+                                            whiteSw = 1;
+                                        }
+                                        else if (reserves2[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) >= reserves2[tmp].whiteCoin) {
+                                            whiteSw = 2;
+                                            white = p2.whiteCoin + p2.SpecialWhiteCoin;
+                                        }
+                                        else if (reserves2[tmp].whiteCoin > 0 && (p2.whiteCoin + p2.SpecialWhiteCoin) - reserves2[tmp].whiteCoin < 0) {
+                                            if (reserves2[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin) <= p2.goldCoin) {
+                                                white = p2.whiteCoin + p2.SpecialWhiteCoin + (reserves2[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin));
+                                                p2.goldCoin -= reserves2[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                                tmpGold5 = reserves2[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                                whiteSw = 3;
+                                                goldCoinNum += reserves2[tmp].whiteCoin - (p2.whiteCoin + p2.SpecialWhiteCoin);
+                                                updateGold1();
+                                                goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                            }
+                                        }
+                                        if (black >= reserves2[tmp].blackCoin && blue >= reserves2[tmp].blueCoin && green >= reserves2[tmp].greenCoin && red >= reserves2[tmp].redCoin && white >= reserves2[tmp].whiteCoin) {
 //                                            System.out.println("YESSSS PLAYER 2");
                                             isP1Turn = true;
-                                            init.playerOneHand.add(reserves2[tmp]);
+                                            init.playerTwoHand.add(reserves2[tmp]);
                                             System.out.println(init.level3.get(tempI).toString());
-                                            init.playerOneReserves.remove(tempI);
-                                            p2.blackCoin -= reserves2[tmp].blackCoin;
-                                            p2.blueCoin -= reserves2[tmp].blueCoin;
-                                            p2.greenCoin -= reserves2[tmp].greenCoin;
-                                            p2.redCoin -= reserves2[tmp].redCoin;
-                                            p2.whiteCoin -= reserves2[tmp].whiteCoin;
+                                            init.playerTwoReserves.remove(tempI);
+                                            switch (blackSw) {
+                                                case 1 : p2.blackCoin -= reserves2[tmp].blackCoin;
+                                                    blackCoinNum += reserves2[tmp].blackCoin;
+                                                    blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                    break;
+                                                case 2 : p2.blackCoin -= reserves2[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                    blackCoinNum += reserves2[tmp].blackCoin - p2.SpecialBlackCoin;
+                                                    blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                    break;
+                                                case 3 : p2.blackCoin -= reserves2[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                    blackCoinNum += reserves2[tmp].blackCoin - p2.SpecialBlackCoin - tmpGold1;
+                                                    blackCoinLabel.setText(String.valueOf(blackCoinNum));
+                                                    goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                    break;
+                                            }
+                                            switch (blueSw) {
+                                                case 1 : p2.blueCoin -= reserves2[tmp].blueCoin;
+                                                    blueCoinNum += reserves2[tmp].blueCoin;
+                                                    blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                    break;
+                                                case 2 : p2.blueCoin -= reserves2[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                    blueCoinNum += reserves2[tmp].blueCoin - p2.SpecialBlueCoin;
+                                                    blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                    break;
+                                                case 3 : p2.blueCoin -= reserves2[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                    blueCoinNum += reserves2[tmp].blueCoin - p2.SpecialBlueCoin - tmpGold1;
+                                                    blueCoinLabel.setText(String.valueOf(blueCoinNum));
+                                                    goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                    break;
+                                            }
+                                            switch (greenSw) {
+                                                case 1 : p2.greenCoin -= reserves2[tmp].greenCoin;
+                                                    greenCoinNum += reserves2[tmp].greenCoin;
+                                                    greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                    break;
+                                                case 2 : p2.greenCoin -= reserves2[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                    greenCoinNum += reserves2[tmp].greenCoin - p2.SpecialGreenCoin;
+                                                    greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                    break;
+                                                case 3 : p2.greenCoin -= reserves2[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                    greenCoinNum += reserves2[tmp].greenCoin - p2.SpecialGreenCoin - tmpGold1;
+                                                    greenCoinLabel.setText(String.valueOf(greenCoinNum));
+                                                    goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                    break;
+                                            }
+                                            switch (redSw) {
+                                                case 1 : p2.redCoin -= reserves2[tmp].redCoin;
+                                                    redCoinNum += reserves2[tmp].redCoin;
+                                                    redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                    break;
+                                                case 2 : p2.redCoin -= reserves2[tmp].redCoin - p2.SpecialRedCoin;
+                                                    redCoinNum += reserves2[tmp].redCoin - p2.SpecialRedCoin;
+                                                    redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                    break;
+                                                case 3 : p2.redCoin -= reserves2[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                    redCoinNum += reserves2[tmp].redCoin - p2.SpecialRedCoin - tmpGold1;
+                                                    redCoinLabel.setText(String.valueOf(redCoinNum));
+                                                    goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                    break;
+                                            }
+                                            switch (whiteSw) {
+                                                case 1 : p2.whiteCoin -= reserves2[tmp].whiteCoin;
+                                                    whiteCoinNum += reserves2[tmp].whiteCoin;
+                                                    whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                    break;
+                                                case 2 : p2.whiteCoin -= reserves2[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                    whiteCoinNum += reserves2[tmp].whiteCoin - p2.SpecialWhiteCoin;
+                                                    whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                    break;
+                                                case 3 : p2.whiteCoin -= reserves2[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                    whiteCoinNum += reserves2[tmp].whiteCoin - p2.SpecialWhiteCoin - tmpGold1;
+                                                    whiteCoinLabel.setText(String.valueOf(whiteCoinNum));
+                                                    goldCoinLabel.setText(String.valueOf(goldCoinNum));
+                                                    break;
+                                            }
                                             p2.score += reserves2[tmp].point;
 
                                             updateScore2();
@@ -5551,6 +5956,10 @@ public class AmusementPark extends JFrame {
                                             reservesLabel2[tmp].removeAll();
                                             try {
                                                 redrawReserves2();
+                                                redrawCards1();
+                                                redrawCards2();
+                                                redrawCards3();
+                                                gamePanel.repaint();
                                             } catch (IOException ex) {
                                                 throw new RuntimeException(ex);
                                             }
